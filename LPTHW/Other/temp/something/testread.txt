@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--comment here-->
+<html lang = 'en'>
+  <head>
+    <title>Casita Sedona</title>
+    <meta charset = 'utf-8'>
+  </head>
+
+  <body>
+    <header>
+      <h1>Casita Sedona Bed & Breakfast</h1>
+    </header>
+    <nav>
+      <b>Home &nbsp; Rooms &nbsp; Events &nbsp; Contact</b>
+    </nav>
+    <main>
+      <h2>Stay in the Heart of Sedona</h2>
+        <p>At Casita&apos;s ....</p>
+      <h3>Luxurious Rooms</h3>
+        <p>Stay in well-appointed.....</p>
+      <h4>Casita Sedona</h4>
+        <p>contact info here.</p>
+    </main>
+    <footer>
+      <small><i>Copyright &copy; 2002 Your Name Here</i></small>
+    </footer>
+  </body>
+  </html>
