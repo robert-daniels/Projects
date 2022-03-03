@@ -8,46 +8,55 @@
     <title>Project 1</title>
   </head>
   <body>
-    <h1>Project 1: Question and Answers</h1>
-      <ol>
-         <li>What is the purpose of JavaScript?  Answer in general and also provide three specific examples of how JavaScript is commonly used.
-          <p>JavaScript is meant to make webpages "alive" per the book. It adds dimensions to bring the site from a basic rendering of a text file to a functioning computing interface. Also per the book, below are some of the explicit functionalities of JS: </p></li> 
-            <ul>
-              <li>JS can add new HTML to a page, as well as modify styles</li>
-              <li>It can react to user actions such as clicking</li>
-              <li>JS can sent requests over the network to remote servers</li>
-            </ul>
+    <header>
+      <p>Name: Robert Daniels</p>
+      <p>For: Web 114</p>
+    </header>
+    <div class="container">
+      <h1>Project 1: Question and Answers</h1>
+        <ol>
+          <li>What is the purpose of JavaScript?  Answer in general and also provide three specific examples of how JavaScript is commonly used.
+            <p>JavaScript is meant to make webpages "alive" per the book. It adds dimensions to bring the site from a basic rendering of a text file to a functioning computing interface. Also per the book, below are some of the explicit functionalities of JS: </p></li> 
+              <ul>
+                <li>JS can add new HTML to a page, as well as modify styles</li>
+                <li>It can react to user actions such as clicking</li>
+                <li>JS can sent requests over the network to remote servers</li>
+              </ul>
+            &nbsp;
 
-        <li> Who invented JavaScript and when?
-          <p>Per w3schools, JavaScript was invented by Brendan Eich in 1995</p></li>
-   
-        <li>What software program will you be using to write JavaScript?
-          <p>JavaScript is written in a text editor. This can be an IDE like goorm or VS Code, or as simple as Notepad++</p></li>
-  
-
-        <li>What software program will you be using to run JavaScript?
-          <p>anything that has a functional javascript engine, though for us the standard browsers (chrome, firefox, etc.) will suffice.</p></li>
-
-
-        <li>Why are external scripts preferable to scripts added directly within an HTML file?
-          <p>clean coding, less cluttered file, easier to maintain/update, script downloads to cache and only needs downloaded once for the site (reduces traffic)</p></li>
+          <li> Who invented JavaScript and when?
+            <p>Per w3schools, JavaScript was invented by Brendan Eich in 1995</p></li>
     
-    </ol>
-      <p>-- What's the point of all of those console.log() statements?</p>
-      <p>console.log makes visible the data stored in memory. otherwise, it would be difficult to know if our scripts are actually working correctly.</p>
-     
-     -- What's the difference between how you reference a variable versus a string in a JavaScript statement?
-     <p>Not sure I get what this question is going for. but use case could be the below:</p>
+          <li>What software program will you be using to write JavaScript?
+            <p>JavaScript is written in a text editor. This can be an IDE like goorm or VS Code, or as simple as Notepad++</p></li>
+    
 
-        <ul>
-          <li>referencing a string: console.log("hello world");</li>
-          <li>let greeting = "hello world"; console.log(`${greeting}`)</li>
-          <li>Essentially, a string is just a string. A variable (not constant) can be updated/changed/altered to suit needs. It can also be re-used in various other parts of the code.</li>
-        </ul>
-     -- What's the difference between a single value and an expression in a JavaScript statement?
-        <p>A single value is stored in a location, or has a single pointer to it. An expression must pull x values from memory into the buffer, perform the computation, and then possibly store that result in a different memory location.</p>
-    </p>
+          <li>What software program will you be using to run JavaScript?
+            <p>Anything that has a functional javascript engine, though for us the standard browsers (chrome, firefox, etc.) should work.</p></li>
 
+
+          <li>Why are external scripts preferable to scripts added directly within an HTML file?
+            <p>clean coding, less cluttered file, easier to maintain/update, script downloads to cache and only needs downloaded once for the site (reduces traffic)</p></li>
+      
+      </ol>
+        <p>-- What's the point of all of those console.log() statements?</p>
+
+        <h3><b>What, you mean these?</b></h3>
+
+        <img class="screengrab" src="images/Console.log" alt="screen capture of the console">
+        <p>console.log makes visible the data stored in memory. otherwise, it would be difficult to know if our scripts are actually working correctly.</p>
+      
+      -- What's the difference between how you reference a variable versus a string in a JavaScript statement?
+      <p>Not sure I get what this question is going for. but use case could be the below:</p>
+
+          <ul>
+            <li>referencing a string: console.log("hello world");</li>
+            <li>let greeting = "hello world"; console.log(`${greeting}`)</li>
+            <li>Essentially, a string is just a string. A variable (not constant) can be updated/changed/altered to suit needs. It can also be re-used in various other parts of the code.</li>
+          </ul>
+      -- What's the difference between a single value and an expression in a JavaScript statement?
+          <p>A single value is stored in a location, or has a single pointer to it. An expression must pull x values from memory into the buffer, perform the computation, and then possibly store that result in a different memory location.</p>
+      </div>
      <!-- Start Scripting Questions -->
 
      
@@ -82,12 +91,15 @@
        console.log(`The data type of vetStatus is ${typeof vetStatus}.`);
       
        // 8. 
+
+       // load a list with the statements, and assign it to the variable "listing"
        let listing = [("" + 1 + 0), ("" - 1 + 0), (true + false),  
                   (6 / "3"), ("2" * "3"), (4 + 5 + "px"),
                   ("$" + 4 + 5 ), ("4" - 2 ), ("4px" - 2 ),
                   (7 / 0 ), ("  -9  " + 5 ), ("  -9  " - 5 ),
                   (null + 1 ), (undefined + 1)]; 
- 
+      
+       // since a list is iterable, use the iterable logic "for each iterant in listing, do this"           
        for ( let i in listing){
          console.log(`${listing[i]}`);
        }
