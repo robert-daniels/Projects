@@ -19,7 +19,7 @@ public class HourlyWageCalculator{
 
     public static void main(String[] args){
         
-        HourlyWageCalculator calculator = new HourlyWageCalculator(); 
+        
         Scanner scnr = new Scanner(System.in);
         double[] arrayToProcess;
         char answer = 'y';
@@ -28,7 +28,7 @@ public class HourlyWageCalculator{
         while (answer == 'y'){
            
             //get weekNumber to pass to getInputFromUser
-            calcWeek = calculator.getWeekNumber(scnr);
+            calcWeek = getWeekNumber(scnr);
             
             if (calcWeek == -1){
                 System.out.println("You've entered -1 to exit. Goodbye.");
@@ -36,10 +36,10 @@ public class HourlyWageCalculator{
             }
 
             // get validated hours from user
-            arrayToProcess = calculator.getInputFromUser(scnr, calcWeek);
+            arrayToProcess = getInputFromUser(scnr, calcWeek);
 
             //pass the sanitized user input to output method
-            calculator.calculatePayForWeek(calcWeek, arrayToProcess);
+            calculatePayForWeek(calcWeek, arrayToProcess);
 
             System.out.print("Would you like to calculate pay for another week? y/n: ");
             answer = scnr.next().charAt(0);
@@ -50,7 +50,7 @@ public class HourlyWageCalculator{
     }
             
    
-    public int getWeekNumber(Scanner scnr){
+    public static int getWeekNumber(Scanner scnr){
             /*
             This method gets passed a scanner from main. It then prompts user for week number. 
             The week number is validated if it is an int between 1 and 52. -1 will kill process.
@@ -86,7 +86,7 @@ public class HourlyWageCalculator{
                 
     }
     
-    public double[] getInputFromUser(Scanner scnr, int calcWeek){
+    public static double[] getInputFromUser(Scanner scnr, int calcWeek){
         /*
         gets hours worked for the week from user. 
         
@@ -127,7 +127,7 @@ public class HourlyWageCalculator{
         
     }
         
-    public boolean validateInput(String[] inputArray){
+    public static boolean validateInput(String[] inputArray){
         /*
         takes String[] inputArray and checks to see if input is valid. 
         
@@ -193,7 +193,7 @@ public class HourlyWageCalculator{
         return validCheck;
     }    
 
-    public double[] convertStringArrayToDouble(String[] inputArray){
+    public static double[] convertStringArrayToDouble(String[] inputArray){
         /*
         takes validated inputArray passed from getInputFromUser, loops through array and 
         converts elements to double.
@@ -212,7 +212,7 @@ public class HourlyWageCalculator{
         return outputArray;
     }
         
-    public void calculatePayForWeek(int calcWeek, double[] arrayToProcess){
+    public static void calculatePayForWeek(int calcWeek, double[] arrayToProcess){
     /*
     Using provided pay logic, calculate earned pay for week. Displays output to client
     */
@@ -282,7 +282,7 @@ public class HourlyWageCalculator{
         
     }
     
-    public double getTotalHours(double[] arrayToProcess){ // kept as double, not integer
+    public static double getTotalHours(double[] arrayToProcess){ // kept as double, not integer
         /*
         Takes the arrayToProcess passed from calculatePay and returns sumTotal hours. 
         Instructions say this should return an integer value, but employees would mutiny if they lost 
