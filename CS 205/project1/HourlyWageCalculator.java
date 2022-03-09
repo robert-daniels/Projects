@@ -36,7 +36,7 @@ public class HourlyWageCalculator{
             }
 
             // get validated hours from user
-            arrayToProcess = calculator.getInputFromUser(calcWeek, scnr);
+            arrayToProcess = calculator.getInputFromUser(scnr, calcWeek);
 
             //pass the sanitized user input to output method
             calculator.calculatePayForWeek(calcWeek, arrayToProcess);
@@ -86,7 +86,7 @@ public class HourlyWageCalculator{
                 
     }
     
-    public double[] getInputFromUser(int calcWeek, Scanner scnr){
+    public double[] getInputFromUser(Scanner scnr, int calcWeek){
         /*
         gets hours worked for the week from user. 
         
