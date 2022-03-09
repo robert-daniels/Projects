@@ -278,8 +278,6 @@ public class HourlyWageCalculator{
        
         
         // ****** /OUTPUT TO CLIENT *******
-        
-        
     }
     
     public static double getTotalHours(double[] arrayToProcess){ // kept as double, not integer
@@ -299,6 +297,4 @@ public class HourlyWageCalculator{
         
         return totalHours;
     }
-    
-    
 }

@@ -102,7 +102,7 @@ public class WageCalculatorTester {
 
 	private static void testCalculatePay() {
 		double[] doubleArray = { 10.5, 10, 8, 12.5, 0, 9.75, 10.75 };
-		double sum;
+		
 
 		System.out.println("\n***Test Calculate Pay Method***");
 
