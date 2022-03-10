@@ -1,0 +1,39 @@
+/* Robert Daniels, 3/10/2022 */
+
+
+header{
+    display: inline-block;
+    
+}
+body {
+    width: 80%;
+    margin: auto;
+    background-color: bisque;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    background-color: antiquewhite;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+li {
+    font-weight: bold;
+}
+
+p {
+    font-weight: lighter;
+}
+
+ul {
+    font-weight: lighter;
+}

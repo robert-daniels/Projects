@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 3/10/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 :: DOM and JavaScript</title>
+    <link rel="stylesheet" href="project2.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 2: Connecting JavaScript to the content in a web page, using the DOM</h1>
+    <div class="container">
+        <ol>
+            <li>At the end of the Browser environment lesson, the author makes this comment:
+
+               <blockquote>"Now we'll get down to learning DOM, because the document plays the central role in the UI." </blockquote>
+
+               Explain this sentence to a non-technical person.  What is the DOM and how is it created?  What is the document? What is the UI?  How does this relate to JavaScript?
+            &nbsp;
+            <p>The DOM (Document Object Model) is "built" by the browser as it reads in the HTML file. The webpage is envisioned as a document with each item in that document being an object. In Object Oriented Programming, objects have their own properties and methods. These objects are considered independent from each other. (They may be able to interface through their methods, though.)</p>   
+            <p>The compilation of these objects creates a user interface (UI) visually to the user that (in theory) they can easily comprehend and interact with. </p> 
+            <p>JavaScript can call the properties and methods of these objects and manipulate them. By doing this, the webpage instance ceases to be static and can be altered by the end user even if they don't have access to the underlying HTML file on the server.</p>
+            </li>
+            <li>
+                What specification documents does the author recommend (include the link and the description of the specification in your answer.)
+                <p>
+                The author recommends the following:</p>
+                    <ul>
+                        <li>
+                            <a href="https://dom.spec.whatwg.org/">The DOM Living Standard</a>
+                            <p>Per the standard, this defines a platform-neutral model for events, aborting, and node trees. Properties and Methods of the various DOM objects are described here. </p>
+                        </li>
+                        <li>
+                            <a href="https://www.w3.org/TR/cssom-1/">The CSSOM: CSS Object Model</a>
+                            <p>This repository explains CSS rules and stylesheets as represented by objects. This also goes into detail on how to read and write with these objects. </p>
+                        </li>
+                    </ul>
+            
+            </li>
+            <li>Other Questions as assigned
+                &nbsp;
+                <ul>
+                    <li>What is the document? Choose from the following -- object, method, property
+                        <p>Object</p>
+                    </li>
+                    <li>What operator do you use to access the methods and properties of an object?
+                        <p>Syntax to access an objects methods and properties: Object.<i>method() or property</i></p>
+                    </li>
+                    <li>What characters always follow a method?
+                    <p>Closed parentheses () with 0+ parameters inside of them</p></li>
+                    <li>What, in general, does a method of an object do?
+                    <p>A method (or function) takes 0+ pieces of data, performs an algorithm, and then returns the result of that algorithm. (It is also possible the method returns nothing / void.</p></li>
+                    <li>What, in general, does a property of an object do?
+                    <p>A property of an object is a value that is unique to that instance of the object. For example, if there were two "studentJCCC" objects student1 might have creditHours = 15 and student2 might have creditHours = 12. The property is creditHours, but each object has a different value.</p></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <script>
+        for (let i = 0; i < document.body.childNodes.length; i++){
+            // starting at i = 0, while i is less than length of the childNodes collection, +1 to i each iteration
+            console.log(document.body.childNodes[i]); // print to console the element at index i in childNodes
+        }
+
+        for (let node of document.body.childNodes){
+            // declare temp variable "node", piecemeal assign each iterable element in childNodes to node
+            console.log(node); // print what node is currently assigned as
+        }
+
+        
+        console.log(document.body.parentNode);
+        console.log(document.body.childNodes);
+        console.log(document.body.firstChild);
+        console.log(document.body.lastChild);
+        console.log(document.body.previousSibling);
+        console.log(document.body.nextSibling);
+        console.log(document.body.parentElement);
+        console.log(document.body.children);
+        console.log(document.body.firstElementChild);
+        console.log(document.body.lastElementChild);
+        console.log(document.body.previousElementSibling);
+        console.log(document.body.nextElementSibling);
+ 
+    </script>
+</body>
+</html>
