@@ -3,7 +3,7 @@ package project1;
 import java.util.*;
 
 
-/*
+/**
 @author: Robert Daniels
 02/25/2022
 
@@ -51,12 +51,13 @@ public class HourlyWageCalculator{
             
    
     public static int getWeekNumber(Scanner scnr){
-            /*
+            /**
             This method gets passed a scanner from main. It then prompts user for week number. 
             The week number is validated if it is an int between 1 and 52. -1 will kill process.
             Continues to loop until killed or validated 
             
-            @returns weekNumber as int
+            @param Scanner scnr: scanner object System.in
+            @return weekNumber as int
             
             */
             boolean weekNumberSentinel = false;
@@ -87,14 +88,14 @@ public class HourlyWageCalculator{
     }
     
     public static double[] getInputFromUser(Scanner scnr, int calcWeek){
-        /*
-        gets hours worked for the week from user. 
-        
+        /**
+        Gets hours worked for the week from user. 
         Will continue to loop until validated. 
-        
         Hours worked are passed to convertStringToDouble once validated
         
-        @returns outputArray as a double[] once passed back up from convertStringToDouble
+        @param Scanner object with System.in
+        @param calcWeek as int: week that hours were worked
+        @return outputArray as a double[] once passed back up from convertStringToDouble
         */
         
         String hoursInput;
@@ -128,8 +129,8 @@ public class HourlyWageCalculator{
     }
         
     public static boolean validateInput(String[] inputArray){
-        /*
-        takes String[] inputArray and checks to see if input is valid. 
+        /**
+        Takes String[] inputArray and checks to see if input is valid. 
         
         Data are validated if:
         
@@ -137,7 +138,8 @@ public class HourlyWageCalculator{
         Every value must be > 0
         Every value must be able to convert to a double
         
-        @returns validCheck as a boolean
+        @param String[] inputArray: the raw split array from input string
+        @return validCheck as a boolean if all tests eval to True (pass)
         
         */
         
@@ -148,8 +150,8 @@ public class HourlyWageCalculator{
         boolean validCheck = false;
 
         
-        // check for exactly 7 values
-        if (inputArray.length == 7){
+        // check for exactly 7 values. Left in for assignment, actually handled above
+        if (inputArray.length == 7){ // should always be true at this point, since init above 7
             validCheck7 = true;
         } else {
             System.out.println("Input must have seven numbers");
@@ -198,7 +200,8 @@ public class HourlyWageCalculator{
         takes validated inputArray passed from getInputFromUser, loops through array and 
         converts elements to double.
         
-        @returns outputArray as a double[]
+        @param String[] inputArray after sanitized
+        @return outputArray as a double[]
         */
         
         
@@ -213,8 +216,11 @@ public class HourlyWageCalculator{
     }
         
     public static void calculatePayForWeek(int calcWeek, double[] arrayToProcess){
-    /*
+    /**
     Using provided pay logic, calculate earned pay for week. Displays output to client
+
+    @param calcWeek as int, week the hours were worked
+    @param double[] arrayToProcess, sanitized array of hours worked
     */
         
          // declare fixed variables
@@ -281,12 +287,12 @@ public class HourlyWageCalculator{
     }
     
     public static double getTotalHours(double[] arrayToProcess){ // kept as double, not integer
-        /*
+        /**
         Takes the arrayToProcess passed from calculatePay and returns sumTotal hours. 
         Instructions say this should return an integer value, but employees would mutiny if they lost 
         partial hours worked. 
         
-        @returns totalHours as a double
+        @return totalHours as a double
         */
         
         double totalHours = 0;
