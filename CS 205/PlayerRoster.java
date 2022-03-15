@@ -40,10 +40,11 @@ public class PlayerRoster {
 
         for (int i = 1; i <= 5; ++i){
             
-            System.out.printf("Enter player %d's jersey number\n", i);
+            System.out.printf("Enter player %d's jersey number:\n", i);
             userInput[i][1] = scnr.nextInt();
-            System.out.printf("Enter player %d's rating\n", i);
+            System.out.printf("Enter player %d's rating:\n", i);
             userInput[i][2] = scnr.nextInt();
+            System.out.println("");
         }
         return userInput;
     }
@@ -55,7 +56,6 @@ public class PlayerRoster {
          * @param int[][] userInput from getUserInput jersey number and ratings
          */
 
-        System.out.println("");
         System.out.println("ROSTER");
         for (int i = 1; i <= 5; ++i){
             System.out.printf("Player %d -- Jersey number: %d, Rating: %d\n", i, userInput[i][1], userInput[i][2]);
@@ -138,7 +138,7 @@ public class PlayerRoster {
          oldJersey = scnr.nextInt();
 
          for (int i = 1; i <= 5; ++i){
-            if (userInput[i][i] == oldJersey){
+            if (userInput[i][1] == oldJersey){
                 playerIndex = i;
                 break;
             }
@@ -174,7 +174,7 @@ public class PlayerRoster {
         System.out.println("a - Output players above a rating");
         System.out.println("r - Replace player");
         System.out.println("o - Output roster");
-        System.out.println("q - quit");
+        System.out.println("q - Quit");
         System.out.println("\nChoose an option:");
 
         userMenuChoice = scnr.next().charAt(0);
