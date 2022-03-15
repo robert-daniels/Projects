@@ -16,7 +16,7 @@ public class PlayerRoster {
         // prompt for 5 pairs of numbers, store jersey number and rating in 2d array
         userInput = getUserInput(scnr, userInput);
         outputRoster(userInput);
-        
+        // TODO start here at #2, to print main menu. needs to loop, so will need a boolean or sentinel 
 
     }
 
