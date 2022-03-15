@@ -24,6 +24,7 @@ public class PlayerRoster {
             userExit = menuOption(scnr, userInput);
         }
         
+        scnr.close();
 
 
     }
@@ -35,6 +36,8 @@ public class PlayerRoster {
          * 
          * @param Scanner object System.in
          * @param int[][] userInput, initialized empty 2d array
+         * 
+         @return 2d int array null,jerseyNumber,playerRating * 5
          */
 
 
@@ -196,6 +199,4 @@ public class PlayerRoster {
         return menuExit;
 
     }
-
-
 }
