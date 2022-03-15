@@ -8,8 +8,10 @@
 </head>
 <body>
     <script>
-        let result = prompt("Tell me something", "")
-        console.log(`you told me ${result}`)
+       alert(location.href);
+       if (confirm("go to wiki?")){
+           location.href = "https://wikipedia.org";
+       }
 
     </script>
 </body>

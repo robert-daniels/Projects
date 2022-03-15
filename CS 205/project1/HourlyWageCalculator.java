@@ -4,7 +4,7 @@ import java.util.*;
 
 
 /**
-@author: Robert Daniels
+@author Robert Daniels
 02/25/2022
 
 Hourly Wage Calculator: prompts user for week worked as an int, and 7 values for hours worked as a double. 
