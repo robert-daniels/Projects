@@ -47,5 +47,7 @@ public class lab8{
                 System.out.print(normalized[i] + " ");
             }
              
+
+            scnr.close();
       }
     }
