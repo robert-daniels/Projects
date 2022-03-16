@@ -151,7 +151,7 @@ public class HourlyWageCalculator{
 
         
         // check for exactly 7 values. Left in for assignment, actually handled above
-        if (inputArray.length == 7){ // should always be true at this point, since init above 7
+        if (inputArray.length == 7){ // should always be true at this point, since init above is 7
             validCheck7 = true;
         } else {
             System.out.println("Input must have seven numbers");

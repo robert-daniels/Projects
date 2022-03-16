@@ -1,7 +1,7 @@
 /**
  * @Author Perla Weaver, Professor at Johnson County Community College for CS 205
  * 
- * PLEASE NOTE: This is uploaded to Robert Daniels Repository as it was part of the Hourly Wage Calculator project to match the test. In no way should
+ * PLEASE NOTE: This is uploaded to Robert Daniels Repository as it was part of the Hourly Wage Calculator project to match the test. In * no way should
  * I be credited for making this code. All intellectual rights are held by Professor Weaver. 
  * 
  * 
