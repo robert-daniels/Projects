@@ -4,7 +4,13 @@ public class BubbleSort {
     
     public static void main(String[] args) {
         /**
-         * Bubble sort degrads rapidly, but warm up.
+         * Bubble Sort Algorithm
+         * 
+         * In-place Algorithm
+         * O(n2) time complexity - Quadratic
+         * Stable Algorithm unless comparison is >= 
+         * 
+         * Bubble sort degrades rapidly
          * Compare array[i] to array[i+1], if greater, swap values 
          * The larger values "bubble up."
          * 
@@ -17,6 +23,7 @@ public class BubbleSort {
          int swapHold;
          int sortedIndex  = testArray.length;
 
+        //  TODO account for the last swap 
          while (sortedIndex != 0){
              for (int i = 0; i < sortedIndex - 1; ++i){  // not clean
                  if (testArray[i] > testArray[i+1]){
