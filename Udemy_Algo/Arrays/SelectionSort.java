@@ -39,7 +39,6 @@ public class SelectionSort {
             testArray[maxIndex] = tempSwapHold;
 
             --unsortedIndex;
-
         }
 
         System.out.println(Arrays.toString(testArray));
