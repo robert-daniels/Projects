@@ -19,6 +19,15 @@ public class Lab10ArraySort{
         System.out.println("Press <enter> key to continue");
         input.nextLine();
 
+        // test improved bubble sort
+
+        int[] improvedBubbleSortArray = masterArray.clone();
+        System.out.printf("\n*Array* before improved bubbleSort: %s\n", Arrays.toString(improvedBubbleSortArray));
+        improvedBubbleSort(improvedBubbleSortArray);
+        System.out.printf("\n*Array after improved bubbleSort: %s\n", Arrays.toString(improvedBubbleSortArray));
+        System.out.println("Press <enter> key to continue");
+        input.nextLine();
+
      }
 
      public static void swapTwo(int[] array, int index1, int index2){
@@ -74,7 +83,58 @@ public class Lab10ArraySort{
             System.out.printf("Array after loop starting at index %d : %s.\n\n", startingIndex, Arrays.toString(array));   
             ++startingIndex;
          }
+
          System.out.printf("Running bubbleSort, I swapped a total of %d times!\n", swapCounter);
      }
+    
 
+     public static void improvedBubbleSort(int[] array){  // TODO logic error, it's running one more additional time for index 6
+        /**
+         * implements an improved bubbleSort algorithm on array passed from main.
+         * DOES check to see if list is sorted mid-run and breaks early if so
+         * For this implementation: 
+         * 
+         * Starts at index 0 and compares it to its next neighbor index. If greater, swap positions.
+         * When the end is reached, start again at index 0 and proceed until the index before lowest sorted. 
+         * If end is reached and no swaps have occurred, the list is sorted. 
+         * 
+         * @param int[] array from main 
+         */
+
+         int sortedIndex = array.length; // at the start, assume none of the array is sorted
+         int netSwapCounter = 0; // counter for the algorithm
+         int loopSwapCounter = 0; // counter for each looping
+         int startingIndex = 0;
+         boolean sorted = false;
+
+         while (sortedIndex != 0 && !sorted){
+            int i; 
+            sorted = true;
+
+            System.out.printf("- Starting at index %d, bubbling up highest numbers until index %d\n", startingIndex, array.length - 1); 
+
+            for (i = 0; i < sortedIndex -1; ++i){
+                loopSwapCounter = 0;
+
+                if (array[i] > array[i + 1]){
+                    sorted = false;
+                    swapTwo(array, i, i + 1);
+                    ++netSwapCounter;
+                    ++loopSwapCounter;
+                 }
+
+             }
+
+             --sortedIndex;
+
+            System.out.printf("Array after loop starting at index %d : %s.\n\n", startingIndex, Arrays.toString(array));   
+            ++startingIndex;
+
+            if (sorted == true){  // this should be removed, this doesn't work. 
+                break;
+            }
+         }
+         
+         System.out.printf("Running improvedBubbleSort, I swapped a total of %d times!\n", netSwapCounter);
+     }
 }
