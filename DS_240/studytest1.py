@@ -62,3 +62,16 @@ myDict[110] = "programming"
 myDict[730] = "glassblowing"
 
 print(myDict)
+
+# week 4 
+# TODO quick rundown of math and random. import math/import random. ceil, floor, etc. 
+
+try:
+    userInput = int(input("Type a number for the dealamajig: "))
+
+    if userInput:
+        print("that number exists and is greater than 0")
+    else:
+        print("you enetered zero, or that number doesn't exist")
+except:
+    print("Incorrect, try again")
