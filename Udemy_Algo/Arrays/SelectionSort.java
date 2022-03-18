@@ -22,22 +22,19 @@ public class SelectionSort {
         
         int[] testArray = {20, 35, -15, 7, 55, 1, -22}; // perfect sized array
         int maxIndex;
-        int maxNumber; 
         int tempSwapHold;
         int unsortedIndex = testArray.length - 1; // at start, consider all of the array unsorted
 
         while (unsortedIndex != 0){
             maxIndex = 0;
-            maxNumber = testArray[0];
 
             for (int i = 0; i <= unsortedIndex; ++i){
-                if ( testArray[i] >= maxNumber ){ // TODO this may convert this into a stable sort 
+                if ( testArray[i] >= testArray[maxIndex] ){ // TODO this may convert this into a stable sort 
                     maxIndex = i;
-                    maxNumber = testArray[i];
                 } 
             }
 
-            tempSwapHold = testArray[unsortedIndex];
+            tempSwapHold = testArray[unsortedIndex]; 
             testArray[unsortedIndex] = testArray[maxIndex];
             testArray[maxIndex] = tempSwapHold;
 
