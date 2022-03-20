@@ -11,14 +11,14 @@ public class KansasTowns {
          * Reads a relative file reference as a string (hardcoded)
          * and outputs the string component and the sum of the values
          * Underlying file is <String>cityName <int>population
-         * All static methods 
+         * All static methods. 
          * 
          * @author Robert Daniels
          */
 
         //TODO the file paths are not ideal. It needs to look inside subfolders, not the main project folder. 
         
-        String fileName = "KansasTownsPop1.txt";
+        String fileName = args[0];  // take from CLI for ease of running
         try{
             readTownsFile(fileName);
         }
