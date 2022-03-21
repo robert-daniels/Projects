@@ -18,7 +18,7 @@ public class KansasTowns {
 
         //TODO the file paths are not ideal. It needs to look inside subfolders, not the main project folder. 
         
-        String fileName = args[0];  // take from CLI for ease of running
+        String fileName = "KansasTownsPop2.txt";
         try{
             readTownsFile(fileName);
         }
