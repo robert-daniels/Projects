@@ -1,4 +1,5 @@
 '''week 5 review'''
+import random
 
 def randomFunction(str):
     print(str)
@@ -29,3 +30,19 @@ print(cityList)
 
 ### stop at random number functions 
 
+print(random.choice(range(50)))
+
+testString = "Summer Time"
+print(random.choice(testString))
+
+for i in range (5):
+    print(i)
+
+print(random.randrange(1, 100, 2))
+
+testRange = list(range(10))
+print(testRange)
+
+random.shuffle(testRange)
+
+print(testRange)
