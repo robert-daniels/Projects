@@ -9,8 +9,6 @@ public class Lab10ArraySort{
      public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         int[] masterArray = {11, 2, 34, 14, 95, 26, 7, 18, 9, 16};
-
-        
         
         // test selection sort
 
@@ -48,6 +46,8 @@ public class Lab10ArraySort{
         System.out.printf("\n*Array after improved bubbleSort: %s\n", Arrays.toString(improvedBubbleSortArray));
         System.out.println("Press <enter> key to continue");
         input.nextLine();
+
+        input.close();
 
      }
 
@@ -158,7 +158,7 @@ public class Lab10ArraySort{
 
          }
          
-         System.out.printf("Running improvedBubbleSort, I swapped a total of %d times and 'ran' %d times!\n", netSwapCounter, netRunCounter);
+         System.out.printf("Running improvedBubbleSort, I swapped a total of %d times and 'ran' %d times! That's %d loops less than a standard bubbleSort!\n", netSwapCounter, netRunCounter, (array.length - 1 - netRunCounter));
      }
 
      public static void selectionSort(int[] array){
@@ -206,6 +206,7 @@ public class Lab10ArraySort{
 
         for (int i = unsortedIndex; i < array.length; ++i){
             sortedIndex = i;
+            System.out.printf("Insert %d into sorted numbers before %d\n", array[i], array[i]);
 
             while (sortedIndex > 0 && (array[sortedIndex] < array[sortedIndex - 1])){
                 swapTwo(array, sortedIndex, sortedIndex - 1);
