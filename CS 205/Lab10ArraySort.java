@@ -20,6 +20,16 @@ public class Lab10ArraySort{
         System.out.printf("\n*Array after selectionSort: %s\n", Arrays.toString(selectionSortArray));
         System.out.println("Press <enter> key to continue");
         input.nextLine();
+
+        // test insertion sort
+
+        int[] insertionSortArray = masterArray.clone();
+        System.out.printf("\n*Array* before insertionSort: %s\n", Arrays.toString(insertionSortArray));
+        insertionSort(insertionSortArray);
+        System.out.printf("\n*Array after insertionSort: %s\n", Arrays.toString(insertionSortArray));
+        System.out.println("Press <enter> key to continue");
+        input.nextLine();
+
         
         // test bubble sort
 
@@ -180,7 +190,28 @@ public class Lab10ArraySort{
             ++unsortedIndex;
          }
 
-         
+     }
+
+     public static void insertionSort(int[] array){
+        /**
+         * Implements insertionSort algorithm. Assumes there's an unsorted and sorted portion of the array. 
+         * Traverses array and recursively inserts the next value in unsorted into its correct place in the
+         * sorted array. The sorted array index ++, unsorted --.
+         * 
+         * @param int array from main containing test sequence
+         */
+        
+        int unsortedIndex = 1; // assumes array[1] is the start of the unsorted
+        int sortedIndex;
+
+        for (int i = unsortedIndex; i < array.length; ++i){
+            sortedIndex = i;
+
+            while (sortedIndex > 0 && (array[sortedIndex] < array[sortedIndex - 1])){
+                swapTwo(array, sortedIndex, sortedIndex - 1);
+                --sortedIndex;
+            }
+        }
 
      }
 
