@@ -163,20 +163,17 @@ public class Lab10ArraySort{
          */
 
          int unsortedIndex = 0;  // at start, assume the entire array is unsorted. 
-         int minNumber;
          int minNumberIndex = 0;
 
          while (unsortedIndex != array.length - 1){
-            minNumber = array[unsortedIndex];
 
-            for (int i = unsortedIndex + 1; i < array.length; ++i){
-                if (array[i] < minNumber){
-                    minNumber = array[i];
+            for (int i = unsortedIndex; i < array.length; ++i){
+                if (array[i] < array[minNumberIndex]){
                     minNumberIndex = i;
                 }
             }
 
-            System.out.printf("--Found next smallest value: %d at index %d.\n", minNumber, minNumberIndex);
+            System.out.printf("--Found next smallest value: %d at index %d.\n", array[minNumberIndex], minNumberIndex);
             swapTwo(array, unsortedIndex, minNumberIndex);
             System.out.printf("Array after loop where i = %d: %s\n", unsortedIndex, Arrays.toString(array));
 
