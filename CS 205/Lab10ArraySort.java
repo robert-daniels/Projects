@@ -61,6 +61,7 @@ public class Lab10ArraySort{
 
          int sortedIndex = array.length; // at the start, assume none of the array is sorted
          int swapCounter = 0;
+         int netRunCounter = 0;
          int startingIndex = 0;
 
          while (sortedIndex != 0){
@@ -79,16 +80,17 @@ public class Lab10ArraySort{
              }
 
              --sortedIndex;
+             ++netRunCounter;
 
             System.out.printf("Array after loop starting at index %d : %s.\n\n", startingIndex, Arrays.toString(array));   
             ++startingIndex;
          }
 
-         System.out.printf("Running bubbleSort, I swapped a total of %d times!\n", swapCounter);
+         System.out.printf("Running bubbleSort, I swapped a total of %d times and 'ran' %d times!\n", swapCounter, netRunCounter);
      }
     
 
-     public static void improvedBubbleSort(int[] array){  // TODO logic error, it's running one more additional time for index 6
+     public static void improvedBubbleSort(int[] array){ 
         /**
          * implements an improved bubbleSort algorithm on array passed from main.
          * DOES check to see if list is sorted mid-run and breaks early if so
@@ -103,18 +105,18 @@ public class Lab10ArraySort{
 
          int sortedIndex = array.length; // at the start, assume none of the array is sorted
          int netSwapCounter = 0; // counter for the algorithm
+         int netRunCounter = 0;
          int loopSwapCounter = 0; // counter for each looping
          int startingIndex = 0;
          boolean sorted = false;
 
          while (sortedIndex != 0 && !sorted){
             int i; 
-            sorted = true;
+            loopSwapCounter = 0;
 
             System.out.printf("- Starting at index %d, bubbling up highest numbers until index %d\n", startingIndex, array.length - 1); 
 
             for (i = 0; i < sortedIndex -1; ++i){
-                loopSwapCounter = 0;
 
                 if (array[i] > array[i + 1]){
                     sorted = false;
@@ -125,16 +127,19 @@ public class Lab10ArraySort{
 
              }
 
+             if (loopSwapCounter == 0){
+                 sorted = true;
+             }
+
              --sortedIndex;
+             ++netRunCounter;
 
             System.out.printf("Array after loop starting at index %d : %s.\n\n", startingIndex, Arrays.toString(array));   
             ++startingIndex;
 
-            if (sorted == true){  // this should be removed, this doesn't work. 
-                break;
-            }
+
          }
          
-         System.out.printf("Running improvedBubbleSort, I swapped a total of %d times!\n", netSwapCounter);
+         System.out.printf("Running improvedBubbleSort, I swapped a total of %d times and 'ran' %d times!\n", netSwapCounter, netRunCounter);
      }
 }
