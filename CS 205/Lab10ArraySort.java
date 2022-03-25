@@ -10,6 +10,17 @@ public class Lab10ArraySort{
         Scanner input = new Scanner(System.in);
         int[] masterArray = {11, 2, 34, 14, 95, 26, 7, 18, 9, 16};
 
+        
+        
+        // test selection sort
+
+        int[] selectionSortArray = masterArray.clone();
+        System.out.printf("\n*Array* before selectionSort: %s\n", Arrays.toString(selectionSortArray));
+        selectionSort(selectionSortArray);
+        System.out.printf("\n*Array after selectionSort: %s\n", Arrays.toString(selectionSortArray));
+        System.out.println("Press <enter> key to continue");
+        input.nextLine();
+        
         // test bubble sort
 
         int[] bubbleSortArray = masterArray.clone();
@@ -56,7 +67,7 @@ public class Lab10ArraySort{
          * Starts at index 0 and compares it to its next neighbor index. If greater, swap positions.
          * When the end is reached, start again at index 0 and proceed until the index before lowest sorted. 
          * 
-         * @param int[] array from main 
+         * @param int[] array from main containing test sequence
          */
 
          int sortedIndex = array.length; // at the start, assume none of the array is sorted
@@ -75,8 +86,6 @@ public class Lab10ArraySort{
                     swapTwo(array, i, i + 1);
                     ++swapCounter;
                  }
-                 //System.out.printf("--Array after loop with i = %d: ", i);
-                 //System.out.println(Arrays.toString(array));
              }
 
              --sortedIndex;
@@ -89,7 +98,6 @@ public class Lab10ArraySort{
          System.out.printf("Running bubbleSort, I swapped a total of %d times and 'ran' %d times!\n", swapCounter, netRunCounter);
      }
     
-
      public static void improvedBubbleSort(int[] array){ 
         /**
          * implements an improved bubbleSort algorithm on array passed from main.
@@ -100,7 +108,7 @@ public class Lab10ArraySort{
          * When the end is reached, start again at index 0 and proceed until the index before lowest sorted. 
          * If end is reached and no swaps have occurred, the list is sorted. 
          * 
-         * @param int[] array from main 
+         * @param int[] array from main containing test sequence
          */
 
          int sortedIndex = array.length; // at the start, assume none of the array is sorted
@@ -114,7 +122,7 @@ public class Lab10ArraySort{
             int i; 
             loopSwapCounter = 0;
 
-            System.out.printf("- Starting at index %d, bubbling up highest numbers until index %d\n", startingIndex, array.length - 1); 
+            System.out.printf("- Starting at index %d, bubbling up highest numbers until index %d\n", startingIndex + 1, array.length - 1); 
 
             for (i = 0; i < sortedIndex -1; ++i){
 
@@ -142,4 +150,43 @@ public class Lab10ArraySort{
          
          System.out.printf("Running improvedBubbleSort, I swapped a total of %d times and 'ran' %d times!\n", netSwapCounter, netRunCounter);
      }
+
+     public static void selectionSort(int[] array){
+        /**
+         * Implements selectionSort algorithm. Starts by assuming entire list is unsorted.
+         * Assumes index[0] is lowest value, then checks if any elements in unsorted portion
+         * are less than that value. If so, swap once end of unsorted is reached. ++sortedPortion, 
+         * take first index of unsorted as next starting. 
+         * 
+         * @param int array from main containing test sequence
+         * 
+         */
+
+         int unsortedIndex = 0;  // at start, assume the entire array is unsorted. 
+         int minNumber;
+         int minNumberIndex = 0;
+
+         while (unsortedIndex != array.length - 1){
+            minNumber = array[unsortedIndex];
+
+            for (int i = unsortedIndex + 1; i < array.length; ++i){
+                if (array[i] < minNumber){
+                    minNumber = array[i];
+                    minNumberIndex = i;
+                }
+            }
+
+            System.out.printf("--Found next smallest value: %d at index %d.\n", minNumber, minNumberIndex);
+            swapTwo(array, unsortedIndex, minNumberIndex);
+            System.out.printf("Array after loop where i = %d: %s\n", unsortedIndex, Arrays.toString(array));
+
+            ++unsortedIndex;
+         }
+
+         
+
+     }
+
+
+
 }
