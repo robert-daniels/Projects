@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 3/26/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3 :: Modifying and Adding</title>
+    <link rel="stylesheet" href="project3.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 3: Modifying and adding new elements to the web page.</h1>
+    <div id="container">
+        <ol>
+            <li>
+                Identify the three major types of nodes found in an HTML document that we work with in JavaScript.
+                <p>The three major types of nodes in the specification are as follows:</p>
+                <ul>
+                    <li>Text Node</li>
+                    <li>Element Node</li>
+                    <li>Comment Node</li>
+                </ul>
+                &nbsp;
+            </li>
+            <li>
+                Why is the JavaScript textContent property safer than innerHTML?
+                <p>The textContent option is safer than innerHTML as it treats what is passed to it as a literal string. The innerHTML element treats what is passed to it as actual HTML. The latter may, in theory, render. This rendering, especially if passed from an end user, may alter the webpage is unanticipated / undesired ways. </p>
+            
+            </li>
+            <li>
+                ...What do you notice about JavaScript properties and their corresponding HTML attribute names? 
+                <p>I may be overthinking this.</p> 
+                <p>An example of a property we've covered is document.body.id="light". This results in a body tag with id = light. 
+                The property id IS A property of body which IS A property of document. The full name of what is being called includes the steps of inheritance of that particular property. 
+                </p>
+            </li>
+            <li>Why do we rarely, if ever use document.write() ?
+                <p>The call to document.write(str) writes HTML directly into the page as it's called. The consequence is that this usually only works as intended while the page is loading. If this is called after the page has loaded, the existing document is erased, leaving the page at whatever has been passed to document.write(). </p>
+            </li>
+            <li>
+                What is a JavaScript method?  Define and provide two examples.
+                <p>Methods (functions) are actions that can be called to get the script to "do something" to "something else." They can return nothing (void) or return something like a Boolean True/False. Methods are often used to manipulate various properties of objects. </p>
+
+                <p>Some examples of JavaScript method examples are as follows:</p>
+                <ul>
+                    <li>document.createElement(tag) : Creates an element with the tag</li>
+                    <li>node.append(elem) : Takes the parameter and inserts it into the specified node, at the end.</li>
+                </ul>
+                &nbsp;
+            </li>
+            <li>
+                What is a JavaScript property? Define and provide two examples.
+                    <p>A property in JavaScript is a value descriptor of the object that it is associated with. It can be called upon as a value, or manipulated with methods.</p>
+                    <p>Some examples of JavaScript properties are as follows: </p>
+                    <ul>
+                        <li>className : the name of the class the object is associated with</li>
+                        <li>hidden : a boolean true / false if the object is currently hidden.</li>
+                    </ul>
+            </li>
+            &nbsp;
+
+            <li>
+                We have been working with three "built-in" objects that are already provided for us when we use JavaScript for its initial purpose -- to modify HTML and CSS in response to user interaction on the web page.  Provide a sample method for each of these three objects:  window, document, and console.
+
+                <p>
+                <ul>
+                    <li>Window: window.alert(str)</li>
+                    <li>Document: document.querySelector(str)</li>
+                    <li>Console: console.log(str)</li>
+                </ul>
+                </p>
+            </li>
+            <li>What is a CSS selector? Define and provide two examples.
+                <p>A CSS selector is a call in a stylesheet or other style source to an html object that matches the header of the call. Examples include an element selector such as p or h1, and an id selector such as #container. </p>
+            </li>
+            <li>
+                What is a CSS property? Define and provide two examples.
+                <p>Given a CSS selector, a CSS property will cause that style to be set on the item(s) selected. 
+                For example, calling #container selector with font-weight = bold will bold all text within an element with the id ="container". This is in somewhat contrast to the syntax for straight JavaScript, container.fontWeight = "bold";</p>
+            </li>
+            
+        </ol>
+    </div>
+    <script>
+        for (let i = 0; i < document.body.childNodes.length; i++){
+            // starting at i = 0, while i is less than length of the childNodes collection, +1 to i each iteration
+            console.log(document.body.childNodes[i]); // print to console the element at index i in childNodes
+        }
+
+        for (let node of document.body.childNodes){
+            // declare temp variable "node", piecemeal assign each iterable element in childNodes to node
+            console.log(node); // print what node is currently assigned as
+        }
+
+        
+        console.log(document.body.parentNode);
+        console.log(document.body.childNodes);
+        console.log(document.body.firstChild);
+        console.log(document.body.lastChild);
+        console.log(document.body.previousSibling);
+        console.log(document.body.nextSibling);
+        console.log(document.body.parentElement);
+        console.log(document.body.children);
+        console.log(document.body.firstElementChild);
+        console.log(document.body.lastElementChild);
+        console.log(document.body.previousElementSibling);
+        console.log(document.body.nextElementSibling);
+ 
+    </script>
+</body>
+</html>
