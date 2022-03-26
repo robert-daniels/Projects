@@ -1,4 +1,4 @@
-/* Robert Daniels, 3/10/2022 */
+/* Robert Daniels, 3/26/2022 */
 
 
 header{
@@ -38,3 +38,17 @@ ul {
     font-weight: lighter;
 }
 
+/* I'm pretty sure the 40% width is still bad practice, but I'm not sure how
+to re-size it to x% of the container otherwise.  */
+#cssimage {
+    display: block;
+    width: 40%;
+    max-width: 900px;
+    margin: auto;
+}
+
+.q6style {
+    text-align: center;
+    text-emphasis: bold;
+
+}

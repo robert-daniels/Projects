@@ -58,7 +58,7 @@
                     <p>Some examples of JavaScript properties are as follows: </p>
                     <ul>
                         <li>className : the name of the class the object is associated with</li>
-                        <li>hidden : a boolean true / false if the object is currently hidden.</li>
+                        <li>hidden : a Boolean true / false if the object is currently hidden.</li>
                     </ul>
             </li>
             &nbsp;
@@ -80,36 +80,74 @@
             <li>
                 What is a CSS property? Define and provide two examples.
                 <p>Given a CSS selector, a CSS property will cause that style to be set on the item(s) selected. 
-                For example, calling #container selector with font-weight = bold will bold all text within an element with the id ="container". This is in somewhat contrast to the syntax for straight JavaScript, container.fontWeight = "bold";</p>
+                For example, calling #container selector with font-weight = bold will bold all text within an element with the id ="container". This is in somewhat contrast to the syntax for the JavaScript equivalent fontWeight property.</p>
             </li>
-            
+            <li>
+                What is a CSS declaration? Define and provide two examples.
+                <p>A CSS declaration is the complete signature of both a selector and property paring. Please see examples as below:</p>
+                <img src="images/CSSDeclaration.png" alt="An image of 2 complete CSS selectors" id="cssimage">
+            </li>
         </ol>
+        
+        <!-- Items in the HTML main for questions -->
+        <h1 id="question2">placeholder</h1>
+        <h2 id="question3_1">placeholder</h2>
+        <h2 id="question3_2">placeholder</h2>
+        <h2 id="question3_3">placeholder</h2>
+
     </div>
     <script>
-        for (let i = 0; i < document.body.childNodes.length; i++){
-            // starting at i = 0, while i is less than length of the childNodes collection, +1 to i each iteration
-            console.log(document.body.childNodes[i]); // print to console the element at index i in childNodes
-        }
-
-        for (let node of document.body.childNodes){
-            // declare temp variable "node", piecemeal assign each iterable element in childNodes to node
-            console.log(node); // print what node is currently assigned as
-        }
-
+        // # 1
+        console.log(document.body);
+        console.dir(document.body);
         
-        console.log(document.body.parentNode);
-        console.log(document.body.childNodes);
-        console.log(document.body.firstChild);
-        console.log(document.body.lastChild);
-        console.log(document.body.previousSibling);
-        console.log(document.body.nextSibling);
-        console.log(document.body.parentElement);
-        console.log(document.body.children);
-        console.log(document.body.firstElementChild);
-        console.log(document.body.lastElementChild);
-        console.log(document.body.previousElementSibling);
-        console.log(document.body.nextElementSibling);
- 
+        // # 2. Not using the global ID specifier question2.textContent to practice the full syntax
+
+        document.getElementById("question2").textContent = "Johnson County Community College";
+        
+        // # 3.
+
+        document.getElementById("question3_1").textContent = "Accounting";
+        document.getElementById("question3_2").textContent = "Fire Science";
+        document.getElementById("question3_3").textContent = "Respiratory Care";
+
+        // # 4.
+
+        // for fun, this will append to inside the container div, not to the end of the body. 
+
+        let majorList = ["Police Academy", "Esthetics", "CIS"];
+        let ele = "";
+
+        for (let i of majorList){
+            ele = document.createElement('h2');
+            ele.textContent = i;
+            document.getElementById("container").append(ele);    
+        }
+
+        // # 5.
+
+        // ATTRIBUTE for #5: script from JavaScript.info: The JavaScript Language, Ilya Kantor.
+        // The e-book may be found at https://JavaScript.info/ebook
+
+        let ul = document.createElement('ul'); // make an element with 'ul' tag
+        document.body.append(ul); // add that ul to the end of the body element
+
+        while (true) { // infinite loop until no data provided, run code block
+            let data = prompt("Enter the text for the list item", ""); // prompt user for text string
+
+                if (!data) { // if no string is provided, 
+                    break; // return program flow / break loop
+                }
+
+            let li = document.createElement('li'); // make an element with the 'li' tag
+            li.textContent = data; // set the text content of that li element to value of data variable
+            ul.append(li); // add the filled li element to the end of the ul element
+        }
+
+        // # 6. 
+
+            document.getElementById("question2").style.color = "red";
+            document.getElementById("question2").classList.add("q6style");
     </script>
 </body>
 </html>
