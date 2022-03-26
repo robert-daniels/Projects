@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Lab10ArraySort{
+public class ArraySorting{
     /**
      * @author Robert Daniels
      * Chapt 10 int[] array sort methods lab
