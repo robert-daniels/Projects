@@ -62,6 +62,7 @@ import java.util.Scanner;
       --numElements; // compensate for the -1 going in
       
       selectionSortDescendTrace(numbers, numElements);
-
+    
+      scnr.close();
    }
 }
