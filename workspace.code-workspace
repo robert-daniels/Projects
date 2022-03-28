@@ -8,10 +8,9 @@
 	"settings": {
 		"liveServer.settings.multiRootWorkspaceName": "js",
 		"java.project.sourcePaths": [
-			"Udemy_Algo/Arrays",
-			"CS 205",
-			"katas"
+			"src"
 		],
-		"java.dependency.packagePresentation": "hierarchical"
+		"java.dependency.packagePresentation": "hierarchical",
+		"java.project.outputPath": "bin"
 	}
 }

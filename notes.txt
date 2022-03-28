@@ -1,3 +1,0 @@
-for vscode, once git enabled can issue a commit comment and either auto-stage all plus commit, or stage, and then commit manual. MUSF
-
-Future me: see about conflict resolution
