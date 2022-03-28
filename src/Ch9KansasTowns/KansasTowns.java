@@ -16,9 +16,9 @@ public class KansasTowns {
          * @author Robert Daniels
          */
 
+        // "H:\Projects-1\KansasTownsPop1.txt"
         
-        
-        String fileName = "KansasTownsPop2.txt";
+        String fileName = "H:\\Projects-1\\CS 205\\Ch9KansasTownsPopFiles\\KansasTownsPop1.txt";
         try{
             readTownsFile(fileName);
         }
@@ -29,8 +29,7 @@ public class KansasTowns {
 
     }
 
-    public static void readTownsFile(String fileName) throws IOException{
-        /**
+    /**
          * Checks if provided file exists, if so, loop through the file
          * and output the cities and total population sum of cities. 
          * 
@@ -39,6 +38,9 @@ public class KansasTowns {
          * @param fileName as String. relative file path from main
          * 
          */
+
+    public static void readTownsFile(String fileName) throws IOException{
+        
         
         File fileIn = new File(fileName);
 
