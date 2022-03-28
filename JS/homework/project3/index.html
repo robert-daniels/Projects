@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 3/26/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3 :: Modifying and Adding</title>
+    <link rel="stylesheet" href="project3.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 3: Modifying and adding new elements to the web page.</h1>
+    <div id="container">
+        <ol>
+            <li>
+                Identify the three major types of nodes found in an HTML document that we work with in JavaScript.
+                <p>The three major types of nodes in the specification are as follows:</p>
+                <ul>
+                    <li>Text Node</li>
+                    <li>Element Node</li>
+                    <li>Comment Node</li>
+                </ul>
+                &nbsp;
+            </li>
+            <li>
+                Why is the JavaScript textContent property safer than innerHTML?
+                <p>The textContent option is safer than innerHTML as it treats what is passed to it as a literal string. The innerHTML element treats what is passed to it as actual HTML. The latter may, in theory, render. This rendering, especially if passed from an end user, may alter the webpage is unanticipated / undesired ways. </p>
+            
+            </li>
+            <li>
+                ...What do you notice about JavaScript properties and their corresponding HTML attribute names? 
+                <p>I may be overthinking this.</p> 
+                <p>An example of a property we've covered is document.body.id="light". This results in a body tag with id = light. 
+                The property id IS A property of body which IS A property of document. The full name of what is being called includes the steps of inheritance of that particular property. 
+                </p>
+            </li>
+            <li>Why do we rarely, if ever use document.write() ?
+                <p>The call to document.write(str) writes HTML directly into the page as it's called. The consequence is that this usually only works as intended while the page is loading. If this is called after the page has loaded, the existing document is erased, leaving the page at whatever has been passed to document.write(). </p>
+            </li>
+            <li>
+                What is a JavaScript method?  Define and provide two examples.
+                <p>Methods (functions) are actions that can be called to get the script to "do something" to "something else." They can return nothing (void) or return something like a Boolean True/False. Methods are often used to manipulate various properties of objects. </p>
+
+                <p>Some examples of JavaScript method examples are as follows:</p>
+                <ul>
+                    <li>document.createElement(tag) : Creates an element with the tag</li>
+                    <li>node.append(elem) : Takes the parameter and inserts it into the specified node, at the end.</li>
+                </ul>
+                &nbsp;
+            </li>
+            <li>
+                What is a JavaScript property? Define and provide two examples.
+                    <p>A property in JavaScript is a value descriptor of the object that it is associated with. It can be called upon as a value, or manipulated with methods.</p>
+                    <p>Some examples of JavaScript properties are as follows: </p>
+                    <ul>
+                        <li>className : the name of the class the object is associated with</li>
+                        <li>hidden : a Boolean true / false if the object is currently hidden.</li>
+                    </ul>
+                    &nbsp;
+            </li>
+            
+
+            <li>
+                We have been working with three "built-in" objects that are already provided for us when we use JavaScript for its initial purpose -- to modify HTML and CSS in response to user interaction on the web page.  Provide a sample method for each of these three objects:  window, document, and console.
+                <ul>
+                    <li>Window: window.alert(str)</li>
+                    <li>Document: document.querySelector(str)</li>
+                    <li>Console: console.log(str)</li>
+                </ul>
+            </li>
+            <li>What is a CSS selector? Define and provide two examples.
+                <p>A CSS selector is a call in a stylesheet or other style source to an html object that matches the header of the call. Examples include an element selector such as p or h1, and an id selector such as #container. </p>
+            </li>
+            <li>
+                What is a CSS property? Define and provide two examples.
+                <p>Given a CSS selector, a CSS property will cause that style to be set on the item(s) selected. 
+                For example, calling #container selector with font-weight = bold will bold all text within an element with the id ="container". This is in somewhat contrast to the syntax for the JavaScript equivalent fontWeight property.</p>
+            </li>
+            <li>
+                What is a CSS declaration? Define and provide two examples.
+                <p>A CSS declaration is the complete signature of both a selector and property paring. Please see examples as below:</p>
+                <img src="images/CSSDeclaration.png" alt="An image of 2 complete CSS selectors" id="cssimage">
+            </li>
+        </ol>
+        
+        <!-- Items in the HTML main for questions -->
+        <h1 id="question2">placeholder</h1>
+        <h2 id="question3_1">placeholder</h2>
+        <h2 id="question3_2">placeholder</h2>
+        <h2 id="question3_3">placeholder</h2>
+
+    </div>
+    <script>
+        // # 1
+        console.log(document.body);
+        console.dir(document.body);
+        
+        // # 2. Not using the global ID specifier question2.textContent to practice the full syntax
+
+        document.getElementById("question2").textContent = "Johnson County Community College";
+        
+        // # 3.
+
+        document.getElementById("question3_1").textContent = "Accounting";
+        document.getElementById("question3_2").textContent = "Fire Science";
+        document.getElementById("question3_3").textContent = "Respiratory Care";
+
+        // # 4.
+
+        // for fun, this will append to inside the container div, not to the end of the body. 
+
+        let majorList = ["Police Academy", "Esthetics", "CIS"];
+        let ele = "";
+
+        for (let i of majorList){
+            ele = document.createElement('h2');
+            ele.textContent = i;
+            document.getElementById("container").append(ele);    
+        }
+
+        // # 5.
+
+        // ATTRIBUTE for #5: script from JavaScript.info: The JavaScript Language, Ilya Kantor.
+        // The e-book may be found at https://JavaScript.info/ebook
+
+        let ul = document.createElement('ul'); // make an element with 'ul' tag
+        document.body.append(ul); // add that ul to the end of the body element
+
+        while (true) { // infinite loop until no data provided, run code block
+            let data = prompt("Enter the text for the list item", ""); // prompt user for text string
+
+                if (!data) { // if no string is provided, 
+                    break; // return program flow / break loop
+                }
+
+            let li = document.createElement('li'); // make an element with the 'li' tag
+            li.textContent = data; // set the text content of that li element to value of data variable
+            ul.append(li); // add the filled li element to the end of the ul element
+        }
+
+        // # 6. 
+
+            document.getElementById("question2").style.color = "red";
+            document.getElementById("question2").classList.add("q6style");
+    </script>
+</body>
+</html>
