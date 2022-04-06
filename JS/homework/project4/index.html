@@ -52,10 +52,8 @@
 
         // 4.
 
-        let greetText = "";
-
-        proceed ? greetText = `Hello ${user}!` : greetText = "---Privacy Please---";
-
+        let greetText = proceed ? `Hello ${user}!` : "---Privacy Please---";
+        
         document.getElementById("greeting").textContent = greetText;
 
         // 5. I wanted to do a bit of extra practice. Does not ask for age if end user already doesn't want their name on the page.
