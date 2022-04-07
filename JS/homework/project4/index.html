@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 04/04/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4 :: User input and If/Then</title>
+    <link rel="stylesheet" href="project4.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 4: Creating variables and using alert(), confirm(), and prompt() to interact with the user, using if-then-else structures </h1>
+    <h1 id="greeting">Hello !</h1>
+    <div id="container">
+        <ol>
+            <li>The alert(), confirm(), and prompt() methods are methods of which object?
+                <p>They are methods of the window object.</p>
+            </li>
+            <li>Why can we use the alert(), confirm(), and prompt() methods without preceding them with the object. (object dot) syntax?
+                <p>Window is a global object which is already provided upon build. One can technically use window.alert() if for some reason they like typing more.</p>
+            </li>
+            <li>How do we distinguish variable names from strings in JavaScript?
+                <p>Strings are enclosed in quotation marks. Variables are simply typed out rote.</p>
+            </li>
+            <li>...What's the point of learning about these annoying popup boxes?
+                <p>The popup boxes are ready "off the shelf." They are provided to us by the Window object. Users are familiar with them, and typically know how to interact with them. In other words, sometimes you don't have to re-invent the wheel. Why would you go out and sharpen a stick when you have a knife readily available?</p>
+            </li>
+
+        </ol>
+
+    </div>
+    <script>
+        // 1.
+
+        let user = prompt("What is your name? : ");
+
+        // 2.
+
+        let proceed = confirm("Are we able to use your name on this web page?");
+
+        // 3.
+
+        //if (proceed){
+        //    document.getElementById("greeting").textContent = `Hello ${user}!`;
+        //} else{
+        //    document.getElementById("greeting").textContent = "---Privacy Please---";
+        //}
+
+        // 4.
+
+        let greetText = proceed ? `Hello ${user}!` : "---Privacy Please---";
+        
+        document.getElementById("greeting").textContent = greetText;
+
+        // 5. I wanted to do a bit of extra practice. Does not ask for age if end user already doesn't want their name on the page.
+        
+        let age = '';
+
+        if (proceed){
+        age = prompt("It might be a bit improper to ask, but what is your age?");
+        }
+        
+        // 6. A bit more practice. If any of the variables are empty, do not display the alert. (Prevents strange blank spots in the greeting.)
+
+        if (age != '' && user != '' && proceed){
+            alert(`Your name is ${user} and you are ${age} year(s) old!`);
+        }
+
+
+        // 7. The prompt listed is: How do we distinguish variable names from strings in JavaScript? Please see # 3 in above HTML. 
+
+        
+    </script>
+</body>
+</html>
