@@ -14,7 +14,7 @@ public class TwoDPractice {
 
         for (int i = 0; i < 10; ++i){
             for (int j = 0; j < 10; ++j){
-                array1[i][j] = i;
+                array1[i][j] = i + j;
             }
         }
 
