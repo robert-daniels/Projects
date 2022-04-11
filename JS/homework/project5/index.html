@@ -182,18 +182,20 @@
 
         let sortingHat2 = function() {
             
-            let house2 = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
+            let houseFXExp = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
 
-            if (house2.valueOf() == 'A'){
+            houseFXExp = houseFXExp.toUpperCase(); // standardize input
+
+            if (houseFXExp.valueOf() == 'A'){
                     console.log("You're in Gryffindor");
-            } else if (house2.valueOf() == 'B'){
+            } else if (houseFXExp.valueOf() == 'B'){
                     console.log("You're in Slytherin");
-            } else if (house2.valueOf() == 'C'){
+            } else if (houseFXExp.valueOf() == 'C'){
                     console.log("You're in Ravenclaw");
-            } else if (house2.valueOf() == 'D'){
+            } else if (houseFXExp.valueOf() == 'D'){
                     console.log("You're in Hufflepuff");
             } else{
-                    console.log("You didn't pick a choice that I know.")
+                    console.log("You didn't pick a choice that I know.");
             }
         };
 
