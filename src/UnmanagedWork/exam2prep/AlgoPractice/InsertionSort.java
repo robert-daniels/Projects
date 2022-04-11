@@ -6,7 +6,6 @@ import java.util.*;
  * Insertion Sort: goes through each element in the unsorted portion of the array and inserts
  * it into its correct position in the sorted portion of the array. 
  * 
- * #TODO: O(N^2) 
  */
 
 public class InsertionSort {

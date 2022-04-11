@@ -11,7 +11,6 @@ import java.util.*;
  * 2) treat the array as sorted / unsorted. When the largest value has hit the end of the unsorted
  * array, the maxIndex for unsorted array is reduced by one. 
  * 
- * #TODO: O(N^2) complexity since it compares all values all times
  */
 
 

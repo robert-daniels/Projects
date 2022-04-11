@@ -9,7 +9,7 @@ public class SelectionSort {
      * In-place Algorithm
      * O(n2) time complexity - quadratic
      * Doesn't require as much swapping as bubble sort
-     * Unstable Algorithm // TODO in theory, if comparison is >=, the relative position should be preserved? 
+     * Unstable Algorithm 
      * 
      * Theory: array is partitioned into unsorted and sorted sections. 
      * Set maxNumber = array[0], traverse entire unsorted array to find maxNumber
@@ -31,7 +31,7 @@ public class SelectionSort {
             maxIndex = 0;
 
             for (int i = 0; i <= unsortedIndex; ++i){
-                if ( testArray[i] >= testArray[maxIndex] ){ // TODO this may convert this into a stable sort 
+                if ( testArray[i] >= testArray[maxIndex] ){ 
                     maxIndex = i;
                 } 
             }

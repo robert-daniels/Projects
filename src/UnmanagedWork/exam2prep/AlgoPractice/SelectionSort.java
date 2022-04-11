@@ -11,8 +11,6 @@ import java.util.*;
  * 
  * Repeat until end of array
  * 
- * 
- * #TODO: O(N**2)
  */
 
 public class SelectionSort {

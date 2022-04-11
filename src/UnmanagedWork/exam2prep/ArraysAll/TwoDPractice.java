@@ -12,7 +12,7 @@ public class TwoDPractice {
     public static void main(String[] args){
         int[][] array1 = new int[10][8];
         int counter = 0;
-        int valueToFind = 3;
+
 
         for (int i = 0; i < 10; ++i){
             for (int j = 0; j < 8; ++j){

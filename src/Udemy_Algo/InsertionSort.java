@@ -26,7 +26,7 @@ public class InsertionSort {
          * Think of picking up a stack of papers. You just start with the top paper's last name "Smith." Then if the one after than is 
          * "Rodgers", you put it ahead of Smith. And so on. 
          * 
-         * TODO review insertion sort. this one, for whatever reason, did not go well on implementation. 
+         * 
          */
 
          int[] testArray = {20, 35, -15, 7, 55, 1, -22};

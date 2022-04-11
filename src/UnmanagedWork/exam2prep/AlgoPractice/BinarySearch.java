@@ -9,10 +9,6 @@ import java.util.*;
  * If not the correct item, set the new range to search as either
  * below or above that index as relavent. Iterate until value is found
  * 
- * #TODO: Important! Do NOT put this as "while !found", since there's no guarantee it'll be in the range. 
- * #TODO: Instead, have it search while the high index is >= low index
- * #TODO: Remember...this has to be sorted
- * #TODO: (log base 2 N) + 1
  */
 
 
