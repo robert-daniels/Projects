@@ -113,10 +113,94 @@
             }
         }
 
-        // TODO: pick up here
+        // 6.
 
+        let house = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
 
+        house = house.toUpperCase(); // standardize input
 
+        switch (house){
+            case 'A':
+                console.log("You're in Gryffindor");
+                break;
+            case 'B':
+                console.log("You're in Slytherin");
+                break;
+            case 'C':
+                console.log("You're in Ravenclaw");
+                break; 
+            case 'D':
+                console.log("You're in Hufflepuff");
+                break;
+            default:
+                console.log("You didn't pick a choice that I know.")
+        };
+
+        // 7. 
+
+        let house2 = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
+
+        if (house2.valueOf() == 'A'){
+                console.log("You're in Gryffindor");
+        } else if (house2.valueOf() == 'B'){
+                console.log("You're in Slytherin");
+        } else if (house2.valueOf() == 'C'){
+                console.log("You're in Ravenclaw");
+        } else if (house2.valueOf() == 'D'){
+                console.log("You're in Hufflepuff");
+        } else{
+                console.log("You didn't pick a choice that I know.")
+        }
+
+        // 8.
+
+        function sortingHat(){
+            let houseFXDeclare = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal"); 
+
+            houseFXDeclare = houseFXDeclare.toUpperCase(); // standardize input
+
+            switch (houseFXDeclare){
+                case 'A':
+                    console.log("You're in Gryffindor");
+                    break;
+                case 'B':
+                    console.log("You're in Slytherin");
+                    break;
+                case 'C':
+                    console.log("You're in Ravenclaw");
+                    break; 
+                case 'D':
+                    console.log("You're in Hufflepuff");
+                    break;
+                default:
+                    console.log("You didn't pick a choice that I know.")
+
+            }
+        };
+
+        // 9.
+
+        let sortingHat2 = function() {
+            
+            let house2 = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
+
+            if (house2.valueOf() == 'A'){
+                    console.log("You're in Gryffindor");
+            } else if (house2.valueOf() == 'B'){
+                    console.log("You're in Slytherin");
+            } else if (house2.valueOf() == 'C'){
+                    console.log("You're in Ravenclaw");
+            } else if (house2.valueOf() == 'D'){
+                    console.log("You're in Hufflepuff");
+            } else{
+                    console.log("You didn't pick a choice that I know.")
+            }
+        };
+
+        // 10.
+
+        sortingHat();
+        sortingHat2();
         
     </script>
 </body>
