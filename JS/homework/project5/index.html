@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 04/11/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 5 :: The Joy of Functions.</title>
+    <link rel="stylesheet" href="project5.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 5: Functions: Declaration and Syntax</h1>
+    <div id="container">
+        <!-- p tag for script question #1 below -->
+        <p id="greeting">Hello!</p>
+        
+        <ol>
+            <li>What is the difference between a function declaration and a function expression?
+                <p>Besides the difference in syntax, a key difference between these two is --when-- these functions "go live." A function declaration in the main code flow has a global scope. It is accessible throughout the script, as the engine is keyed to scan the script as a whole looking for it. A function expression is not allocated, and thus not accessible, until the engine reaches and "defines" the expression to the variable name.  </p>
+            </li>
+            <li>Why do we create functions in the first place?
+                <p>I like to think of functions as tools. They are a helpful way to abstract what a program is doing. If a block of code is being used several times in a script, then condensing this down into a function both increases readability and cuts down on repetitive code. The end result is code that is easier to maintain and update. A suitable metaphor might be a power drill: I don't want to re-build a power drill each time I need it. As well, a power drill can take different attachments (parameters) that use the underlying machinery in ways that suit the job.</p>
+            </li>
+        </ol>
+
+    </div>
+    <script>
+        // 1.
+
+        let userAge = prompt("How old are you? ");
+        let isOkToContinue = confirm("Do you want to proceed? ");
+        let userName = '' // global scope variable, in case it's needed elsewhere
+
+        if (userAge >= 18 && isOkToContinue){
+            userName = prompt("What is your name? ");
+            document.getElementById("greeting").textContent = `${userName} is legal.`;
+        }
+
+        // 2.
+
+        let favoriteSport = prompt("What is your favorite sport?"); 
+
+        if (!favoriteSport){
+            console.log("Whoops, you hit cancel. You're supposed to tell me your favorite sport!");
+        } else if (favoriteSport.valueOf() != "Drag Race".valueOf()){
+            console.log("That...that's not the correct answer. You were supposed to say Drag Race") // There'd be some regex or case agnostic checks normally
+        } else if (favoriteSport.valueOf() == "Drag Race".valueOf()){
+            let favoriteQueen = prompt("Who is your favorite queen? ");
+            
+            if(!favoriteQueen){
+                console.log("You were supposed to tell me your favorite queen, not hit cancel.");
+            } else if (favoriteQueen.valueOf() != "Sasha".valueOf()){
+                console.log("Wrong answer. You were supposed to say Sasha...obviosuly");
+            } else if (favoriteQueen.valueOf() == "Sasha".valueOf()){
+                console.log("Right answer!");
+            }
+        }
+
+        // 3.
+
+        let secret = 7;
+        let isFound = false;
+        let userGuess = '';
+        let instructions = "Guess the secret number between 1 and 10"
+
+        // I added some glitter to the question. (Gives users hints as to what the answer is)
+
+        while (!isFound){
+            userGuess = prompt(instructions);
+
+            if (userGuess == secret){
+                alert("You guessed correctly! Yay!");
+                isFound = true;
+            } else if (!userGuess){
+                instructions="You need to enter a guess";
+            } else if (userGuess < secret){
+                instructions = "Too low, try again";
+            } else if (userGuess > secret){
+                instructions = "Too high, try again";
+            }
+        }
+        
+        // 4.
+
+        instructions = "Guess the secret number between 1 and 10";
+        isFound = false;
+
+        do{
+            userGuess = prompt(instructions);
+
+            if (userGuess == secret){
+                alert("You guessed correctly! Yay!");
+                isFound = true;
+            } else if (!userGuess){
+                instructions="You need to enter a guess";
+            } else if (userGuess < secret){
+                instructions = "Too low, try again";
+            } else if (userGuess > secret){
+                instructions = "Too high, try again";
+            }
+
+        } while (!isFound);
+
+        // 5.
+
+        for (let i = 1; i <= 31; ++i){
+            if (i % 3 == 0){
+                console.log(`${i} is evenly divisible by 3`);
+            }
+        }
+
+        // TODO: pick up here
+
+
+
+        
+    </script>
+</body>
+</html>
