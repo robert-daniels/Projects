@@ -56,6 +56,12 @@ public class PhoneContactsApp {
                 case 3:
                     recordCount = countContacts(fileContacts);
                     break;
+                case 4:
+                    if (recordCount == 0){
+                        recordCount = countContacts(fileContacts); // prevents logic error of insert at [0]
+                    }
+                    recordCount = addContact(fileContacts, scnr, recordCount);
+                    break;
                 
                 case 9:
                     System.out.println("Exiting the PhoneContactsApp. Goodbye.");
@@ -94,15 +100,21 @@ public class PhoneContactsApp {
         inFS = new Scanner(fileByteStream);
 
 
-        while (inFS.hasNextLine()){
+        while (inFS.hasNextLine() && rowIndex < MAX_SIZE){
             contactLine = inFS.nextLine().trim();
             String[] contactLineSplit = contactLine.split(",");
             
             fileData[rowIndex] = contactLineSplit;
             ++rowIndex;
+
+            if (rowIndex == MAX_SIZE){
+                System.out.printf("Warning! File import was truncated. Reason: Max Size of the array (%d records) was reached before end of file.\n", MAX_SIZE);
+            }
         }
 
         inFS.close();
+
+        System.out.printf("%d records were loaded into the array.\n\n", rowIndex);
 
         return fileData;
 
@@ -158,12 +170,45 @@ public class PhoneContactsApp {
             }
         }
 
-        System.out.printf("The total record count is %d.\n", recordCount);
+        System.out.printf("Current Record Count is:  %d.\n", recordCount);
         System.out.println();
 
         return recordCount;
 
     }
 
+    /**
+     * Allows user to append new contact to lowest null index of a 2D array, provided 
+     * enough space has been allocated.
+     * 
+     * @param fileContacts 2D String array loaded from option 1, file read
+     * @param scnr object passed System.in from main
+     * @param recordCount as an int. Initial number of records in oversized 2D array
+     * @return new number of records in fileContacts as an int
+     */
+    
+    public static int addContact(String[][] fileContacts, Scanner scnr, int recordCount){
+        char answer = 'n';
 
+        if (recordCount >= fileContacts.length){
+            System.out.println("The array is full. No additional contacts may be added.\n");
+            return recordCount;
+        }
+        
+        do{
+        System.out.print("Enter new contact's first name: ");
+        fileContacts[recordCount][0] = scnr.next();
+        System.out.print("Enter new contact's last name: ");
+        fileContacts[recordCount][1] = scnr.next();
+        System.out.print("Enter new contact's phone number 999-999-9999:  ");
+        fileContacts[recordCount][2] = scnr.next();
+        
+        System.out.printf("Adding %s, is this correct? y/n: ", Arrays.toString(fileContacts[recordCount]));
+        
+        answer = scnr.next().charAt(0);
+
+        } while (answer == 'n');
+
+        return ++recordCount;
+    }
 }
