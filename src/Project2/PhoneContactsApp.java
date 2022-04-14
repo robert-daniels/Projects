@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided, all static methods per specification. 
+ * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided, all static methods per specification. All static methods prevents re-use of the recordCount function code block without substantially altering the specification. 
  * 
  * @Author: Robert Daniels
  * 
@@ -60,6 +60,12 @@ public class PhoneContactsApp {
                         recordCount = countContacts(fileContacts); // prevents logic error of insert at [0]
                     }
                     recordCount = addContact(fileContacts, scnr, recordCount);
+                    break;
+                case 5:
+                    if (recordCount == 0){
+                        recordCount = countContacts(fileContacts);
+                    }
+                    recordCount = deleteContact(fileContacts, recordCount, scnr);
                     break;
                 
                 case 9:
@@ -211,8 +217,58 @@ public class PhoneContactsApp {
 
         } while (answer == 'n');
 
-        System.out.printf("Added: %s\n", Arrays.toString(fileContacts[recordCount])); // TODO: possible logic error if no data checks
+        if (answer == 'y'){
+            System.out.printf("Added: %s\n", Arrays.toString(fileContacts[recordCount]));
+        }
+         // TODO: possible logic error if no data checks
 
         return ++recordCount;
+    }
+
+    /**
+     * Asks user for first and last name of a contact to delete from 2D array. If found, shifts all records recursively at
+     * indexes greater than the array into the row that matches. If not found, alerts the user. 
+     * 
+     * 
+     * @param fileContacts 2D String array of First Name, Last Name, Phone Number as string
+     * @param recordCount number of non-null records in the fileContacts array as an int
+     * @param scnr passed System.in from main
+     * @return recordCount as an int, number of non-null records in oversized array.
+     * 
+     */
+
+    public static int deleteContact(String[][] fileContacts, int recordCount, Scanner scnr){
+        
+        String[] recordToDelete = new String[2];
+        boolean foundMatch = false;
+        int foundIndex = -1;
+
+        System.out.print("Enter the first name of the record to delete (case sensitive): ");
+        recordToDelete[0] = scnr.next();
+        System.out.print("Enter the last name of the record to delete (case sensitive):  ");
+        recordToDelete[1] = scnr.next();
+        
+        for (int i = 0; i < recordCount; ++i){
+            foundMatch = Arrays.asList(fileContacts[i]).containsAll(Arrays.asList(recordToDelete));
+            
+            if (foundMatch){
+                foundIndex = i;
+                break;
+            }
+        }
+
+        if (foundIndex == -1){
+            System.out.printf("%s, %s was not found in the array. No deletion occurred.\n", recordToDelete[0], recordToDelete[1]);
+            return recordCount;
+        } 
+        else {
+            for (int i = foundIndex; i < recordCount; ++i){
+                fileContacts[i] = fileContacts[i + 1];
+            }
+            System.out.printf("%s, %s was removed from the array.\n", recordToDelete[0], recordToDelete[1]);
+            System.out.printf("%d records remain.\n", recordCount - 1);
+            System.out.println();
+        }
+        return --recordCount;
     }
 }
