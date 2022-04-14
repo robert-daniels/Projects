@@ -1,6 +1,9 @@
 package Project2;
 
 import java.util.*;
+
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import java.io.*;
 
 /**
@@ -18,6 +21,7 @@ public class PhoneContactsApp {
         final int MAX_SIZE = 50; // small placeholder
         int input;
         String[][] fileContacts = new String[MAX_SIZE][MAX_FIELDS];
+        int recordCount = 0;
 
         System.out.println("Please select a number from the menu");
 
@@ -48,6 +52,14 @@ public class PhoneContactsApp {
                     break;
                 case 2:
                     displayContacts(fileContacts, scnr);
+                    break;
+                case 3:
+                    recordCount = countContacts(fileContacts);
+                    break;
+                
+                case 9:
+                    System.out.println("Exiting the PhoneContactsApp. Goodbye.");
+                    System.exit(0);
             }
         } while (input != 9);
     }
@@ -104,7 +116,7 @@ public class PhoneContactsApp {
      * @param fileContacts: a 2D array loaded from a file
      * @param scnr passed System.in stream from main. 
      */
-    
+    // Done
     public static void displayContacts(String[][] fileContacts, Scanner scnr){
         
         System.out.println("Displaying the contents...");
@@ -125,4 +137,33 @@ public class PhoneContactsApp {
         }
 
     }
+
+    /**
+     * Takes a filled 2D String array from main and returns the count of non-null rows as 
+     * an int. 
+     * 
+     * 
+     * @param fileContacts as loaded 2D String array from main
+     * @return count of records in 2D array
+     */
+    // done
+    public static int countContacts(String[][] fileContacts){
+        int recordCount = 0;
+
+        for (int i = 0; i < fileContacts.length; ++i){
+            if (fileContacts[i][0] == null){
+                break;
+            } else{
+                ++recordCount;
+            }
+        }
+
+        System.out.printf("The total record count is %d.\n", recordCount);
+        System.out.println();
+
+        return recordCount;
+
+    }
+
+
 }
