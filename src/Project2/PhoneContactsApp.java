@@ -30,10 +30,9 @@ public class PhoneContactsApp {
             System.out.println("3) Show number of contacts");
             System.out.println("4) Add a contact");
             System.out.println("5) Remove a contact");
-            System.out.println("6) Update phone for a contact");
-            System.out.println("7) Sort contacts by last name");
-            System.out.println("8) Write contact list to file");
-            System.out.println("9) Exit");
+            System.out.println("6) Sort contacts by last name");
+            System.out.println("7) Write contact list to file");
+            System.out.println("8) Exit");
             System.out.print("Selection:  ");
             input = scnr.nextInt();
             scnr.nextLine();
@@ -67,14 +66,14 @@ public class PhoneContactsApp {
                     }
                     recordCount = deleteContact(fileContacts, recordCount, scnr);
                     break;
-                case 7:
+                case 6:
                     if (recordCount == 0){
                         recordCount = countContacts(fileContacts);
                     }
                     sortContacts(fileContacts, recordCount, scnr);
                     break;
                 
-                case 9:
+                case 8:
                     System.out.println("Exiting the PhoneContactsApp. Goodbye.");
                     System.exit(0);
             }
