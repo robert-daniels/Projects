@@ -160,7 +160,7 @@ public class PhoneContactsApp {
      * @param fileContacts as loaded 2D String array from main
      * @return count of records in 2D array
      */
-    // done
+    // Done
     public static int countContacts(String[][] fileContacts){
         int recordCount = 0;
 
@@ -188,7 +188,7 @@ public class PhoneContactsApp {
      * @param recordCount as an int. Initial number of records in oversized 2D array
      * @return new number of records in fileContacts as an int
      */
-    
+    // Done
     public static int addContact(String[][] fileContacts, Scanner scnr, int recordCount){
         char answer = 'n';
 
