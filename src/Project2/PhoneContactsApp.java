@@ -1,13 +1,10 @@
 package Project2;
 
 import java.util.*;
-
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
-
 import java.io.*;
 
 /**
- * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided.
+ * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided, all static methods per specification. 
  * 
  * @Author: Robert Daniels
  * 
@@ -23,7 +20,9 @@ public class PhoneContactsApp {
         String[][] fileContacts = new String[MAX_SIZE][MAX_FIELDS];
         int recordCount = 0;
 
-        System.out.println("Please select a number from the menu");
+        System.out.println("Please select a number from the menu: ");
+
+        // ================== START USER MENU ==================
 
         do {
             System.out.println("1) Read contacts from file.");
@@ -45,7 +44,7 @@ public class PhoneContactsApp {
                     try{
                         fileContacts = readContactsFromFile(scnr, MAX_SIZE, MAX_FIELDS);
                     } catch (IOException e){
-                        System.out.println("I couldn't find the file.");
+                        System.out.println("File not found. Please try again. If the file is not in the current directory, a full filepath less the extension must be provided.");
                         System.out.println();
                     }
                     
@@ -68,6 +67,9 @@ public class PhoneContactsApp {
                     System.exit(0);
             }
         } while (input != 9);
+
+        // ================== /USER MENU ==================
+
     }
 
     /**
@@ -208,6 +210,8 @@ public class PhoneContactsApp {
         answer = scnr.next().charAt(0);
 
         } while (answer == 'n');
+
+        System.out.printf("Added: %s\n", Arrays.toString(fileContacts[recordCount])); // TODO: possible logic error if no data checks
 
         return ++recordCount;
     }
