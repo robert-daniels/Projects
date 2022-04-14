@@ -67,6 +67,12 @@ public class PhoneContactsApp {
                     }
                     recordCount = deleteContact(fileContacts, recordCount, scnr);
                     break;
+                case 7:
+                    if (recordCount == 0){
+                        recordCount = countContacts(fileContacts);
+                    }
+                    sortContacts(fileContacts, recordCount, scnr);
+                    break;
                 
                 case 9:
                     System.out.println("Exiting the PhoneContactsApp. Goodbye.");
@@ -271,4 +277,39 @@ public class PhoneContactsApp {
         }
         return --recordCount;
     }
+
+    /**
+     * Sorts the array in ascending order by last name. Order is defined by 
+     * lastName1.compareTo(lastName2). Does not use the Arrays.sort tool per specification.
+     * Implements a basic insertion sort.
+     * 
+     * @param fileContacts: 2D array of Strings loaded from a text file
+     * @param recordCount: current recordCount in fileContacts as an int
+     * @param scnr passed System.in from main
+     */
+    
+    // Done
+    public static void sortContacts(String[][] fileContacts, int recordCount, Scanner scnr){
+        int j;
+        String[] tempHolding;
+
+        for (int row = 1; row < recordCount; ++row){
+            j = row;
+            while (j > 0 && fileContacts[j][1].compareTo(fileContacts[j - 1][1]) < 0){
+
+                tempHolding = fileContacts[j];
+                fileContacts[j] = fileContacts[j - 1];
+                fileContacts[j - 1] = tempHolding;
+
+                --j;
+            }
+        }
+
+        System.out.println("The array has been sorted by last name. Use option 2 to display.");
+        
+    }
+
+
+   
+
 }
