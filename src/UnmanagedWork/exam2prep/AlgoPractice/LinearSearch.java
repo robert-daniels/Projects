@@ -9,7 +9,6 @@ import java.util.*;
  * Linear search: find a value in the array. 
  * 
  * Worst case: array[-1]
- * #TODO: O(n) complexity
  */
 
 public class LinearSearch {

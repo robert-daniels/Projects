@@ -24,9 +24,11 @@ public class SwapTwo {
 
     public int[] makeArray(int size){
         int[] testArray = new int[size];
+        int numToFill = size;
         
-        for (int i = size - 1; i >= 0; --i){
-            testArray[i] = i;
+        for (int i = 0; i < testArray.length; ++i){
+            testArray[i] = numToFill;
+            --numToFill;
         }
 
         return testArray;

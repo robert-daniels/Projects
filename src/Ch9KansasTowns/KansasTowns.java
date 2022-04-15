@@ -29,11 +29,11 @@ public class KansasTowns {
 
     }
 
-    /**
+        /**
          * Checks if provided file exists, if so, loop through the file
          * and output the cities and total population sum of cities. 
          * 
-         * File is standardized <String>City <int>Population
+         * File is standardized <String>City, <int>Population
          * 
          * @param fileName as String. relative file path from main
          * 

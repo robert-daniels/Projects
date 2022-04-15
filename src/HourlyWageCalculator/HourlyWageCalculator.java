@@ -4,14 +4,13 @@ import java.util.*;
 
 
 /**
-@author Robert Daniels
-02/25/2022
-
-Hourly Wage Calculator: prompts user for week worked as an int, and 7 values for hours worked as a double. 
-It then has logic to calculate pay for that time frame, based on accepted pay practices and bonuses to rate based on
-week worked. 
-
-
+* @author Robert Daniels
+* 02/25/2022
+*
+* Hourly Wage Calculator: prompts user for week worked as an int, and 7 values for hours worked as a double. 
+* It then has logic to calculate pay for that time frame, based on accepted pay practices and bonuses to rate based on
+* week worked. 
+*
 */
 
 public class HourlyWageCalculator{
@@ -46,20 +45,21 @@ public class HourlyWageCalculator{
             System.out.println("");
         }
         
-        System.out.println("Thanks for using the wage calculator tool.");
+        System.out.println("Thank you for using the wage calculator tool.");
+        System.out.println();
     }
-            
+    
+    /**
+    * This method gets passed a scanner from main. It then prompts user for week number. 
+    * The week number is validated if it is an int between 1 and 52. -1 will kill process.
+    * Continues to loop until killed or validated 
+    *   
+    * @param Scanner scnr: scanner object System.in
+    * @return weekNumber as int   
+    */
    
     public static int getWeekNumber(Scanner scnr){
-            /**
-            This method gets passed a scanner from main. It then prompts user for week number. 
-            The week number is validated if it is an int between 1 and 52. -1 will kill process.
-            Continues to loop until killed or validated 
-            
-            @param Scanner scnr: scanner object System.in
-            @return weekNumber as int
-            
-            */
+         
             boolean weekNumberSentinel = false;
             int weekNumber = 0;
             String weekNumberError = "Week must be between 1 and 52, please try again to continue.";
@@ -87,16 +87,19 @@ public class HourlyWageCalculator{
                 
     }
     
+
+    /**
+    * Gets hours worked for the week from user. 
+    * Will continue to loop until validated. 
+    * Hours worked are passed to convertStringToDouble once validated
+    *  
+    * @param Scanner object with System.in
+    * @param calcWeek as int: week that hours were worked
+    * @return outputArray as a double[] once passed back up from convertStringToDouble
+    */
+
     public static double[] getInputFromUser(Scanner scnr, int calcWeek){
-        /**
-        Gets hours worked for the week from user. 
-        Will continue to loop until validated. 
-        Hours worked are passed to convertStringToDouble once validated
-        
-        @param Scanner object with System.in
-        @param calcWeek as int: week that hours were worked
-        @return outputArray as a double[] once passed back up from convertStringToDouble
-        */
+       
         
         String hoursInput;
         final int DAYS_IN_WEEK = 7;
@@ -127,21 +130,24 @@ public class HourlyWageCalculator{
         
         
     }
-        
+    
+    
+    /**
+    * Takes String[] inputArray and checks to see if input is valid. 
+    *   
+    * Data are validated if:
+    *   
+    * Exactly 7 values are given
+    * Every value must be > 0
+    * Every value must be able to convert to a double
+    *   
+    * @param String[] inputArray: the raw split array from input string
+    * @return validCheck as a boolean if all tests eval to True (pass)   
+    */
+
+
     public static boolean validateInput(String[] inputArray){
-        /**
-        Takes String[] inputArray and checks to see if input is valid. 
         
-        Data are validated if:
-        
-        Exactly 7 values are given
-        Every value must be > 0
-        Every value must be able to convert to a double
-        
-        @param String[] inputArray: the raw split array from input string
-        @return validCheck as a boolean if all tests eval to True (pass)
-        
-        */
         
         boolean validCheck7 = false;
         boolean validCheckNumeric = true;
@@ -194,15 +200,18 @@ public class HourlyWageCalculator{
         
         return validCheck;
     }    
+    
+    
+    /**
+     * Takes validated inputArray passed from getInputFromUser, loops through array and 
+     * converts elements to double.
+     *   
+     * @param String[] inputArray after sanitized
+     * @return outputArray as a double[]
+     */
 
     public static double[] convertStringArrayToDouble(String[] inputArray){
-        /*
-        takes validated inputArray passed from getInputFromUser, loops through array and 
-        converts elements to double.
         
-        @param String[] inputArray after sanitized
-        @return outputArray as a double[]
-        */
         
         
         double[] outputArray;
@@ -214,14 +223,17 @@ public class HourlyWageCalculator{
         
         return outputArray;
     }
+
+
+    /**
+    * Using provided pay logic, calculate earned pay for week. Displays output to client
+    *
+    * @param calcWeek as int, week the hours were worked
+    * @param double[] arrayToProcess, sanitized array of hours worked
+    */
         
     public static void calculatePayForWeek(int calcWeek, double[] arrayToProcess){
-    /**
-    Using provided pay logic, calculate earned pay for week. Displays output to client
-
-    @param calcWeek as int, week the hours were worked
-    @param double[] arrayToProcess, sanitized array of hours worked
-    */
+    
         
          // declare fixed variables
         final double HOUR_RATE = 15.00;
@@ -269,7 +281,9 @@ public class HourlyWageCalculator{
         totalPay = (regHoursWorked * actualRate) + (overtimeHours * (OVERLOAD_PERCENT * actualRate));
         
        // ****** OUTPUT TO CLIENT *******    
-        
+       
+       System.out.println();
+
        if (bonusWeek == true){
            System.out.printf("Week %d receives a bonus of $%.2f per hour\n", calcWeek, BONUS_RATE);
        }
@@ -281,19 +295,20 @@ public class HourlyWageCalculator{
        System.out.printf("\t Base pay: $%.2f\n", (regHoursWorked * actualRate));
        System.out.printf("\t Overtime hours worked: %.2f at $%.2f\n", overtimeHours, (actualRate * OVERLOAD_PERCENT));
        System.out.printf("\t Overtime pay: $%.2f\n", (overtimeHours * (actualRate * OVERLOAD_PERCENT)));
+       System.out.println();
        
         
         // ****** /OUTPUT TO CLIENT *******
     }
     
+
+    /**
+    * Takes the arrayToProcess passed from calculatePay and returns sumTotal hours.  
+    * 
+    * @return totalHours as a double
+    */
     public static double getTotalHours(double[] arrayToProcess){ // kept as double, not integer
-        /**
-        Takes the arrayToProcess passed from calculatePay and returns sumTotal hours. 
-        Instructions say this should return an integer value, but employees would mutiny if they lost 
-        partial hours worked. 
-        
-        @return totalHours as a double
-        */
+       
         
         double totalHours = 0;
         
