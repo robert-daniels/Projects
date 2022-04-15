@@ -46,16 +46,16 @@
 
         if (!favoriteSport){
             console.log("Whoops, you hit cancel. You're supposed to tell me your favorite sport!");
-        } else if (favoriteSport.valueOf() != "Drag Race".valueOf()){
+        } else if (favoriteSport != "Drag Race"){
             console.log("That...that's not the correct answer. You were supposed to say Drag Race") // There'd be some regex or case agnostic checks normally
-        } else if (favoriteSport.valueOf() == "Drag Race".valueOf()){
+        } else if (favoriteSport == "Drag Race"){
             let favoriteQueen = prompt("Who is your favorite queen? ");
             
             if(!favoriteQueen){
                 console.log("You were supposed to tell me your favorite queen, not hit cancel.");
-            } else if (favoriteQueen.valueOf() != "Sasha".valueOf()){
+            } else if (favoriteQueen != "Sasha"){
                 console.log("Wrong answer. You were supposed to say Sasha...obviosuly");
-            } else if (favoriteQueen.valueOf() == "Sasha".valueOf()){
+            } else if (favoriteQueen == "Sasha"){
                 console.log("Right answer!");
             }
         }
@@ -140,13 +140,15 @@
 
         let house2 = prompt("How would you describe yourself? Enter A for Brave, B for Cunning, C for Clever, D for Loyal");
 
-        if (house2.valueOf() == 'A'){
+        house2 = house2.toUpperCase(); // standardize input
+
+        if (house2 == 'A'){
                 console.log("You're in Gryffindor");
-        } else if (house2.valueOf() == 'B'){
+        } else if (house2 == 'B'){
                 console.log("You're in Slytherin");
-        } else if (house2.valueOf() == 'C'){
+        } else if (house2 == 'C'){
                 console.log("You're in Ravenclaw");
-        } else if (house2.valueOf() == 'D'){
+        } else if (house2 == 'D'){
                 console.log("You're in Hufflepuff");
         } else{
                 console.log("You didn't pick a choice that I know.")
@@ -186,13 +188,13 @@
 
             houseFXExp = houseFXExp.toUpperCase(); // standardize input
 
-            if (houseFXExp.valueOf() == 'A'){
+            if (houseFXExp == 'A'){
                     console.log("You're in Gryffindor");
-            } else if (houseFXExp.valueOf() == 'B'){
+            } else if (houseFXExp == 'B'){
                     console.log("You're in Slytherin");
-            } else if (houseFXExp.valueOf() == 'C'){
+            } else if (houseFXExp == 'C'){
                     console.log("You're in Ravenclaw");
-            } else if (houseFXExp.valueOf() == 'D'){
+            } else if (houseFXExp == 'D'){
                     console.log("You're in Hufflepuff");
             } else{
                     console.log("You didn't pick a choice that I know.");

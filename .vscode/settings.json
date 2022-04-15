@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
-        "CS 205"
+        "CS 205",
+        "src"
     ]
 }
