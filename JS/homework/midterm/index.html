@@ -16,7 +16,7 @@
     <h1 id="title">Midterm: A Calculator</h1>
     <div id="container">
         <h3>Please enter your desired financial calculation below.</h3>
-        <h3><i>Note: data will be rounded to the cent before calculation. </i></h3>
+        <h3><i>Note: data will be rounded to the cent. </i></h3>
 
         <div id ="inputDiv">
             <p>What do you want to calculate?
@@ -29,22 +29,53 @@
             <button id="startCalc">Begin</button>
             </p>
             
-            <script src="midterm.js"></script>
+            
         </div>
 
         <div id="workArea">
             <div id="tvmDiv">
-                <p>tvm stub</p>
+                <p>Let's calculate the time value of money!</p>
+                
+                <form id="tvmForm" action="" method="get">
+                    <label for="presentValue">Present Value of Money</label>
+                    <input type="number" name="presentValue" id="presentValue"><br>
+                    <label for="interestRate">Annual Interest Rate</label>
+                    <input type="number" name="interestRate" id="interestRate"><br>
+                    <label for="periodsPerYear">Number of Compounding Periods per Year</label>
+                    <input type="number" name="periodsPerYear" id="periodsPerYear"><br>
+                    <label for="years">Number of Years</label>
+                    <input type="number" name="years" id="years"><br>
+                    <input type="button" name="tvmButton" id="tvmButton" Value="Calculate" onClick="tvmCalc(this.form)">
+                </form>
+
+                <p id="tvmAnswer">Click "Calculate" to see the future value of money</p>
             </div>
 
             <div id="mathDiv">
-                <p>mathDiv stub</p>
+                <p>Lets do some math!</p>
+                <!-- Similar starting structure as seed file provided -->
+                <label for="num1">Enter first number  </label><input type="number" id="num1">
+                <label for="num2">Enter second number  </label><input type="number" id="num2">
+                <p>What would you like to do with these two numbers?</p>
+                    <select id="mathOperator">
+                        <option value="add">+ add</option>
+                        <option value="subtract">- subtract</option>
+                        <option value="multiply">* multiply</option>
+                        <option value="divide">/ divide</option>
+                        <option value="exponent">** exponent</option>
+                    </select>
+
+                <button id="mathCalculate">Display Result</button>
+                
+                <p id="mathAnswer">Hit the "Display Result" button for the answer.</p>
             </div>
 
             <div id="binaryConvertDiv">
                 <p>binaryConvert stub</p>
             </div>
         </div>
+
+        <script src="midterm.js"></script>
     </div>
     
 </body>

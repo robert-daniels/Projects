@@ -46,3 +46,10 @@ p {
 #binaryConvertDiv {
     display: none;
 }
+
+#tvmForm {
+    text-align:right;
+    display: block;
+    width: 50%
+    
+}
