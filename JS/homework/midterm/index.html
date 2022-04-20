@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 04/20/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm</title>
+    <link rel="stylesheet" href="midterm.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Midterm: A Calculator</h1>
+    <div id="container">
+        <h3>Please enter your desired financial calculation below.</h3>
+        <h3><i>Note: data will be rounded to the cent before calculation. </i></h3>
+
+        <div id ="inputDiv">
+            <p>What do you want to calculate?
+            <select id="calcChoice">
+                <option value="timeValue">Time Value of Money (TVM)</option>
+                <option value="basicMath">Basic Math</option>
+                <option value="binaryConvert">Bonus! Convert an Integer to Binary</option>
+            </select>
+
+            <button id="startCalc">Begin</button>
+            </p>
+            
+            <script src="midterm.js"></script>
+        </div>
+
+        <div id="workArea">
+            <div id="tvmDiv">
+                <p>tvm stub</p>
+            </div>
+
+            <div id="mathDiv">
+                <p>mathDiv stub</p>
+            </div>
+
+            <div id="binaryConvertDiv">
+                <p>binaryConvert stub</p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
