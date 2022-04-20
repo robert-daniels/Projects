@@ -72,7 +72,7 @@ function tvmCalc(form){
     let periodsPerYear = form.periodsPerYear.value;
     let years = form.years.value;
 
-    let futureValue = presentValue * ((1 + (interestRate / periodsPerYear))**(periodsPerYear * years))
+    let futureValue = -presentValue * ((1 + (interestRate / periodsPerYear))**(periodsPerYear * years))
     futureValue = futureValue.toFixed(2);
 
     document.getElementById("tvmAnswer").textContent = "$" + futureValue;

@@ -18,6 +18,13 @@ body {
     padding-bottom: 2%;
 }
 
+label {
+    display: block;
+    float: left;
+    width: 100%;
+
+}
+
 h1 {
     text-align: center;
 }
@@ -48,8 +55,8 @@ p {
 }
 
 #tvmForm {
-    text-align:right;
+    text-align:left;
     display: block;
-    width: 50%
+    width: 90%
     
 }

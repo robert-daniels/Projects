@@ -35,16 +35,19 @@
         <div id="workArea">
             <div id="tvmDiv">
                 <p>Let's calculate the time value of money!</p>
+                <p></p>
                 
                 <form id="tvmForm" action="" method="get">
-                    <label for="presentValue">Present Value of Money</label>
+                    <label for="presentValue">Present Value of Money (Typically negative, if investing)</label>
                     <input type="number" name="presentValue" id="presentValue"><br>
-                    <label for="interestRate">Annual Interest Rate</label>
+                    <label for="interestRate">Annual Interest Rate as a decimal</label>
                     <input type="number" name="interestRate" id="interestRate"><br>
                     <label for="periodsPerYear">Number of Compounding Periods per Year</label>
                     <input type="number" name="periodsPerYear" id="periodsPerYear"><br>
                     <label for="years">Number of Years</label>
                     <input type="number" name="years" id="years"><br>
+                    <br>
+                    <br>
                     <input type="button" name="tvmButton" id="tvmButton" Value="Calculate" onClick="tvmCalc(this.form)">
                 </form>
 
@@ -54,7 +57,7 @@
             <div id="mathDiv">
                 <p>Lets do some math!</p>
                 <!-- Similar starting structure as seed file provided -->
-                <label for="num1">Enter first number  </label><input type="number" id="num1">
+                <label for="num1">Enter first number  </label><input type="number" id="num1"><br>
                 <label for="num2">Enter second number  </label><input type="number" id="num2">
                 <p>What would you like to do with these two numbers?</p>
                     <select id="mathOperator">
