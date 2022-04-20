@@ -22,24 +22,27 @@ h1 {
     text-align: center;
 }
 
-
 h3 {
     text-align: center;
 }
 
-li {
-    font-weight: bold;
-}
 
 p {
     font-weight: lighter;
 }
 
-ul {
-    font-weight: lighter;
+
+
+/* Divs that will turn on based on user calculation choice */
+
+#tvmDiv {
+    display: none;
 }
 
-#greeting {
-    text-align: center;
+#mathDiv {
+    display: none;
 }
 
+#binaryConvertDiv {
+    display: none;
+}
