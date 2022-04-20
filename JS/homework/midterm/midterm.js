@@ -80,6 +80,30 @@ function tvmCalc(form){
 }
 
 
+// prints the binary representation of a number. REQUIREMENT: Modulo
+
+function convertToBinary(){
+    let quotient = Math.round(document.getElementById("userNum").value);
+    let remainder = '';
+    let remainderArray = [];
+    let binaryAnswer = '';
+
+    while (quotient != 0){
+        remainder = quotient % 2;
+        remainderArray.push(remainder);
+        quotient = Math.floor(quotient / 2);
+    }
+
+    let binaryAnswerArray = remainderArray.reverse();
+    
+    for (let i = 0; i < binaryAnswerArray.length; ++i){
+        binaryAnswer = binaryAnswer + binaryAnswerArray[i];
+    }
+
+    document.getElementById("binaryAnswer").textContent = binaryAnswer;
+   
+}
+
 // onclick assignments
 
 // choose method to run
@@ -88,3 +112,6 @@ document.getElementById("startCalc").onclick = calcSelector;
 // calculate basic math
 document.getElementById("mathCalculate").onclick = runMath;
 
+// convert to binary
+
+document.getElementById("binaryCalc").onclick = convertToBinary;
