@@ -14,6 +14,8 @@
         <p>For: Web 114</p>
       </header>
     <h1 id="title">Midterm: A Calculator</h1>
+
+<!-- Get module choice from the user  -->
     <div id="container">
         <h3>Please enter your desired financial calculation below.</h3>
         <h3><i>Note: data will be rounded to the cent. </i></h3>
@@ -28,14 +30,17 @@
 
             <button id="startCalc">Begin</button>
             </p>
-            
-            
         </div>
 
+
+<!-- The workArea div is the landing zone for the three main tools of the site: 1: Time Value of Money, Basic Math, and converting an Int to Binary. These div's are hidden on stylesheet, and only made visible by the calcSelector() function based on user selection. Only one div may be visible at a time in this workArea. -->
+
         <div id="workArea">
+
+<!-- Time Value of Money module -->
+
             <div id="tvmDiv">
-                <p>Let's calculate the time value of money!</p>
-                <p></p>
+                <p>Let's calculate the future value of money!</p>
                 
                 <form id="tvmForm" action="" method="get">
                     <label for="presentValue">Present Value of Money (Typically negative, if investing)</label>
@@ -48,14 +53,21 @@
                     <input type="number" name="years" id="years"><br>
                     <br>
                     <br>
+                    
+                    <!-- Call the tvmCalc function on this form object -->
                     <input type="button" name="tvmButton" id="tvmButton" Value="Calculate" onClick="tvmCalc(this.form)">
                 </form>
 
+                <!-- Answer socket, textContent updates with tvmCalc() -->
                 <p id="tvmAnswer">Click "Calculate" to see the future value of money</p>
             </div>
 
+
+<!-- Basic Arithmetic Module -->
+
             <div id="mathDiv">
                 <p>Lets do some math!</p>
+                
                 <!-- Similar starting structure as seed file provided -->
                 <label for="num1">Enter first number  </label><input type="number" id="num1"><br>
                 <label for="num2">Enter second number  </label><input type="number" id="num2">
@@ -70,21 +82,30 @@
 
                 <button id="mathCalculate">Display Result</button>
                 
+                <!-- Answer socket, textContent updates with runMath() -->
                 <p id="mathAnswer">Hit the "Display Result" button for the answer.</p>
             </div>
+
+
+<!-- Converting an Integer to Binary Module (demonstrating modulo) -->
 
             <div id="binaryConvertDiv">
                 <p>Lets convert an integer to a binary! This will just be a string of 1's and 0's, but a computer typically represents these in a byte (8 bits) at a time.</p>
 
+                <!-- Shortcut for simplicity -->
                 <p>Please only enter an integer value. A float will be rounded to the nearest int before display.</p>
 
                 <label for="userNumber">Enter a number to convert</label><input type="number" id="userNum"><br>
 
                 <button id="binaryCalc">Show Binary</button>
+
+                <!-- Answer socket, textContent updates with convertToBinary() -->
                 <p id="binaryAnswer">Click "Show Binary" to see the result.</p>
             </div>
         </div>
 
+
+<!-- Script declaration -->
         <script src="midterm.js"></script>
     </div>
     

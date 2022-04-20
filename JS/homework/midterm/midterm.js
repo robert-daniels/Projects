@@ -1,15 +1,26 @@
 // Robert Daniels, 4/20/2022
 
-// fx that will turn on the appropriate div for the calculation requested
+// The specified concepts for the project may be found below:
+
+// 1. How JavaScript evaluates user data with expressions: @see function runMath(). For modulo @see convertToBinary()
+// 2. How JavaScript differentiates between =, ==. ===: @see function runMath(). Values are compared both with strict equality ===, as well as ==. = is seen as an assignment throughout
+// 3. How JavaScript uses PEMDAS. @see tvmCalc(form) for a standard involved order of operations equation. 
+
+// ==================================================
+
+// Turns on the appropriate div for the module requested. If any tools are currently visible, set to hidden before running. 
 
 function calcSelector() {
 
     let calcChoiceAnswer = document.getElementById("calcChoice").value;
-    
-    // I realize this is very sloppy. Should probably just set the workArea Div to clear it's contents and then pulling the correct calc landing page into it. 
+
+    // if any modules are currently displayed, hide them
+
     document.getElementById("tvmDiv").style.display = "none";
     document.getElementById("mathDiv").style.display = "none";
     document.getElementById("binaryConvertDiv").style.display = "none";
+
+    // "turn on the requested module"
 
     if (calcChoiceAnswer == "timeValue"){
         document.getElementById("tvmDiv").style.display = "inline";
@@ -23,15 +34,14 @@ function calcSelector() {
     else {
         alert("Something went wrong");
     }
-        
-
-
 }
 
-// runs the basic arithmetic functions requested under basic math
+// ==================================================
+
+// Runs the basic arithmetic functions requested with basic math module
 
 function runMath() {
-    // similar structure to seed file provided. No data sanitation / error checking for nonsensical user inputs.
+    // Similar structure to seed file provided. No data sanitation / error checking for nonsensical user inputs.
 
     let operationChoice = document.getElementById("mathOperator").value;
 
@@ -40,7 +50,6 @@ function runMath() {
 
     let result = '';
 
-    // REQUIREMENT 1: evaluate user data AND REQUIREMENT 2, =, ==, ===
     if (operationChoice === "add"){
         result = localNum1 + localNum2;
     }
@@ -57,14 +66,20 @@ function runMath() {
         result = localNum1 ** localNum2;
     }
 
+    // added only to show == usage. Compares a number to a string
+    if (localNum1 == "2"){
+        console.log("The first number is 2.");
+    }
+
     // updates p tag at the end of mathDiv with result
     //pulls to 2 decimal points to correct for machine precision
     document.getElementById("mathAnswer").textContent = "$" + result.toFixed(2);
-
-    
 }
 
-// calculates future value of money. REQUIREMENT 3: PEMDAS
+// ==================================================
+
+// Calculates future value of money. A more involved calculator would check for the missing value and run appropriately. 
+// Unpacks the form object passed to it and assigns to local variables 
 
 function tvmCalc(form){
     let presentValue = form.presentValue.value;
@@ -79,8 +94,10 @@ function tvmCalc(form){
 
 }
 
+// ==================================================
 
-// prints the binary representation of a number. REQUIREMENT: Modulo
+
+// Prints the binary representation of a number as a continuous string
 
 function convertToBinary(){
     let quotient = Math.round(document.getElementById("userNum").value);
@@ -103,6 +120,9 @@ function convertToBinary(){
     document.getElementById("binaryAnswer").textContent = binaryAnswer;
    
 }
+
+// ==================================================
+
 
 // onclick assignments
 
