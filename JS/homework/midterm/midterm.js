@@ -14,7 +14,7 @@ function calcSelector() {
 
     let calcChoiceAnswer = document.getElementById("calcChoice").value;
 
-    // if any modules are currently displayed, hide them
+    // if any modules are currently displayed, hide them. #refactor: hard to maintain. Just have the div clear itself before running. 
 
     document.getElementById("tvmDiv").style.display = "none";
     document.getElementById("mathDiv").style.display = "none";
