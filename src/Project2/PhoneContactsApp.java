@@ -33,7 +33,8 @@ public class PhoneContactsApp {
             System.out.println("5) Remove a contact");
             System.out.println("6) Sort contacts by last name");
             System.out.println("7) Write contact list to file");
-            System.out.println("8) Exit");
+            System.out.println("8) Update contact phone number");
+            System.out.println("9) Exit");
             System.out.print("Selection:  ");
             input = scnr.nextInt();
             scnr.nextLine();
@@ -75,6 +76,9 @@ public class PhoneContactsApp {
                     }
                     break;
                 case 8:
+                    updateContact(fileContacts, recordCount, scnr);
+                    break;
+                case 9:
                     System.out.println("Exiting the PhoneContactsApp. Goodbye.");
                     System.exit(0);
                 default:
@@ -356,6 +360,69 @@ public class PhoneContactsApp {
 
          outFS.close();
 
+    }
+
+    /**
+     * Allows user to update the PHONE NUMBER of a record in the array. A change in name should be considered a new record.
+     * 
+     * @param fileContacts an oversized 2D array from previous import from file
+     * @param recordCount an int representing how many records are currently in the oversizes fileContacts 2D array
+     * @param scnr passed System.in from main
+     */
+    
+    public static void updateContact(String[][] fileContacts, int recordCount, Scanner scnr){
+        String firstName;
+        String lastName;
+        boolean found = false;
+        int recordToUpdate = -1;
+        char answer = 'n';
+        String newNumber;
+        boolean validChoice = false;
+
+
+        System.out.print("Enter the first name of the person you want to update the phone number for:  ");
+        firstName = scnr.next();
+
+        System.out.print("Enter the last name of the person you want to update the phone number for:  ");
+        lastName = scnr.next();
+
+        for (int i = 0; i < recordCount; ++i){
+            if ((fileContacts[i][0].equals(firstName)) && (fileContacts[i][1].equals(lastName))){
+                found = true;
+                recordToUpdate = i;
+                break;
+            } 
+        }
+
+        if (!found){
+            System.out.println("The name provided was not found.\n");
+            return;
+        } else{
+            System.out.printf("The phone number for %s, %s is currently listed as %s. Do you want to update this? y/n ", fileContacts[recordToUpdate][0], fileContacts[recordToUpdate][1], fileContacts[recordToUpdate][2]);
+        }
+            
+        
+        do{
+            answer = scnr.next().charAt(0);
+    
+            if (answer == 'y'){
+                System.out.print("Enter the new phone number: ");
+                newNumber = scnr.next();
+                fileContacts[recordToUpdate][2] = newNumber;
+                validChoice = true;
+
+                System.out.printf("\nThe phone number has been updated to %s\n\n", newNumber);
+            } else if (answer == 'n'){
+                System.out.println("Update operation cancelled\n");
+                validChoice = true;
+                return;
+            } else{
+                System.out.print("You must enter 'y' for yes and 'n' for no: ");
+            }
+    
+        } while (validChoice != true);
+
+       
     }
 
 
