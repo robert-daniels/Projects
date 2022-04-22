@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided, all static methods per specification. All static methods prevents re-use of the recordCount function code block without substantially altering the specification. 
+ * Project 2, CS 205. Class provides functionality of a Phonebook contacts app that reads from a given file. No method overloading, implementation of the UML provided, all static methods per specification. All static methods prevents re-use of the recordCount function code block without substantially altering the specification. Some basic user input checking, though not exhaustive. 
  * 
  * @Author: Robert Daniels
  * 
@@ -101,7 +101,7 @@ public class PhoneContactsApp {
      * @return 2D String Array of first, last, phone
      * @throws IOException
      */
-    // Done
+
     public static String[][] readContactsFromFile(Scanner scnr, int MAX_SIZE, int MAX_FIELDS) throws IOException{
         String fileName;
         String[][] fileData = new String[MAX_SIZE][MAX_FIELDS];
@@ -148,7 +148,7 @@ public class PhoneContactsApp {
      * @param fileContacts: a 2D array loaded from a file
      * @param scnr passed System.in stream from main. 
      */
-    // Done
+
     public static void displayContacts(String[][] fileContacts, Scanner scnr){
         
         System.out.println("\nDisplaying the contents...");
@@ -178,7 +178,7 @@ public class PhoneContactsApp {
      * @param fileContacts as loaded 2D String array from main
      * @return count of records in 2D array
      */
-    // Done
+    
     public static int countContacts(String[][] fileContacts){
         int recordCount = 0;
 
@@ -206,7 +206,7 @@ public class PhoneContactsApp {
      * @param recordCount as an int. Initial number of records in oversized 2D array
      * @return new number of records in fileContacts as an int
      */
-    // Done
+
     public static int addContact(String[][] fileContacts, Scanner scnr, int recordCount){
         char answer = 'n';
         boolean validConfirm = false;
@@ -305,7 +305,6 @@ public class PhoneContactsApp {
      * @param scnr passed System.in from main
      */
     
-    // Done
     public static void sortContacts(String[][] fileContacts, int recordCount, Scanner scnr){
         int j;
         String[] tempHolding;
