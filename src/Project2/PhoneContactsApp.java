@@ -74,9 +74,13 @@ public class PhoneContactsApp {
                     sortContacts(fileContacts, recordCount, scnr);
                     break;
                 case 7:
+                    if (recordCount == 0){
+                        recordCount = countContacts(fileContacts);
+                    }
+                    
                     try{
                         writeContactsToFile(fileContacts, recordCount, scnr);
-                        System.out.println("\nSuccessfully written to file\n");
+                        
                     }
                     catch (IOException eIO){
                         System.out.println("That file is not currently available to write. Data were NOT written to file.");
@@ -348,6 +352,8 @@ public class PhoneContactsApp {
                 outFS.printf("%s,%s,%s", fileContacts[i][0], fileContacts[i][1], fileContacts[i][2]); // correct for blank line at end
             }
          }
+
+         System.out.println("\nSuccessfully written to file\n");
 
          outFS.close();
 
