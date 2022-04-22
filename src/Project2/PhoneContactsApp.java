@@ -98,6 +98,8 @@ public class PhoneContactsApp {
      * 
      * 
      * @param scnr with System.in stream from main
+     * @param MAX_SIZE max size of the 2D array
+     * @param MAX_FIELDS max columns in the 2D Array
      * @return 2D String Array of first, last, phone
      * @throws IOException
      */
