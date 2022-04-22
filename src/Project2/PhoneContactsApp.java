@@ -20,7 +20,8 @@ public class PhoneContactsApp {
         String[][] fileContacts = new String[MAX_SIZE][MAX_FIELDS];
         int recordCount = 0;
 
-        System.out.println("Please select a number from the menu: ");
+        System.out.println("Welcome to the PhoneContactsApp. Please note that data should be imported into the application via Option 1 prior to operations.");
+        System.out.println("\nPlease select a number from the menu: \n");
 
         // ================== START USER MENU ==================
 
@@ -72,12 +73,22 @@ public class PhoneContactsApp {
                     }
                     sortContacts(fileContacts, recordCount, scnr);
                     break;
-                
+                case 7:
+                    try{
+                        writeContactsToFile(fileContacts, recordCount, scnr);
+                        System.out.println("\nSuccessfully written to file\n");
+                    }
+                    catch (IOException eIO){
+                        System.out.println("That file is not currently available to write. Data were NOT written to file.");
+                    }
+                    break;
                 case 8:
                     System.out.println("Exiting the PhoneContactsApp. Goodbye.");
                     System.exit(0);
+                default:
+                    System.out.println("Unknown choice. Please try again.\n");
             }
-        } while (input != 9);
+        } while (input != -1);
 
         // ================== /USER MENU ==================
 
@@ -127,7 +138,7 @@ public class PhoneContactsApp {
 
         inFS.close();
 
-        System.out.printf("%d records were loaded into the array.\n\n", rowIndex);
+        System.out.printf("\n%d records were loaded into the array.\n\n", rowIndex);
 
         return fileData;
 
@@ -144,7 +155,7 @@ public class PhoneContactsApp {
     // Done
     public static void displayContacts(String[][] fileContacts, Scanner scnr){
         
-        System.out.println("Displaying the contents...");
+        System.out.println("\nDisplaying the contents...");
 
         for (int i = 0; i < fileContacts.length; ++i){
             if (fileContacts[i][0] == null){
@@ -183,7 +194,7 @@ public class PhoneContactsApp {
             }
         }
 
-        System.out.printf("Current Record Count is:  %d.\n", recordCount);
+        System.out.printf("\nCurrent Record Count is:  %d.\n", recordCount);
         System.out.println();
 
         return recordCount;
@@ -209,7 +220,7 @@ public class PhoneContactsApp {
         }
         
         do{
-        System.out.print("Enter new contact's first name: ");
+        System.out.print("\nEnter new contact's first name: ");
         fileContacts[recordCount][0] = scnr.next();
         System.out.print("Enter new contact's last name: ");
         fileContacts[recordCount][1] = scnr.next();
@@ -223,7 +234,7 @@ public class PhoneContactsApp {
         } while (answer == 'n');
 
         if (answer == 'y'){
-            System.out.printf("Added: %s\n", Arrays.toString(fileContacts[recordCount]));
+            System.out.printf("Added: %s\n\n", Arrays.toString(fileContacts[recordCount]));
         }
          // TODO: possible logic error if no data checks
 
@@ -263,14 +274,14 @@ public class PhoneContactsApp {
         }
 
         if (foundIndex == -1){
-            System.out.printf("%s, %s was not found in the array. No deletion occurred.\n", recordToDelete[0], recordToDelete[1]);
+            System.out.printf("\n%s, %s was not found in the array. No deletion occurred.\n\n", recordToDelete[0], recordToDelete[1]);
             return recordCount;
         } 
         else {
             for (int i = foundIndex; i < recordCount; ++i){
                 fileContacts[i] = fileContacts[i + 1];
             }
-            System.out.printf("%s, %s was removed from the array.\n", recordToDelete[0], recordToDelete[1]);
+            System.out.printf("\nThe first %s, %s found was removed from the array.\n", recordToDelete[0], recordToDelete[1]);
             System.out.printf("%d records remain.\n", recordCount - 1);
             System.out.println();
         }
@@ -304,9 +315,44 @@ public class PhoneContactsApp {
             }
         }
 
-        System.out.println("The array has been sorted by last name. Use option 2 to display.");
+        System.out.println("\nThe array has been sorted by last name. Use option 2 to display.\n");
         
     }
+
+    /**
+     * Asks user for desired filename to write the array to. Writes to such if available
+     * 
+     * @param fileContacts : 2D array loaded from prior file input
+     * @param recordCount : number of current records in the 2D array
+     * @param scnr passed System.in from main
+     * @throws IOException
+     */
+
+    public static void writeContactsToFile(String[][] fileContacts, int recordCount, Scanner scnr) throws IOException{
+         String userFileName;
+         FileOutputStream fileStream;
+         PrintWriter outFS;
+         
+         System.out.print("Preparing to write data to a file. Please enter the desired filename. (Do not provide file extensions) :  ");
+         
+         userFileName = scnr.next();
+         userFileName = userFileName + ".txt";
+         fileStream = new FileOutputStream(userFileName);
+         outFS = new PrintWriter(fileStream);
+
+         for (int i = 0; i < recordCount; ++i){
+            if (i != (recordCount -1)){ 
+                outFS.printf("%s,%s,%s\n", fileContacts[i][0], fileContacts[i][1], fileContacts[i][2]);
+            }
+            else{
+                outFS.printf("%s,%s,%s", fileContacts[i][0], fileContacts[i][1], fileContacts[i][2]); // correct for blank line at end
+            }
+         }
+
+         outFS.close();
+
+    }
+
 
 
    
