@@ -43,6 +43,7 @@ public class PhoneContactsApp {
                 case 1:
                     try{
                         fileContacts = readContactsFromFile(scnr, MAX_SIZE, MAX_FIELDS);
+                        recordCount = countContacts(fileContacts);
                     } catch (IOException e){
                         System.out.println("File not found. Please try again. If the file is not in the current directory, a full filepath less the extension must be provided.");
                         System.out.println();
@@ -56,28 +57,15 @@ public class PhoneContactsApp {
                     recordCount = countContacts(fileContacts);
                     break;
                 case 4:
-                    if (recordCount == 0){
-                        recordCount = countContacts(fileContacts); // prevents logic error of insert at [0]
-                    }
                     recordCount = addContact(fileContacts, scnr, recordCount);
                     break;
                 case 5:
-                    if (recordCount == 0){
-                        recordCount = countContacts(fileContacts);
-                    }
                     recordCount = deleteContact(fileContacts, recordCount, scnr);
                     break;
                 case 6:
-                    if (recordCount == 0){
-                        recordCount = countContacts(fileContacts);
-                    }
                     sortContacts(fileContacts, recordCount, scnr);
                     break;
                 case 7:
-                    if (recordCount == 0){
-                        recordCount = countContacts(fileContacts);
-                    }
-                    
                     try{
                         writeContactsToFile(fileContacts, recordCount, scnr);
                         
@@ -142,7 +130,7 @@ public class PhoneContactsApp {
 
         inFS.close();
 
-        System.out.printf("\n%d records were loaded into the array.\n\n", rowIndex);
+        System.out.printf("\n%d records were loaded into the array.\n", rowIndex);
 
         return fileData;
 
@@ -217,6 +205,7 @@ public class PhoneContactsApp {
     // Done
     public static int addContact(String[][] fileContacts, Scanner scnr, int recordCount){
         char answer = 'n';
+        boolean validConfirm = false;
 
         if (recordCount >= fileContacts.length){
             System.out.println("The array is full. No additional contacts may be added.\n");
@@ -233,7 +222,17 @@ public class PhoneContactsApp {
         
         System.out.printf("Adding %s, is this correct? y/n: ", Arrays.toString(fileContacts[recordCount]));
         
-        answer = scnr.next().charAt(0);
+            do{
+                answer = scnr.next().charAt(0);
+
+                if (answer == 'y' || answer == 'n'){
+                    validConfirm = true;
+                } else{
+                    System.out.println("Please enter 'y' for yes and 'n' for no: ");
+                }
+
+            } while (validConfirm != true);
+            
 
         } while (answer == 'n');
 
