@@ -1,6 +1,6 @@
 package UnmanagedWork.exam2prep.AlgoPractice;
 /**
- * SwapTwo...swaps two array elements at given locations, I don't want to code this every time. 
+ * SwapTwo...swaps two array elements at given locations
  * 
  */
 
