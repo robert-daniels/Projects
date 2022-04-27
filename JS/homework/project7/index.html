@@ -75,7 +75,7 @@
             console.log(`The result is : ${result}`);
         }
 
-        //doMath(); #TODO: fix
+        doMath(); 
 
         // 2.
 
@@ -95,12 +95,12 @@
 
         }
 
-        //cheery(); #TODO: fix
+        cheery();
 
         // 3.
 
-        // ATTRIBUTE for #3, 4, 5, 6: script from JavaScript.info: The JavaScript Language, Ilya Kantor.
-        // The e-book may be found at https://JavaScript.info/ebook. #6 has modified the script from source.
+        // ATTRIBUTE for #3, 4, 5, 6, 8: script from JavaScript.info: The JavaScript Language, Ilya Kantor.
+        // The e-book may be found at https://JavaScript.info/ebook. #6, 8 have slightly modified the script from source.
 
         function ucFirst(str) {
             if (!str) return str;  // check if string is not empty. If empty, gracefully step out of function. 
@@ -178,33 +178,59 @@
           
           alert( averageInput() );
 
-          // 7.
+        // 7.
 
-          /**
-          * Use to find the sum of the two largest numbers in a given array
-          * @param {array<number>} arr as a 1D homogenous array
-          * @return {number} sum of the two largest values in the provided array
-          */
+        /**
+        * Use to find the sum of the two largest numbers in a given array
+        * @param {array<number>} arr as a 1D array
+        * @return {number} sum of the two largest values in the provided array
+        */
 
-          let addTwo = function(arr) {
-              let maxNumIndex = 0;
-              let nextMaxNumIndex = 0;
+        let addTwo = function(arr) {
+            let maxNumIndex = 0;
+            let nextMaxNumIndex = 0;
 
-              for (let i = 0; i < arr.length; ++i){
-                  if (arr[i] > arr[maxNumIndex]){
-                      nextMaxNumIndex = maxNumIndex;
-                      maxNumIndex = i;
-                  }
-              }
+            for (let i = 0; i < arr.length; ++i){
+                if (arr[i] > arr[maxNumIndex]){
+                    nextMaxNumIndex = maxNumIndex;
+                    maxNumIndex = i;
+                }
+            }
 
-              return (arr[maxNumIndex] + arr[nextMaxNumIndex]);
+            return (arr[maxNumIndex] + arr[nextMaxNumIndex]);
+        }
+
+        let arr1 = [0, 1, 2, 5];
+        let arr2 = [10, 20, 4, 1];
+
+        console.log(addTwo(arr1));
+        console.log(addTwo(arr2));
+
+
+        // 8. 
+
+        //@GIT_learning_scanner.add(JavaScriptS22): Callback Functions
+        let sortFunctionKey = function(a, b) {
+            return a.age - b.age
+        }
+
+        function sortByAge(arr) {
+            arr.sort(sortFunctionKey);
           }
 
-          let arr1 = [0, 1, 2, 5];
-          let arr2 = [10, 20, 4, 1];
 
-          console.log(addTwo(arr1));
-          console.log(addTwo(arr2));
+        let john = { name: "John", age: 25 };
+        let pete = { name: "Pete", age: 30 };
+        let mary = { name: "Mary", age: 28 };
+
+        let arr = [ pete, john, mary ];
+
+        sortByAge(arr);
+
+    
+        alert(arr[0].name); // John
+        alert(arr[1].name); // Mary
+        alert(arr[2].name); // Pete
 
 
     </script>
