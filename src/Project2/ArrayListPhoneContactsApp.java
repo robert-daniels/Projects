@@ -1,18 +1,27 @@
 package Project2;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.io.*;
 import java.util.*;
+
+/**
+ * Alternative method to generate a phone contacts app with OOP. 
+ * @Author: Robert Daniels
+ * AS ADAPTED FROM SEED FILE provided by Perla Weaver, Johnson County Community College. 
+ * 
+ */
 
 public class ArrayListPhoneContactsApp {
 
+
+	/**
+	 * Reads in data from a text file provided. Each data point is pressed into a new Contact object. @see ~/src/Project2/Contact.java
+	 * 
+	 * 
+	 * @param scnr passed a fileInputStream
+	 * @return an ArrayList<Contact>
+	 * @throws IOException
+	 */
 	public static ArrayList<Contact> readContactsFromFile(Scanner scnr) throws IOException {
 		ArrayList<Contact> contactList = new ArrayList<Contact>();
 		String fileName;
@@ -21,7 +30,7 @@ public class ArrayListPhoneContactsApp {
 		String[] lineArray;
 		Contact aContact;
 
-		System.out.print("Give file name: ");
+		System.out.print("Please provide file to import, do not include .txt extension: ");
 		fileName = scnr.next();
 		fileName += ".txt";
 		file = new FileInputStream(fileName);
@@ -36,8 +45,17 @@ public class ArrayListPhoneContactsApp {
 			contactList.add(aContact);
 		}
 
+		filesc.close();
+
 		return contactList;
 	}
+
+	/**
+	 * Iterates through ArrayList 10 Contact objects at a time. "Unpacks" the Contact object to display key fields.
+	 * 
+	 * @param contactList as a 1D ArrayList<Contact> @see ~/src/Project2/Contact.java
+	 * @param scnr passed System.in from main
+	 */
 
 	public static void displayContacts(ArrayList<Contact> contactList, Scanner scnr) {
 
@@ -49,24 +67,31 @@ public class ArrayListPhoneContactsApp {
 
 			if (i % 10 == 0) {
 				scnr.nextLine();
-				System.out.println("Press any key to continue...");
-				String input = scnr.nextLine();
+				System.out.print("Press any key to continue...\n");
+				scnr.nextLine();
 			}
 		}
 	}
-// to test
-	public static int countContacts(ArrayList<Contact> contactList) {
 
-		// use a method from the ArrayList to display the number of elements in the list
-		// ** your code here (1 or 2 lines)
+	/**
+	 * Uses built-in ArrayList.size() method to return size
+	 * 
+	 * @param contactList an ArrayList<Contact>
+	 * @return number of elements in ArrayList as an int
+	 */
+
+	public static int countContacts(ArrayList<Contact> contactList) {
 		
 		return contactList.size();
 	}
 
+	/**
+	 * Asks user for First Name / Last Name / Phone number. Loads these data into a new Contact object, which is then appended to the ArrayList
+	 * 
+	 * @param contactList an ArrayList<Contact>
+	 * @param scnr passed System.in from main
+	 */
 	public static void addContact(ArrayList<Contact> contactList, Scanner scnr) {
-
-		// ask the user for the contact information: first, last and phone
-		// ** your code here (multiple lines)
 
 		String firstName;
 		String lastName;
@@ -75,32 +100,35 @@ public class ArrayListPhoneContactsApp {
 		System.out.print("Enter first name: ");
 		firstName = scnr.next();
 
-		System.out.print("\nEnter last name: ");
+		System.out.print("Enter last name: ");
 		lastName = scnr.next();
 
-		System.out.print("\nEnter phone: \n");
+		System.out.print("Enter phone: ");
 		phone = scnr.next();
+
+		try{
 			
-
-		// instantiate a new Contact object with the given data
-		// add the new contact to the list
-		// ** your code here (1 or 2 lines)
-
-		Contact newContact = new Contact(firstName, lastName, phone);
+			Contact newContact = new Contact(firstName, lastName, phone);
+			contactList.add(newContact);	
+			System.out.printf("%s, %s, %s added to the listing.\n", newContact.getFirstName(), newContact.getLastName(), newContact.getPhone());
+		} catch (Exception e){
+			System.out.println("Something went wrong adding a contact to the listing.");
+		}
 		
-		contactList.add(newContact);	
 	}
-
+	
+	/**
+	 * Allows user to delete a Contact object held in the ArrayList, provided it's found by First and Last Name
+	 * 
+	 * @param  an ArrayList<Contact>
+	 * @param scnr passed System.in from main
+	 */
 
 	public static void deleteContact(ArrayList<Contact> contactList, Scanner scnr) { 
-		// declare variables here
 		Contact contactToDelete = null;
 		boolean success = false;
 		String firstName;
 		String lastName;
-
-		// get information from the user for first and last name
-		// ** your code here (multiple lines)
 
 		System.out.print("Enter first name: ");
 		firstName = scnr.next();
@@ -108,74 +136,49 @@ public class ArrayListPhoneContactsApp {
 		System.out.print("\nEnter last name: ");
 		lastName = scnr.next();
 
-		
-		
-
-		// instantiate a new contact "contactToDelete" with only first and last names
-		// this will use the second constructor
-		// use an ArrayList method to "delete" the contact object you created
-		// the method you use returns a boolean value - true when the object is found
-		// assign the result of the method to the success variable 
-		// ** your code here (1-2 lines)
-		
 		contactToDelete = new Contact(firstName, lastName);
 
 		success = contactList.remove(contactToDelete);
 
-		
-		// check the value of success to see if the contact was removed
 		if (success) 
 			System.out.println("Contact removed");
 		else
 			System.out.println("Contact not found");
 
 	}
-// to test
+
+	/**
+	 * Allow user to update a contact's phone number
+	 * 
+	 * @param contactList an ArrayList<Contact>
+	 * @param scnr passed System.in from main
+	 */
+
 	public static void updateContact(ArrayList<Contact> contactList, Scanner scnr) { 
-		// declare variables
+	
 		Contact contactToFind, contactToUpdate;
 		int indexToUpdate;
-		boolean success;
 		String firstName;
 		String lastName;
 		String newPhone;
 
-		// get information from the user for first and last name
-		// ** your code here (multiple lines)
 
 		System.out.print("Enter first name: ");
 		firstName = scnr.next();
 
-		System.out.print("\nEnter last name: ");
+		System.out.print("Enter last name: ");
 		lastName = scnr.next();
-		
-
-		
-		// instantiate a new Contact object "contactToFind" using the first and last name
-		// you will use the second constructor from Contact here
-		// ** your code here (one line)
 
 		contactToFind = new Contact(firstName, lastName);
-
-
-		// use an ArrayList method to 
-		// find the location (index) of the contact in the list
-		// ** your code here (one line)
 		
 		indexToUpdate = contactList.indexOf(contactToFind);
 		
-		//
+		// the contact was not found
 		if (indexToUpdate == -1) {
 			System.out.println("Contact not found");
 		}
 		else { // the contact was found
-			
-			// use an ArrayList method to
-			// find the actual Contact object using the index
-			// hold on to the return object in the variable "contactToUpdate"
-			// get the new phone number from the user
-			// update the phone number using the setPhone method
-			// ** your code here (multiple lines)
+
 			
 			contactToUpdate = contactList.get(indexToUpdate);
 
@@ -184,8 +187,6 @@ public class ArrayListPhoneContactsApp {
 
 			contactToUpdate.setPhone(newPhone);
 			
-
-
 			// if all works out this line should display the contact with a new phone number
 			System.out.println("Updated Contact Info: " +  contactToUpdate);
 
@@ -193,42 +194,39 @@ public class ArrayListPhoneContactsApp {
 
 	}
 	
+	/**
+	 * Sorts contacts by last name
+	 * 
+	 * @param contactList an ArrayList<Contact>
+	 */
 	
 	public static void sortContacts(ArrayList<Contact> contactList) {
-		
-		// Use a method from the ArrayList to order the data
-		// This works automatically because of the compareTo method in the Contact class
-		// ** your code here (one line)
 
 		Collections.sort(contactList);
-
-		
+		System.out.println("Sorted by last name");
 	}
 
+	/**
+	 * Allows user to choose a name for a new file and write 
+	 * 
+	 * @param contactList
+	 * @param scnr
+	 * @throws IOException
+	 */
 
 	public static void writeContactsToFile(ArrayList<Contact> contactList, Scanner scnr) throws IOException {
-		//search how to write to a file using file input stream
+	
 		String fileName;
 		String userFileInput;
 		FileOutputStream fileStream = null;
 		PrintWriter outFS = null;
 		
-		// get filename, add .txt extension, and open file stream
-		// instantiate the PrintWriter on the file stream
-		// ** your code here (multiple lines)
-
 		System.out.print("Preparing to write data to a file. Please enter the desired filename. (Do not provide file extensions) :  ");
         
 		userFileInput = scnr.next();
 		fileName = userFileInput + ".txt";
 		fileStream = new FileOutputStream(fileName);
 		outFS = new PrintWriter(fileStream);
-
-		
-		
-		// use a for each loop to iterate through the contact list and 
-		// print each contact info
-		// ** your code here (4 lines will work if you put the commas with the info) 
 
 		for (int i = 0; i < contactList.size(); ++i){
 			outFS.printf("%s\n", contactList.get(i).toString());
@@ -255,16 +253,20 @@ public class ArrayListPhoneContactsApp {
 			System.out.println("6) update phone number for contact");
 			System.out.println("7) sort contacts by last name");
 			System.out.println("8) write contact list to file");
-			System.out.println();
 			System.out.println("9) exit");
 			System.out.println();
-			System.out.println("Enter your choice");
+			System.out.print("Enter your choice: ");
 
 			choice = scnr.nextInt();
 
 			switch(choice) {
 			case 1:
-				contactList = readContactsFromFile(scnr);
+				try{
+					contactList = readContactsFromFile(scnr);
+					System.out.println("Import Successful");
+				} catch (IOException e){
+					System.out.println("Cannot find a readable file from the info provided.");
+				}
 				break;
 
 			case 2:
@@ -292,22 +294,28 @@ public class ArrayListPhoneContactsApp {
 				break;
 
 			case 8:
-				writeContactsToFile(contactList,scnr);
+				try{
+					writeContactsToFile(contactList,scnr);
+					System.out.println("Write Successful");
+				} catch (IOException e){
+					System.out.println("Something went wrong with the file export.");
+				}
+				
 				break;
 
 			}
 			
 			scnr.nextLine();
-			System.out.println("Press any key to continue...");
-			scnr.nextLine();
+
 
 		} while (choice != 9);
 
 		if (choice == 9) {
+			scnr.close();
 			System.out.println("Program ended");
 		}
 
-
+		
 	}
 
 }
