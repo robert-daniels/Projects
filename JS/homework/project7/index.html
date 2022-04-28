@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 04/26/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 7 :: Best Practices</title>
+    <link rel="stylesheet" href="project7.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+      </header>
+    <h1 id="title">Project 7: Best Practices and Modifying Existing Functions</h1>
+    <div id="container">
+        
+        <ol>
+            <li>Identify a common JavaScript style guide, and hyperlink to it.
+                <p>A style guide mentioned in the book is the Google JavaScript Style Guide. 
+                   Click <a href="https://google.github.io/styleguide/jsguide.html">here</a> to proceed to their GitHub repository. </p>
+            </li>
+            <li>Identify three distinct "best practice" programming practices and explain how they create better code.
+                <p>Keep the horizontal line length of code under a specified character count (determined by style guide.)</p>
+                <p>Avoid over-complicated nesting of conditionals when there are better alternatives. </p>
+                <p>Comments should be used for abstract high-level uses of functions. They should not repeat what the function is doing.</p>
+            </li>
+            <li>Identify three distinct sloppy programming practices and explain the problems they each create.
+                <p>Sacrificing readability and explicit communication in favor of a shorter line of code. This code may be harder for others to understand and maintain, as well as yourself. Explicit and standard is usually better than clever and novel.</p>
+                <p>Using ambiguous / vague variable names. A person should be able to tell what a variable is at a glance. If they can't, resources must be invested to track it down.</p>
+                <p>Functions not being built for a single purpose. A function that is named something like isReady() should evaluate and return a Boolean. It should not alter the underlying values. This makes the code confusing, harder to maintain, and more difficult to determine when best to use a tool.</p>
+            </li>
+            <li>Explain the difference between a primitive, an array, and an object and include an example of each. 
+                <p>Primitive: value can contain only a single "thing." Example: x = 6. This should not unpack further, though it can be wrapped into an object wrapper which then may contain fields and methods.</p>
+                <p>Object: an abstract data type that may contain multiple associated fields and methods. The object we've been working with the most so far is the document object. The document object has fields like document.head, as well as methods like document.getElementById(*).</p>
+                <p>Array: a collection-type data structure (that is also an object.) This provides a structured and ordered scaffold to hold data, zero-indexed. Example: let testArray = [11, 12, 13]</p>
+            </li>
+            <li>Explain the phrase "Fractions divided by powers of 2 are exactly represented in the binary system" and what universal problem this is referring to in all programming languages.
+                <p> Reasonable whole numbers may be represented as the sum of n^x where x is an integer from 0 to the desired result. (2^0 + 2^1 = 3, for example.) This property is useful, as a computer can only use a bit as 1 "On" or 0 "Off." By manipulating which 2^x to "turn on", a computer can represent such a number. However, a computer is physically limited to the bits it has available. If it needs 500 bits to accurately represent a number, and can only access 64, it will be unable to render correctly. The same thing with a very small decimal number. In this frame of reference, dividing by a power of 2 means there will be a fixed number of bits to represent the result, and in theory can be represented if physically available. A division by another number will yield an endless fraction. An endless fraction will run up against the physical count of bits in the system and will instead need to be rendered with machine precision only.  </p>
+
+            </li>
+        </ol>
+
+    </div>
+    <script>
+       
+        // 1.
+
+        function doMath() {
+            let num1 = prompt("Enter the first number: ", 0);
+            let num2 = prompt("Enter the second number: ", 0);
+            let operator = prompt("What would you like to do with these two numbers? + - * /")
+            let result = null;
+
+            switch(operator) {
+                case "+":
+                    result = +num1 + +num2;
+                    break;
+                case "-":
+                    result = +num1 - +num2;
+                    break;
+                case "*":
+                    result = +num1 * +num2;
+                    break;
+                case "/":
+                    result = +num1 / +num2;
+                    break;
+                default:
+                    console.log("Operation choice not recognized");
+                    return;
+
+            }
+
+            console.log(`The result is : ${result}`);
+        }
+
+        doMath(); 
+
+        // 2.
+
+        function cheery() {
+            
+            let cheeryArray = [
+                "Why, hello there!",
+                "You're looking lovely today!",
+                "Hope you got some good sleep last night!",
+                "You should have some cake!",
+                "It's time for some fun!",
+            ]
+
+            let cheeryChoice = Math.floor(Math.random() * 5);
+
+            console.log(cheeryArray[cheeryChoice]);
+
+        }
+
+        cheery();
+
+        // 3.
+
+        // ATTRIBUTE for #3, 4, 5, 6, 8: script from JavaScript.info: The JavaScript Language, Ilya Kantor.
+        // The e-book may be found at https://JavaScript.info/ebook. #6, 8 have slightly modified the script from source.
+
+        function ucFirst(str) {
+            if (!str) return str;  // check if string is not empty. If empty, gracefully step out of function. 
+          
+            // if string not empty, return a new concat string. Take first letter of old string, capitalize, add on subsection of old string
+            // from index 1 to end. 
+            return str[0].toUpperCase() + str.slice(1); 
+
+        
+          }
+          
+          alert( ucFirst("john") ); // pass the ucFirst function with "john" parameter to the alert function to alert user a capitalized word "John"
+
+        
+
+          // 4.
+
+          function checkSpam(str) {
+            let lowerStr = str.toLowerCase();  // standardizes by making a new all lowercase string to avoid case-sensitive comparison issues
+          
+            // return the first truthy statement where the processed string contains the given parameter
+            return lowerStr.includes('viagra') || lowerStr.includes('xxx'); 
+
+          }
+          
+          alert( checkSpam('buy ViAgRA now') );  // alert function passed what checkSpam returns when ran with the given String
+          alert( checkSpam('free xxxxx') );  // alert function passed what checkSpam returns when ran with the given String
+          alert( checkSpam("innocent rabbit") );  // alert function passed what checkSpam returns when ran with the given String
+
+          // 5.
+
+          function truncate(str, maxlength) {
+            
+            //evaluate if string length is > maxlength. if so, return a new concat string consisting of old less last character + "...";
+            //if not longer than maxlength, return the original string
+            return (str.length > maxlength) ? str.slice(0, maxlength - 1) + '…' : str;
+          }
+
+          // 6.
+
+          function averageInput() {
+
+            let numbers = [];
+          
+            while (true) {
+          
+              let value = prompt("A number between 0 - 100 (inclusive, both) please?", 0);
+          
+              // should we cancel?
+              if (
+                  value === "" || 
+                  value === null || 
+                  !isFinite(value) || 
+                  value < 0 ||
+                  value > 100
+                  ) break;
+          
+              numbers.push(+value);
+            }
+          
+            let sum = 0;
+            let numElements = 0;
+
+            for (let number of numbers) {
+              sum += number;
+              numElements += 1;
+            }
+
+            if (numElements == 0){ // to prevent an alert of undefined
+                return "No valid numbers were given.";
+            }
+            
+            return (sum / numElements);
+          }
+          
+          alert( averageInput() );
+
+        // 7.
+
+        /**
+        * Use to find the sum of the two largest numbers in a given array
+        * @param {array<number>} arr as a 1D array
+        * @return {number} sum of the two largest values in the provided array
+        */
+
+        let addTwo = function(arr) {
+            let maxNumIndex = 0;
+            let nextMaxNumIndex = 0;
+
+            for (let i = 0; i < arr.length; ++i){
+                if (arr[i] > arr[maxNumIndex]){
+                    nextMaxNumIndex = maxNumIndex;
+                    maxNumIndex = i;
+                }
+            }
+
+            return (arr[maxNumIndex] + arr[nextMaxNumIndex]);
+        }
+
+        let arr1 = [0, 1, 2, 5];
+        let arr2 = [10, 20, 4, 1];
+
+        console.log(addTwo(arr1));
+        console.log(addTwo(arr2));
+
+
+        // 8. 
+
+        //@GIT_learning_scanner.add(JavaScriptS22, "Callback Functions")
+        let sortFunctionKey = function(a, b) {
+            return a.age - b.age
+        }
+
+        function sortByAge(arr) {
+            arr.sort(sortFunctionKey);
+          }
+
+
+        let john = { name: "John", age: 25 };
+        let pete = { name: "Pete", age: 30 };
+        let mary = { name: "Mary", age: 28 };
+
+        let arr = [ pete, john, mary ];
+
+        sortByAge(arr);
+        //@GIT_learning_scanner.stop();
+    
+        alert(arr[0].name); // John
+        alert(arr[1].name); // Mary
+        alert(arr[2].name); // Pete
+
+
+    </script>
+</body>
+</html>
