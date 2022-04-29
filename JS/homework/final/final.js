@@ -29,6 +29,7 @@ document.getElementById("userAgreeToStart").onclick = loadGameBoard;
 document.getElementById("askQuestion").onclick = askQuestion;
 document.getElementById('userQuizAnswer').onclick = gradeAnswer;
 document.getElementById('endGame').onclick = determineWin;
+document.getElementById("tryAgain").onclick = loadGameBoard;
 
 
 
@@ -41,11 +42,16 @@ Removes the initial instructions and loads the game board.
 function loadGameBoard() {  // create several custom functions to process your game
     userPoints = 0
 
+    document.getElementById("questionSocket").classList.add("deactivatedDiv");
+    document.getElementById("title").textContent = "Let's Play A Game:"
     // document.getElementById("something5").classList
     document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
     
     // document.getElementById("something4").className
-    document.getElementById("gameBoardDiv").className = "activatedDiv"; 
+    document.getElementById("gameBoardDiv").className = "activatedDiv";
+    document.getElementById("answerResult").className = "deactivatedDiv";
+  
+    
 
     setDealerHand();
 
@@ -67,6 +73,9 @@ function setDealerHand() {
 
 function determineWin() {
     console.log("determineWin ran");
+
+   
+
     if (userPoints > dealerHand && userPoints < 22) {
         document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!`
     }
@@ -76,6 +85,16 @@ function determineWin() {
     else if (userPoints < dealerHand){
         document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`
     }
+    
+        var titleElement = document.getElementById("tryAgainDiv").value
+        
+        if (titleElement) {
+            title.append(document.getElementById("tryAgainDiv"))
+        }
+        else {
+            
+        }
+    
 }
 
 `
@@ -118,6 +137,7 @@ Validates the user input to see if correct based off topic chosen. If validated,
 function gradeAnswer() {
     console.log("gradeAnswer ran");
     let validated = false;
+    document.getElementById("answerResult").className = "activatedDiv";
 
     switch (currentTopic){
         case ("loops"):
@@ -200,6 +220,7 @@ let loopQuestions = [loopQ1, loopQ2, loopQ3]; // array
 
 const loopQuizzer = {
     askQuestion : function (arrayChoice) {
+        document.getElementById("questionSocket").className = ("activatedDiv");
         document.getElementById("questionSocket").textContent = loopQuestions[arrayChoice].question;
         document.getElementById("answerSocket").className = "activatedDiv"
     },
