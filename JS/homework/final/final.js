@@ -2,11 +2,12 @@
 
 // add graphics
 // prevent question duplication
+// prevent further user input after determineWin() is called
 
 
 // =============================Establish Variables=============================
 let name = prompt("Hello! What is your name?", "John Smith"); // window.prompt(), let 
-alert(`${name}, let's play!`) // window.alert() //TODO: uncomment
+alert(`${name}, let's play!`) // window.alert() 
 
 const winThreshold = 21; // const
 
