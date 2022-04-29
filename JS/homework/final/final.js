@@ -2,26 +2,26 @@
 
 // =============================Establish Variables=============================
 let name = prompt("Hello! What is your name?", "John Smith"); // window.prompt(), let 
-//alert(`${name}, let's play some blackjack!`) // window.alert() //TODO: uncomment
+alert(`${name}, let's play!`) // window.alert() //TODO: uncomment
 
 const winThreshold = 21; // const
 
 let instructions = "the rules of this game are simple: Answer questions about JavaScript to push your point value as close to 21 as possible. Aces will be either 1 or 10, the comptuer will decide. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
 
-let userPoints = 0;
-let dealerHand = 0;
+let userPoints;
+let dealerHand;
 let currentTopic;
 let randomArrayChoice = Math.floor(Math.random() * 3); // assumes three questions per category. brittle, could instead use the array.length
 let gameRunning = true;
 
 
-// =============================Introduce the game=============================
+// =============================Introduce the Game=============================
 
 // document.getElementById("something1").textContent
-document.getElementById("instructions").textContent = `${name}, ` + instructions
+document.getElementById("instructions").textContent = `${name}, ` + instructions;
 
 
-// =============================onclick Assignments =============================
+// =============================onclick Assignments=============================
 // onclick assignment
 
 document.getElementById("userAgreeToStart").onclick = loadGameBoard;
@@ -35,14 +35,16 @@ document.getElementById("tryAgain").onclick = loadGameBoard;
 // =============================Backend Functions=============================
 
 `
-Removes the initial instructions and loads the game board.
+Removes the initial instructions and loads / resets the game board.
 `
 
 function loadGameBoard() {  // create several custom functions to process your game
-    userPoints = 0
+    userPoints = 0;
+    document.getElementById("categorySelector").className = "activatedDiv";
 
     document.getElementById("questionSocket").className = "deactivatedDiv";
-    document.getElementById("title").textContent = "Let's Play A Game:"
+    document.getElementById("title").textContent = "Let's Play!"
+    
     // document.getElementById("something5").classList
     document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
     
@@ -50,15 +52,13 @@ function loadGameBoard() {  // create several custom functions to process your g
     document.getElementById("gameBoardDiv").className = "activatedDiv";
     document.getElementById("answerResult").className = "deactivatedDiv";
   
-    
-
     setDealerHand();
 
     document.getElementById("pointCounter").textContent = `${name}, your current card count is ${userPoints}`;
 }
 
 `
-Quick and dirty draw a dealer's hand. Determines the initial dealer value
+Draw a dealer's hand. Determines the initial dealer value
 `
 
 function setDealerHand() {
@@ -70,29 +70,29 @@ function setDealerHand() {
     }
 }
 
+`
+Determines if user or dealer wins and displays such. Regardless of win/lose, enables user to play again.
+`
+
 function determineWin() {
     console.log("determineWin ran");
-
-   
+    var titleElement = document.getElementById("tryAgainDiv").value
+    
 
     if (userPoints > dealerHand && userPoints < 22) {
         document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!`
     }
     else if (userPoints > 21) {
-        document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. Loss recorded`
+        document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`
     }
     else if (userPoints < dealerHand){
         document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`
     }
     
-        var titleElement = document.getElementById("tryAgainDiv").value
-        
-        if (titleElement) {
-            title.append(document.getElementById("tryAgainDiv"))
-        }
-        else {
-            
-        }
+    
+    if (titleElement) {
+        title.append(document.getElementById("tryAgainDiv"))
+    }
     
 }
 
@@ -102,9 +102,10 @@ Pulls a question from the relevant topic quiz bank
 
 function askQuestion() {
     console.log("askQuestion() ran")
+    
     // document.getElementById("something2").value
     let topicChoice = document.getElementById("categorySelector").value; 
-     currentTopic = topicChoice;
+    currentTopic = topicChoice;
     
     
     // clear the old responses
