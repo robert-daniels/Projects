@@ -1,6 +1,6 @@
 "use strict";
 
-// =============================Establish variables=============================
+// =============================Establish Variables=============================
 let name = prompt("Hello! What is your name?", "John Smith"); // window.prompt(), let 
 //alert(`${name}, let's play some blackjack!`) // window.alert() //TODO: uncomment
 
@@ -104,7 +104,7 @@ function askQuestion() {
     console.log("askQuestion() ran")
     // document.getElementById("something2").value
     let topicChoice = document.getElementById("categorySelector").value; 
-     
+     currentTopic = topicChoice;
     
     
     // clear the old responses
@@ -122,16 +122,18 @@ function askQuestion() {
 
         case "loops":
             loopQuizzer.askQuestion(randomArrayChoice);
-            currentTopic = topicChoice;
             break;
         case "dataTypes":
             dataTypeQuizzer.askQuestion(randomArrayChoice);
-            currentTopic = topicChoice;
             break;
         case "arrays":
             arrayQuizzer.askQuestion(randomArrayChoice); 
-            currentTopic = topicChoice;
             break;
+        case "comparisons":
+            comparisonsQuizzer.askQuestion(randomArrayChoice);
+            break;
+        default:
+            console.log("Something went wrong in final.js/askQuestion()");
     }
 
 }
@@ -158,7 +160,7 @@ function gradeAnswer() {
             correctAnswer = arrayQuestions[randomArrayChoice].answer;
             break;
         case ("comparisons") :
-            correctAnswer = "method stub" //TODO:
+            correctAnswer = comparisonQuestions[randomArrayChoice].answer;
             break;
         default:
             console.log("something went wrong in final.js/gradeAnswer()");
@@ -307,9 +309,24 @@ const comparisonsQ1 = {
     answer: "true",
 }
 
-const comparisonsQ2 = { // ===, !=, >=, <=
-    question: "What will [(6 != '6') && ('a' === 'A') || (7 >= 2) || (6 <= 8)] return?",
+const comparisonsQ2 = { // ===, !=, >=, <=, !==
+    question: "What will [(6 != '6') && ('a' === 'A') && ('a' !== 'A') || (7 >= 2) || (6 <= 8)] return?",
     answer: "true",
+}
+
+const comparisonsQ3 = { // ++, --, +=
+    question: "Assume you are running a script, and the following expressions have successfully evaluated. x = 1, y = 2, y++, x--, x += y. What is the final value of x, assuming any increment / decrement operations have ran?",
+    answer: 3,
+}
+
+let comparisonQuestions = [comparisonsQ1, comparisonsQ2, comparisonsQ3];
+
+const comparisonsQuizzer = {
+    askQuestion : function (arrayChoice){
+        document.getElementById("questionSocket").className = ("activatedDiv");
+        document.getElementById("questionSocket").textContent = comparisonQuestions[arrayChoice].question;
+        document.getElementById("answerSocket").className = "activatedDiv"
+    }
 }
 
 
@@ -323,14 +340,6 @@ const comparisonsQ2 = { // ===, !=, >=, <=
 
 
 // use JavaScript to modify images
-
-
-
-//   +=
-// !==
-// ++    --   
-// 
-
 // Do not allow the user to divide by 0.
 
 // at least 2 images
