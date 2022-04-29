@@ -46,6 +46,7 @@
                 </select>
 
                 <button id="askQuestion">Hit Me!</button>
+                <button id="endGame">No More! Show me who won</button>
             </div>
             <br>
             <div id="questionSocket"></div>
@@ -53,8 +54,18 @@
             <div id="answerSocket" class="deactivatedDiv">
                 <label for="userAnswer">Your Answer: </label>
                 <input type="text" id="userAnswer">
+                
                 <button id="userQuizAnswer">Submit</button>
             </div>
+
+
+<!-- Current workaround to get a fresh template each quiz -->
+            <div id="answerTemplate" class="deactivatedDiv">
+                <!-- <label for="userAnswer">Your Answer: </label>
+                <input type="text" id="userAnswer">
+                <button id="userQuizAnswer">Submit2</button> -->
+            </div>
+            <div id="answerResult"></div>
 
         </div>
 

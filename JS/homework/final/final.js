@@ -6,9 +6,10 @@ let name = prompt("Hello! What is your name?", "John Smith"); // window.prompt()
 
 const winThreshold = 21; // const
 
-let instructions = "the rules of this game are simple: Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
+let instructions = "the rules of this game are simple: Answer questions about JavaScript to push your point value as close to 21 as possible. Aces will be either 1 or 10, the comptuer will decide. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
 
 let userPoints = 0;
+let dealerHand = 0;
 let currentTopic;
 let randomArrayChoice = Math.floor(Math.random() * 3);
 
@@ -17,17 +18,22 @@ let randomArrayChoice = Math.floor(Math.random() * 3);
 // document.getElementById("something1").textContent
 document.getElementById("instructions").textContent = `${name}, ` + instructions
 
+
+
 // =============================onclick Assignments =============================
 // onclick assignment
 
 document.getElementById("userAgreeToStart").onclick = loadGameBoard;
 document.getElementById("askQuestion").onclick = askQuestion;
-document.getElementById("userQuizAnswer").onclick = gradeAnswer;
+document.getElementById('userQuizAnswer').onclick = gradeAnswer;
+document.getElementById('endGame').onclick = determineWin;
+
+
 
 // =============================Backend Functions=============================
 
 `
-Removes the initial instructions and loads the game board. Also determines the initial dealer value
+Removes the initial instructions and loads the game board. Also 
 `
 
 function loadGameBoard() {  // create several custom functions to process your game
@@ -38,37 +44,58 @@ function loadGameBoard() {  // create several custom functions to process your g
     // document.getElementById("something4").className
     document.getElementById("gameBoardDiv").className = "activatedDiv"; 
 
-    setTheGame();
-}
-
-`
-Quick and dirty draw a dealer's hand 
-`
-
-function setTheGame() {
-    let dealerHand = 0;
-
-    while (dealerHand < 11) {  // while
-        dealerHand = dealerHand + Math.floor(Math.random() * 12);
-        console.log(dealerHand) // console.log() to follow and debug your code -- leave these in the js file. I use VS Code breakpoint debugging. Adding one in for the requirements
-    }
+    setDealerHand();
 
     document.getElementById("pointCounter").textContent = `${name}, your current card count is ${userPoints}`;
-
-
-
-
 }
+
+`
+Quick and dirty draw a dealer's hand. Determines the initial dealer value
+`
+
+function setDealerHand() {
+    
+
+    while (dealerHand < 11) {  // while
+        dealerHand = dealerHand + Math.floor((Math.random() * 11) + 1);
+        console.log(dealerHand) // console.log() to follow and debug your code -- leave these in the js file. 
+    }
+}
+
+function determineWin() {
+    console.log("determineWin ran");
+    if (userPoints > dealerHand && userPoints < 22) {
+        document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!`
+    }
+    else if (userPoints > 21) {
+        document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. Loss recorded`
+    }
+    else if (userPoints < dealerHand){
+        document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`
+    }
+}
+
+`
+Pulls a question from the relevant topic quiz bank
+`
 
 function askQuestion() {
     console.log("askQuestion() ran")
     // document.getElementById("something2").value
     let topicChoice = document.getElementById("categorySelector").value;  
+    
+    document.getElementById("answerResult").textContent = "";
+    document.getElementById("userAnswer").value = "";
+
+
     console.log(topicChoice);
     randomArrayChoice = Math.floor(Math.random() * 3);
     
+    document.getElementById("answerTemplate").className = "activatedDiv";
+    answerSocket.append(document.getElementById('answerTemplate'));
+    
 
-    switch (topicChoice){
+    switch (topicChoice){  // switch
 
         case "loops":
             loopQuizzer.askQuestion(randomArrayChoice);
@@ -79,23 +106,55 @@ function askQuestion() {
 
 }
 
+`
+Validates the user input to see if correct based off topic chosen. If validated, add points to user score
+`
+
 function gradeAnswer() {
+    console.log("gradeAnswer ran");
+    let validated = false;
 
     switch (currentTopic){
         case ("loops"):
+            let correctAnswer = loopQuestions[randomArrayChoice].answer;
             let userQuizAnswer = document.getElementById("userAnswer").value;
-            if (userQuizAnswer == (loopQuestions[randomArrayChoice].answer)) {
-                celebrate(); // TODO:
+            if (userQuizAnswer == (correctAnswer)) {  // if ... else
+                validated = true;
+                respondToAnswer(validated, correctAnswer); 
             }
             else {
                 console.log("false");
-                console.log(loopQuestions[randomArrayChoice].answer);
+                respondToAnswer(validated, correctAnswer);
+                
             }
     }
+}
 
-        
+function respondToAnswer(validated, correctAnswer) {
+    let answerResult = document.getElementById("answerResult")
+    document.getElementById("answerSocket").classList.add("deactivatedDiv");
+
+    if (validated) {
+        answerResult.textContent = "Correct!"
+        addPoints();
+    }
+    else {
+        answerResult.textContent = `Sorry, incorrect. We were looking for: ${correctAnswer}`;
+    }
+    
+}
+
+
+function addPoints() {
+    let userPointsToAdd  = Math.floor((Math.random() * 11) + 1);
+
+    answerResult.insertAdjacentText("beforeend", ` You received a card worth ${userPointsToAdd} points.`)
+    userPoints = userPoints + userPointsToAdd;
+
+    document.getElementById("pointCounter").textContent = `${name}, your current card count is ${userPoints}`;
 
 }
+
 
 // =============================Loop Objects and related Functions=============================
 
@@ -119,7 +178,7 @@ const loopQ3 = {
     answer: "while"
 }
 
-let loopQuestions = [loopQ1, loopQ2, loopQ3];
+let loopQuestions = [loopQ1, loopQ2, loopQ3]; // array
 
 const loopQuizzer = {
     askQuestion : function (arrayChoice) {
@@ -141,14 +200,14 @@ const loopQuizzer = {
 // =============================Items Remaining to Code=============================
 
 // document.getElementsByTagName("something3")
-
+// document.querySelectorAll(".something6")
 
 // document.querySelectorAll(".something6")
 // for
-// if ... else
 
-// switch
-// array
+
+
+
 
 // addEventListener() to trigger all functions OR you can also use individual JavaScript event properties such as .onclick and assign a function to that property
 // use JavaScript to modify images
