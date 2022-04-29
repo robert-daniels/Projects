@@ -1,5 +1,9 @@
 "use strict";
 
+// add graphics
+// prevent question duplication
+
+
 // =============================Establish Variables=============================
 let name = prompt("Hello! What is your name?", "John Smith"); // window.prompt(), let 
 alert(`${name}, let's play!`) // window.alert() //TODO: uncomment
@@ -81,6 +85,7 @@ function determineWin() {
 
     if (userPoints > dealerHand && userPoints < 22) {
         document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!`
+        
     }
     else if (userPoints > 21) {
         document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`
