@@ -12,9 +12,11 @@ let userPoints = 0;
 let dealerHand = 0;
 let currentTopic;
 let randomArrayChoice = Math.floor(Math.random() * 3);
+let gameRunning = true;
 
 
 // =============================Introduce the game=============================
+
 // document.getElementById("something1").textContent
 document.getElementById("instructions").textContent = `${name}, ` + instructions
 
@@ -33,11 +35,12 @@ document.getElementById('endGame').onclick = determineWin;
 // =============================Backend Functions=============================
 
 `
-Removes the initial instructions and loads the game board. Also 
+Removes the initial instructions and loads the game board.
 `
 
 function loadGameBoard() {  // create several custom functions to process your game
-    
+    userPoints = 0
+
     // document.getElementById("something5").classList
     document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
     
@@ -54,7 +57,7 @@ Quick and dirty draw a dealer's hand. Determines the initial dealer value
 `
 
 function setDealerHand() {
-    
+    dealerHand = 0
 
     while (dealerHand < 11) {  // while
         dealerHand = dealerHand + Math.floor((Math.random() * 11) + 1);
@@ -82,15 +85,17 @@ Pulls a question from the relevant topic quiz bank
 function askQuestion() {
     console.log("askQuestion() ran")
     // document.getElementById("something2").value
-    let topicChoice = document.getElementById("categorySelector").value;  
+    let topicChoice = document.getElementById("categorySelector").value; 
+     
     
+    
+    // clear the old responses
     document.getElementById("answerResult").textContent = "";
     document.getElementById("userAnswer").value = "";
 
-
-    console.log(topicChoice);
     randomArrayChoice = Math.floor(Math.random() * 3);
     
+    // activate the answer template and append to the socket
     document.getElementById("answerTemplate").className = "activatedDiv";
     answerSocket.append(document.getElementById('answerTemplate'));
     
@@ -125,10 +130,18 @@ function gradeAnswer() {
             else {
                 console.log("false");
                 respondToAnswer(validated, correctAnswer);
-                
             }
+
+           
+            console.log(loopQuestions);
+
+
     }
 }
+
+`
+Output to user if the answer was right or wrong. Calls addPoints()
+`
 
 function respondToAnswer(validated, correctAnswer) {
     let answerResult = document.getElementById("answerResult")
@@ -152,6 +165,11 @@ function addPoints() {
     userPoints = userPoints + userPointsToAdd;
 
     document.getElementById("pointCounter").textContent = `${name}, your current card count is ${userPoints}`;
+
+    if (userPoints > 21){
+        gameRunning = false;
+        determineWin();
+    }
 
 }
 
@@ -184,7 +202,8 @@ const loopQuizzer = {
     askQuestion : function (arrayChoice) {
         document.getElementById("questionSocket").textContent = loopQuestions[arrayChoice].question;
         document.getElementById("answerSocket").className = "activatedDiv"
-    }
+    },
+
 }
 
 // =============================Data Types and Related Functions=============================
