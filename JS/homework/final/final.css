@@ -52,4 +52,13 @@ ul {
     display: none
 }
 
+#tryAgainDiv {
+    display: flex; 
+    justify-content: center;
+    align-items: center;   
+    padding-top: 1em;
+}
 
+#questionSocket {
+    padding-top: 1em;
+}
