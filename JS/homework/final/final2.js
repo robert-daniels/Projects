@@ -2,7 +2,38 @@
 
 // Robert Daniels, 05/03/2022 Final Project JavaScript File
 
+
+/**
+ * The logic for this script is as follows: 
+ * 
+ * The main game engine is the Dealer. A Dealer interfaces with QuizBank and Player objects. The Dealer sets the webpage and interfaces with QuizBank objects to quiz a Player. The Player provides feedback which is
+ * captured by the Dealer. The Dealer then progresses the game forward based on that input. 
+ * 
+ * Game Rules : Player gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
+ * The winner (Dealer or Player) is whichever has a point value closest to 21 without going over 21. 
+ * 
+ * User Defined Classes:
+ *  
+ * NOTE: "Interfaces" in this context is by behavior and not enforced by syntax. 
+ * 
+ * Player: Tracks the user's point totals and information 
+ *      Interfaces with : Dealer
+ * 
+ * Dealer: Main Game Engine
+ *      Interfaces with : Player, QuizBank-like Objects
+ * 
+ * QuizBank superclass: Provides methods all sub-classes share
+ *      Interfaces with : N/A
+ * 
+ * LoopQuizBank, DataTypesBank, ArrayQuizBank, ComparisonsQuizBank : extend QuizBank. Maintain the question / answer test set and track the user progress through the set
+ *      Interfaces with : Dealer
+ * 
+ */
+
+
+
 // =============================Establish Starting Variables===================
+
 let name = prompt("Hello! What is your name?", "John Smith");  // window.prompt(), let
 alert(`${name}, let's play!`) // window.alert()
 
@@ -13,7 +44,7 @@ let instructions = "The rules of this game are simple. Answer questions about Ja
 // =============================Introduce the Game=============================
 
 // document.getElementById("something1").textContent
-document.getElementById("instructions").textContent = `${name}: ` + instructions;
+document.getElementById("instructions").textContent = `${name}: ` + instructions; // concatenate
 
 
 // =============================Player Class===================================
@@ -69,7 +100,7 @@ let user = new Player(name);
 // =============================Dealer Class===================================
 
 /**
- * Class representing a dealer that is running the game. The main engine of the game, handles game logic * as well as grades user responses. 
+ * Class representing a card dealer. The main engine of the game, handles game logic as well as grades user responses. 
  */
 class Dealer {
     /**
@@ -90,8 +121,8 @@ class Dealer {
         console.log("setDealerHand ran") // console.log() to follow and debug your code
         this.dealerHand = 0
 
-        // while
-        while (this.dealerHand < 11) {  
+        
+        while (this.dealerHand < 11) {   // while
             this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1);
             console.log(this.dealerHand) 
         }
@@ -113,7 +144,7 @@ class Dealer {
         user.setPoints(0);
         dealer.setDealerHand();
 
-        // should likely be selected by a querySelectorAll
+        // should likely be selected by a querySelectorAll, quite messy at the moment
 
         // document.getElementById("something4").className
         document.getElementById("categorySelector").className = "activatedDiv";
