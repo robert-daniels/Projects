@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- Robert Daniels 04/29/2022 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final :: JavaScript Game!</title>
+    <link rel="stylesheet" href="final.css">
+</head>
+<body>
+    <header>
+        <p>Name: Robert Daniels</p>
+        <p>For: Web 114</p>
+        <p>JavaScript 1 Final</p>
+      </header>
+    <h1 id="title">Let's Play A Game!</h1>
+    <div id="container">
+
+
+<!--User Introduction Div  -->
+
+        <div id="onboardingDiv">
+            <p id="instructions"></p>
+
+            <div id="userAcceptanceDiv">
+                <button id="userAgreeToStart">Yes! Lets Go!</button>
+            </div>
+        </div>
+
+
+<!--Game Board  -->
+
+        <div id="gameBoardDiv" class = "deactivatedDiv">
+            <div id="pointCounter">
+                <p>Point Value: </p>
+            </div>
+            <br>
+
+            <div id="quizzer">
+                <label for="categorySelector">Pick a quiz category </label>
+                <select id="categorySelector">
+                    <option value="loops">Loops</option>
+                    <option value="dataTypes">Data Types</option>
+                    <option value="arrays">Arrays</option>
+                    <option value="comparisons">Comparisons</option>
+                </select>
+
+                <button id="askQuestion">Hit Me!</button>
+                <button id="endGame">No More! Show me who won</button>
+            </div>
+            <br>
+            <div id="questionSocket">&nbsp;</div>
+            <br>
+            <div id="answerSocket" class="deactivatedDiv">
+                <label for="userAnswer">Your Answer: </label>
+                <input type="text" id="userAnswer">
+                
+                <button id="userQuizAnswer">Submit</button>
+            </div>
+
+
+<!-- Current workaround to get fresh templates each quiz -->
+            <div id="answerTemplate" class="deactivatedDiv">
+                <!-- <label for="userAnswer">Your Answer: </label>
+                <input type="text" id="userAnswer">
+                <button id="userQuizAnswer">Submit2</button> -->
+            </div>
+            
+            <div id="answerResult"></div>
+
+            <div id="tryAgainDiv">
+                <button id="tryAgain">Click Here To Reset Your Points and Try Again!</button>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- Script Declaration -->
+    <script src="final.js"></script>
+</body>
+</html>
