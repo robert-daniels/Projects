@@ -1,12 +1,14 @@
-"use strict";
+"use strict";    // "use strict"
+
+// Robert Daniels, 05/03/2022 Final Project JavaScript File
 
 // =============================Establish Starting Variables===================
-let name = prompt("Hello! What is your name?", "John Smith"); 
-alert(`${name}, let's play!`)
+let name = prompt("Hello! What is your name?", "John Smith");  // window.prompt(), let
+alert(`${name}, let's play!`) // window.alert()
 
-const winThreshold = 21;
+const winThreshold = 21; // const
 
-let instructions = "The rules of this game are simple: Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
+let instructions = "The rules of this game are simple. Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
 
 // =============================Introduce the Game=============================
 
@@ -85,9 +87,10 @@ class Dealer {
      */
     
     setDealerHand() {
-        console.log("setDealerHand ran")
+        console.log("setDealerHand ran") // console.log() to follow and debug your code
         this.dealerHand = 0
 
+        // while
         while (this.dealerHand < 11) {  
             this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1);
             console.log(this.dealerHand) 
@@ -111,13 +114,17 @@ class Dealer {
         dealer.setDealerHand();
 
         // should likely be selected by a querySelectorAll
+
+        // document.getElementById("something4").className
         document.getElementById("categorySelector").className = "activatedDiv";
         document.getElementById("quizzer").className = "activatedDiv";
         document.getElementById("pointCounter").className = "activatedDiv";
         document.getElementById("questionSocket").className = "deactivatedDiv";
-        document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
         document.getElementById("gameBoardDiv").className = "activatedDiv";
         document.getElementById("answerResult").className = "deactivatedDiv";
+
+        // document.getElementById("something5").classList
+        document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
 
         document.getElementById("title").textContent = "Let's Play!"
 
@@ -149,6 +156,7 @@ class Dealer {
     determineWin() {
         console.log("determineWin ran");
         
+        // document.getElementById("something2").value
         var titleElement = document.getElementById("tryAgainDiv").value
         var userPoints = user.getPoints();
         var dealerHand = dealer.getDealerHand();
@@ -159,6 +167,8 @@ class Dealer {
         document.getElementById("pointCounter").className = "deactivatedDiv";
         document.getElementById("answerResult").className = "deactivatedDiv";
 
+
+        // if...else
         if (userPoints >= dealerHand && userPoints < 22) {
             console.log("user won ran");
             document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` 
@@ -171,7 +181,9 @@ class Dealer {
             console.log("dealer won ran");
             document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`
         }
-        console.log("outside of if else");
+        else {
+            console.log("something went wrong in determineWin()");
+        }
         
         if (titleElement) {
             title.append(document.getElementById("tryAgainDiv"))
@@ -197,6 +209,7 @@ class Dealer {
         document.getElementById("answerTemplate").className = "activatedDiv";
         answerSocket.append(document.getElementById('answerTemplate'));
 
+        // switch
         switch (topicChoice){ 
             case "loops":
                 question = loopQuizzer.getQuestion();
@@ -334,7 +347,7 @@ class LoopQuizBank extends QuizBank {
     constructor() {
         super();
         this.questionIndex = 0;
-        this.questionArray = [
+        this.questionArray = [  // array
             "If you are trying to end a loop immediately, what keyword would you use?",
             "If you are trying to skip an iteration of a loop, but not exit the loop entirely, what keyword would you use?",
             "Which style of loop would be better if the number of needed iterations is unknown? if or while?",
@@ -363,7 +376,7 @@ class DataTypesBank extends QuizBank {
         this.questionArray = [
             "Which of the following are NOT a pimitive data type in JavaScript: string, number, bigint, smallint, boolean, symbol, null, undefined",
             "What will Math.floor((4.0 + 6 - (9 / 3)) ** (10 % 3)) evaluate to?",
-            "Assuming that you have num1 = 2 and num2 = 3, cast as strings, what will the result of num3 = num1 + num2 be?",
+            "Assuming that you have num1 = 2 and num2 = 3, cast as strings, what will the result of num3 = num1 + num2 be?", // Differentiate the use of + to add versus concatenate.
         ];
         this.answerArray = [
             "smallint",
@@ -404,7 +417,7 @@ let arrayQuizzer = new ArrayQuizBank();
 
 // =============================ComparisonsQuizBank Class=============================
 
-//NOTE FOR INSTRUCTOR: Noted values should not be hard-coded for the final turn in. Created to get the class set. #TODO: Add user interface to enter in values for grading
+//NOTE FOR INSTRUCTOR: Noted that values should not be hard-coded for the final turn in. Created to get the class set. #TODO: Add user interface to enter in values for grading
 
 /**
  * QuizBank-like object that stores questions related to comparison operators. #refactor: add methods to add additional questions / answers. 
@@ -439,3 +452,20 @@ document.getElementById("askQuestion").onclick = dealer.askQuestion;
 document.getElementById('userQuizAnswer').onclick = dealer.gradeAnswer;
 document.getElementById('endGame').onclick = dealer.determineWin;
 document.getElementById("tryAgain").onclick = dealer.loadGameBoard;
+
+
+
+// =============================Remaining Items to code=================================
+
+// document.getElementsByTagName("something3")
+// document.querySelectorAll(".something6")
+// for
+// use JavaScript to modify images
+// include ALL of the following operations, conditional operators, and logical operators
+// +   -   *   /   %   **
+// ==   +=
+// ===   !=   !==
+// ++    --   
+// >   <   >=   <=
+// &&   ||
+// Do not allow the user to divide by 0.

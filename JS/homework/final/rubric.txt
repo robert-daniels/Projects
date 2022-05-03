@@ -1,0 +1,29 @@
+Specifics:
+
+Create a well-formed, semantically correct html page. Include appropriate wireframe tags.
+Include a div element to wrap all content in the body.
+Set the width of wrapper div to less than 100% and center the div inside the margins of the web page. (But do not center all content inside the div element! That would be hard to read.)
+Review the list of required items below, incorporating them into your JavaScript game.
+Validate your html.
+Validate your css.
+Spell check all content.
+Your page should follow responsive web design principles.
+All measurements should be flexible. (em and % or other responsive units of measure). There should be no large px measurements.
+Images should be flexible. e.g. { max-width: 100% }, no height= or width= attributes in html. Incorporate at least two images in your game!
+meta viewport tag should be added. <meta name="viewport" content="width=device-width, initial-scale=1.0">
+Two media queries for tablet and phone size should be added. I don't care if you code it with max-width queries for a traditional approach or with min-width queries for a mobile-first approach, but the media queries should make significant and appropriate styling changes at the three basic screen sizes of mobile - tablet - laptop.
+The web page should be 2 columns at laptop size, 1 column at tablet/phone -- use either float or grid to create a 2-column web page.
+Make sure the web page is full width at phone size.
+All css and JavaScript should be stored in a separate external file dedicated to that language. There should be NO inline styles or JavaScript in the .html file. You should NOT use any JavaScript inside of HTML opening tags. This means you should NOT use the "on" HTML attributes such as onclick!
+All files should be properly documented with your name and the current date.
+NOTE! You MUST present your project to the rest of the class to get full credit. I will announce at least 4 different options for this a couple weeks before the end of the semester. If none of those times works it is your responsibility to contact me to schedule an alternative time. No exceptions! Thanks!
+Your game should demonstrate and use this list of JavaScript knowledge learned in WEB 114:
+
+As you are coding your game, include a JavaScript comment to identify *each* of these requirements in your external .js file. (NOTE that "something" below should be replaced by something meaningful to your code.)
+
+
+
+
+
+2 point deduction for every question that isn't directly related to JavaScript.
+1 point deduction for every question that doesn't tie into the game.
