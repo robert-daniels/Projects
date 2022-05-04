@@ -4,29 +4,31 @@
 
 
 /**
- * The logic for this script is as follows: 
+ * The logic for this script: 
  * 
- * The main game engine is the Dealer. A Dealer interfaces with QuizBank and Player objects. The Dealer sets the webpage and interfaces with QuizBank objects to quiz a Player. The Player provides feedback which is
+ * Game Rules : Player randomly gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
+ * The winner (Dealer or Player) is whichever has a point value closest to 21 without going over 21. 
+ * 
+ * A Dealer object manages the game by interacting with QuizBank and Player objects. 
+ * The Dealer sets the webpage and interacts with QuizBank objects to quiz a Player. The Player provides feedback which is
  * captured by the Dealer. The Dealer then progresses the game forward based on that input. 
  * 
- * Game Rules : Player gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
- * The winner (Dealer or Player) is whichever has a point value closest to 21 without going over 21. 
  * 
  * User Defined Classes:
  *  
- * NOTE: "Interfaces" in this context is by behavior and not enforced by syntax. 
  * 
  * Player: Tracks the user's point totals and information 
- *      Interfaces with : Dealer
+ *      Interacts with : Dealer
  * 
- * Dealer: Main Game Engine
- *      Interfaces with : Player, QuizBank-like Objects
+ * Dealer: Main game handler
+ *      Interacts with : Player, QuizBank-like Objects
  * 
- * QuizBank superclass: Provides methods all sub-classes share
- *      Interfaces with : N/A
+ * QuizBank superclass: Provides methods all sub-classes of type QuizBank share
+ *      Interacts with : N/A
  * 
- * LoopQuizBank, DataTypesBank, ArrayQuizBank, ComparisonsQuizBank : extend QuizBank. Maintain the question / answer test set and track the user progress through the set
- *      Interfaces with : Dealer
+ * LoopQuizBank, DataTypesBank, ArrayQuizBank, ComparisonsQuizBank : extend QuizBank. 
+ * Maintain the question / answer test set and track the user progress
+ *      Interacts with : Dealer
  * 
  */
 
@@ -55,7 +57,7 @@ document.getElementById("instructions").textContent = `${name}: ` + instructions
 class Player {
     /**
      * Player template to track userPoints as an int
-     * @param {string} name from window.prompt() 
+     * @param {String} name from window.prompt() 
      */
 
     constructor(name) {
@@ -77,7 +79,7 @@ class Player {
      */
 
     addPoints() {
-        let userPointsToAdd  = Math.floor((Math.random() * 11) + 1);
+        var userPointsToAdd  = Math.floor((Math.random() * 11) + 1);
         this.userPoints = this.userPoints + userPointsToAdd;
 
         // alert user the points added
@@ -103,18 +105,14 @@ let user = new Player(name);
  * Class representing a card dealer. The main engine of the game, handles game logic as well as grades user responses. 
  */
 class Dealer {
-    /**
-     * Dealer template for the game engine
-     */
 
     constructor() {
         this.dealerHand = 0;
-        this.isGameRunning = true;
         this.currentAnswer = "NoName";
     }
 
     /**
-     * Randomly draws cards and adds to a Dealer's dealerHand until the next card would push over 21
+     * Randomly draws cards and adds to a Dealer's dealerHand until the next card may push over 21
      */
     
     setDealerHand() {
@@ -144,7 +142,7 @@ class Dealer {
         user.setPoints(0);
         dealer.setDealerHand();
 
-        // should likely be selected by a querySelectorAll, quite messy at the moment
+        // should likely be selected by a querySelectorAll, quite messy at the moment. Will likely use a for to cycle through this
 
         // document.getElementById("something4").className
         document.getElementById("categorySelector").className = "activatedDiv";
@@ -236,7 +234,7 @@ class Dealer {
         document.getElementById("answerResult").textContent = "";
         document.getElementById("userAnswer").value = "";
 
-        // activate the answer template and append to the socket
+        // activate the answer html template and append to the socket
         document.getElementById("answerTemplate").className = "activatedDiv";
         answerSocket.append(document.getElementById('answerTemplate'));
 
@@ -269,7 +267,8 @@ class Dealer {
 
     /**
      * Decision-gating based on if the user is determined to have answered the question correctly.
-     * Instructs a Player object to addPoints() if and only if userAnswer matches answer provided by a QuizBank-like object. Short-circuit to determine winner if userPoints exceeds max of 21
+     * Instructs a Player object to addPoints() if and only if userAnswer matches answer provided by a QuizBank-like object. 
+     * Short-circuit to determine winner if userPoints exceeds max of 21
      * 
      * @param {Boolean} validated: userAnswer provided is correct (true) or incorrect (false) as determined by Dealer.gradeAnswer(). 
      */
@@ -288,7 +287,6 @@ class Dealer {
         }
 
         if (user.getPoints() > 21){
-            this.gameRunning = false;
             dealer.determineWin();
         }
     }
@@ -300,8 +298,8 @@ class Dealer {
     gradeAnswer() {
         console.log("gradeAnswer ran");
 
-        let validated = false;
-        let userQuizAnswer = document.getElementById("userAnswer").value;
+        var validated = false;
+        var userQuizAnswer = document.getElementById("userAnswer").value;
         let correctAnswer = dealer.getCurrentAnswer();
 
         document.getElementById("answerResult").className = "activatedDiv";
@@ -448,11 +446,14 @@ let arrayQuizzer = new ArrayQuizBank();
 
 // =============================ComparisonsQuizBank Class=============================
 
-//NOTE FOR INSTRUCTOR: Noted that values should not be hard-coded for the final turn in. Created to get the class set. #TODO: Add user interface to enter in values for grading
+// NOTE FOR INSTRUCTOR: Noted that values should not be hard-coded for the final turn in. 
+// Created to get the class set. #TODO: Add user interface to enter in values for grading. 
+// These are basically placeholders until I figure out how to implement the stated specs. 
 
 /**
  * QuizBank-like object that stores questions related to comparison operators. #refactor: add methods to add additional questions / answers. 
  */
+
 class ComparisonsQuizBank extends QuizBank {
 
     constructor() {
