@@ -37,11 +37,14 @@
 // =============================Establish Starting Variables===================
 
 let name = prompt("Hello! What is your name?", "John Smith");  // window.prompt(), let
-alert(`${name}, let's play!`) // window.alert()
+alert(`${name}, let's play!`); // window.alert()
 
 const winThreshold = 21; // const
 
-let instructions = "The rules of this game are simple. Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?"
+let instructions = "The rules of this game are simple. Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?";
+
+
+
 
 // =============================Introduce the Game=============================
 
@@ -83,7 +86,7 @@ class Player {
         this.userPoints = this.userPoints + userPointsToAdd;
 
         // alert user the points added
-        answerResult.insertAdjacentText("beforeend", ` You received a card worth ${userPointsToAdd} points.`)
+        answerResult.insertAdjacentText("beforeend", ` You received a card worth ${userPointsToAdd} points.`);
         document.getElementById("pointCounter").textContent = `${name}, your current card count is ${user.getPoints()}`;
     }
 
@@ -116,13 +119,13 @@ class Dealer {
      */
     
     setDealerHand() {
-        console.log("setDealerHand ran") // console.log() to follow and debug your code
-        this.dealerHand = 0
+        console.log("setDealerHand ran"); // console.log() to follow and debug your code
+        this.dealerHand = 0;
 
         
         while (this.dealerHand < 11) {   // while
             this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1);
-            console.log(this.dealerHand) 
+            console.log(this.dealerHand); 
         }
     }
 
@@ -142,20 +145,27 @@ class Dealer {
         user.setPoints(0);
         dealer.setDealerHand();
 
-        // should likely be selected by a querySelectorAll, quite messy at the moment. Will likely use a for to cycle through this
-
         // document.getElementById("something4").className
-        document.getElementById("categorySelector").className = "activatedDiv";
-        document.getElementById("quizzer").className = "activatedDiv";
-        document.getElementById("pointCounter").className = "activatedDiv";
-        document.getElementById("questionSocket").className = "deactivatedDiv";
-        document.getElementById("gameBoardDiv").className = "activatedDiv";
+
+        var activatedDivArray = ["categorySelector", "quizzer", "pointCounter", "gameBoardDiv"];
+
+        for (let i = 0; i < activatedDivArray.length; ++i){
+            document.getElementById(activatedDivArray[i]).className = "activatedDiv";
+        };
+
+//TODO: 
+        // document.getElementById("categorySelector").className = "activatedDiv";
+        // document.getElementById("quizzer").className = "activatedDiv";
+        // document.getElementById("pointCounter").className = "activatedDiv";
+        // document.getElementById("gameBoardDiv").className = "activatedDiv";
+
         document.getElementById("answerResult").className = "deactivatedDiv";
+        document.getElementById("questionSocket").className = "deactivatedDiv";
 
         // document.getElementById("something5").classList
         document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
 
-        document.getElementById("title").textContent = "Let's Play!"
+        document.getElementById("title").textContent = "Let's Play!";
 
         document.getElementById("pointCounter").textContent = `${name}, your current card count is ${user.getPoints()}`;
 
@@ -177,55 +187,65 @@ class Dealer {
     getCurrentAnswer() {
         return this.currentAnswer;
     }
+
+    /**
+     * Removes input divs to prevent unintended user input after game end
+     */
+
+    clearTheBoard() {
+        var deactivatedDivArray = ["questionSocket", "answerSocket", "quizzer", "pointCounter", "answerResult"];
+
+        for (let i = 0; i < deactivatedDivArray.length; ++i){
+            document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
+        }
+
+    }
     
     /**
-     * Clears the game board and determine winner. Game logic: userPoints > 21, user loses. Winner is the object whose points are closest to 21
+     * Determines winner. Game logic: userPoints > 21, user loses. Winner is the object whose points are closest to 21
      */
 
     determineWin() {
         console.log("determineWin ran");
         
         // document.getElementById("something2").value
-        var titleElement = document.getElementById("tryAgainDiv").value
+        var titleElement = document.getElementById("tryAgainDiv").value;
         var userPoints = user.getPoints();
         var dealerHand = dealer.getDealerHand();
 
-        document.getElementById("questionSocket").className = "deactivatedDiv";
-        document.getElementById("answerSocket").className = "deactivatedDiv";
-        document.getElementById("quizzer").className = "deactivatedDiv";
-        document.getElementById("pointCounter").className = "deactivatedDiv";
-        document.getElementById("answerResult").className = "deactivatedDiv";
-
+        dealer.clearTheBoard();  // remove input divs
 
         // if...else
         if (userPoints >= dealerHand && userPoints < 22) {
             console.log("user won ran");
-            document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` 
+            document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` ;
         }
         else if (userPoints > 21) {
             console.log("user over ran");
-            document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`
+            document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`;
         }
         else if (userPoints < dealerHand){
             console.log("dealer won ran");
-            document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`
+            document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`;
         }
         else {
             console.log("something went wrong in determineWin()");
         }
         
         if (titleElement) {
-            title.append(document.getElementById("tryAgainDiv"))
+            title.append(document.getElementById("tryAgainDiv"));
         }
 
     }
+
+    
 
     /**
      * Based on user selection, asks relevant QuizBank-like object for the next question / answer couple in the data set.  
      */
 
     askQuestion() {
-        console.log("askQuestion() ran")
+        console.log("askQuestion() ran");
 
         var topicChoice = document.getElementById("categorySelector").value;
         var question = "NoName"; 
@@ -262,7 +282,7 @@ class Dealer {
 
         document.getElementById("questionSocket").className = ("activatedDiv");
         document.getElementById("questionSocket").textContent = question;
-        document.getElementById("answerSocket").className = "activatedDiv"
+        document.getElementById("answerSocket").className = "activatedDiv";
     }
 
     /**
@@ -274,7 +294,7 @@ class Dealer {
      */
 
     respondToAnswer(validated) {
-        let answerResult = document.getElementById("answerResult")
+        let answerResult = document.getElementById("answerResult");
         
         document.getElementById("answerSocket").className = "deactivatedDiv";
 
@@ -346,8 +366,8 @@ class QuizBank {
      */
 
     getQuestion() {
-        console.log(this.questionArray[this.questionIndex])
-        var question = this.questionArray[this.questionIndex]
+        console.log(this.questionArray[this.questionIndex]);
+        var question = this.questionArray[this.questionIndex];
         
         return question;
     }
@@ -362,7 +382,7 @@ class QuizBank {
         answer = answer.toString();
         this.progressQuestion();
 
-        return answer
+        return answer;
     }
 }
 
