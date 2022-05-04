@@ -2,7 +2,7 @@
 
 
 header{
-    display: inline-flexbox;
+    display: -ms-inline-flexbox;
     
 }
 body {
