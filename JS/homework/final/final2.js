@@ -6,7 +6,7 @@
 /**
  * The logic for this script: 
  * 
- * Game Rules : Player randomly gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
+ * Game Rules (--very-- loosely based on blackjack logic): Player randomly gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
  * The winner (Dealer or Player) is whichever has a point value closest to 21 without going over 21. 
  * 
  * A Dealer object manages the game by interacting with QuizBank and Player objects. 
@@ -124,7 +124,7 @@ class Dealer {
 
         
         while (this.dealerHand < 11) {   // while
-            this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1);
+            this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1); // implement handicap
             console.log(this.dealerHand); 
         }
     }
@@ -149,15 +149,10 @@ class Dealer {
 
         var activatedDivArray = ["categorySelector", "quizzer", "pointCounter", "gameBoardDiv"];
 
-        for (let i = 0; i < activatedDivArray.length; ++i){
+        for (let i = 0; i < activatedDivArray.length; ++i){   // for
             document.getElementById(activatedDivArray[i]).className = "activatedDiv";
         };
 
-//TODO: 
-        // document.getElementById("categorySelector").className = "activatedDiv";
-        // document.getElementById("quizzer").className = "activatedDiv";
-        // document.getElementById("pointCounter").className = "activatedDiv";
-        // document.getElementById("gameBoardDiv").className = "activatedDiv";
 
         document.getElementById("answerResult").className = "deactivatedDiv";
         document.getElementById("questionSocket").className = "deactivatedDiv";
