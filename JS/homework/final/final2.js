@@ -23,11 +23,11 @@
  * Dealer: Main game handler
  *      Interacts with : Player, QuizBank-like Objects
  * 
- * QuizBank superclass: Provides methods all sub-classes of type QuizBank share
+ * QuizBank superclass: Provides question / answer retrieval methods for sub-classes
  *      Interacts with : N/A
  * 
  * LoopQuizBank, DataTypesBank, ArrayQuizBank, ComparisonsQuizBank : extend QuizBank. 
- * Maintain the question / answer test set and track the user progress
+ *      Maintain the question / answer test set and track the user progress
  *      Interacts with : Dealer
  * 
  */
@@ -52,6 +52,9 @@ let instructions = "The rules of this game are simple. Answer questions about Ja
 document.getElementById("instructions").textContent = `${name}: ` + instructions; // concatenate
 
 
+
+
+
 // =============================Player Class===================================
 
 /**
@@ -69,7 +72,7 @@ class Player {
     }
 
     /**
-     * Get user of type Player point value
+     * Get user of type Player current point value
      * @returns {number} userPoints: current value of the player's hand
      */
 
@@ -92,7 +95,7 @@ class Player {
 
     /**
      * Allows direct set of a Player hand point value
-     * @param {number} pointValue as an int 
+     * @param {number} pointValue to set current Player hand to
      */
 
     setPoints(pointValue) {
@@ -102,10 +105,14 @@ class Player {
 
 let user = new Player(name);
 
+
+
+
+
 // =============================Dealer Class===================================
 
 /**
- * Class representing a card dealer. The main engine of the game, handles game logic as well as grades user responses. 
+ * Class representing a card dealer. The manager of the game, handles game logic as well as grades user responses. 
  */
 class Dealer {
 
@@ -115,7 +122,7 @@ class Dealer {
     }
 
     /**
-     * Randomly draws cards and adds to a Dealer's dealerHand until the next card may push over 21
+     * Randomly draws cards and adds to a Dealer's dealerHand until the next card may push over 21. Handicapped
      */
     
     setDealerHand() {
@@ -130,7 +137,7 @@ class Dealer {
     }
 
     /**
-     * @returns {number} current value of an object of type Dealer dealerHand
+     * @returns {number} current value of dealerHand stored in onbject of type Dealer
      */
 
     getDealerHand() {
@@ -145,10 +152,11 @@ class Dealer {
         user.setPoints(0);
         dealer.setDealerHand();
 
-        // document.getElementById("something4").className
+        
 
         var activatedDivArray = ["categorySelector", "quizzer", "pointCounter", "gameBoardDiv"];
 
+        // document.getElementById("something4").className
         for (let i = 0; i < activatedDivArray.length; ++i){   // for
             document.getElementById(activatedDivArray[i]).className = "activatedDiv";
         };
@@ -167,8 +175,8 @@ class Dealer {
     }
 
     /**
-     * Updates the current correct answer of a Dealer object based on responses from a QuizBank-like object
-     * @param {string} correctAnswer as passed from a QuizBank-like object 
+     * Updates the current correct answer of a Dealer object based on return from a QuizBank-like object
+     * @param {String} correctAnswer as passed from a QuizBank-like object 
      */
 
     setCurrentAnswer(correctAnswer) {
@@ -176,7 +184,7 @@ class Dealer {
     }
 
     /**
-     * @returns {string} currentAnswer as defined in a Dealer object;
+     * @returns {String} currentAnswer to the currentQuestion as stored in a Dealer object;
      */
 
     getCurrentAnswer() {
@@ -197,7 +205,7 @@ class Dealer {
     }
     
     /**
-     * Determines winner. Game logic: userPoints > 21, user loses. Winner is the object whose points are closest to 21
+     * Game logic: userPoints > 21, user loses. Winner is the object whose points are closest to 21. Tie, Player wins
      */
 
     determineWin() {
@@ -211,16 +219,13 @@ class Dealer {
         dealer.clearTheBoard();  // remove input divs
 
         // if...else
-        if (userPoints >= dealerHand && userPoints < 22) {
-            console.log("user won ran");
+        if (userPoints >= dealerHand && userPoints < 22) {   //dealerHand throttled to below 21 in dealer.setDealerHand();
             document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` ;
         }
         else if (userPoints > 21) {
-            console.log("user over ran");
             document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`;
         }
-        else if (userPoints < dealerHand){
-            console.log("dealer won ran");
+        else if (userPoints < dealerHand) {
             document.getElementById("title").textContent = `Your points: ${userPoints} Dealer: ${dealerHand}...Dealer wins!`;
         }
         else {
@@ -236,7 +241,7 @@ class Dealer {
     
 
     /**
-     * Based on user selection, asks relevant QuizBank-like object for the next question / answer couple in the data set.  
+     * Based on user selection, asks relevant QuizBank-like object for the next question / answer couple in their data set.  
      */
 
     askQuestion() {
@@ -282,14 +287,13 @@ class Dealer {
 
     /**
      * Decision-gating based on if the user is determined to have answered the question correctly.
-     * Instructs a Player object to addPoints() if and only if userAnswer matches answer provided by a QuizBank-like object. 
      * Short-circuit to determine winner if userPoints exceeds max of 21
      * 
      * @param {Boolean} validated: userAnswer provided is correct (true) or incorrect (false) as determined by Dealer.gradeAnswer(). 
      */
 
     respondToAnswer(validated) {
-        let answerResult = document.getElementById("answerResult");
+        var answerResult = document.getElementById("answerResult");
         
         document.getElementById("answerSocket").className = "deactivatedDiv";
 
@@ -315,7 +319,7 @@ class Dealer {
 
         var validated = false;
         var userQuizAnswer = document.getElementById("userAnswer").value;
-        let correctAnswer = dealer.getCurrentAnswer();
+        var correctAnswer = dealer.getCurrentAnswer();
 
         document.getElementById("answerResult").className = "activatedDiv";
 
@@ -331,8 +335,15 @@ class Dealer {
 
 let dealer = new Dealer();
 
+
+
+
+
 // =============================QuizBank Super Class===========================
 
+/**
+ * Provides methods to allow Dealer-type object to retreive a question / answer set 
+ */
 class QuizBank {
 
     constructor(){
@@ -381,10 +392,14 @@ class QuizBank {
     }
 }
 
+
+
+
+
 // =============================LoopQuizBank Class=============================
 
 /**
- * QuizBank-like object that stores questions related to loops. #refactor: add methods to add additional questions / answers. 
+ * QuizBank-like object that stores questions and related answers related to loops.
  */
 class LoopQuizBank extends QuizBank {
 
@@ -407,10 +422,13 @@ class LoopQuizBank extends QuizBank {
 let loopQuizzer = new LoopQuizBank();
 
 
+
+
+
 // =============================DataTypesBank Class============================
 
 /**
- * QuizBank-like object that stores questions related to DataTypes. #refactor: add methods to add additional questions / answers. 
+ * QuizBank-like object that stores questions and related answers related to DataTypes. 
  */
 class DataTypesBank extends QuizBank {
 
@@ -433,10 +451,13 @@ class DataTypesBank extends QuizBank {
 let dataTypesQuizzer = new DataTypesBank();
 
 
+
+
+
 // =============================ArrayQuizBank Class============================
 
 /**
- * QuizBank-like object that stores questions related to Arrays. #refactor: add methods to add additional questions / answers. 
+ * QuizBank-like object that stores questions and related answers related to Arrays. 
  */
 class ArrayQuizBank extends QuizBank {
 
@@ -459,6 +480,9 @@ class ArrayQuizBank extends QuizBank {
 let arrayQuizzer = new ArrayQuizBank();
 
 
+
+
+
 // =============================ComparisonsQuizBank Class=============================
 
 // NOTE FOR INSTRUCTOR: Noted that values should not be hard-coded for the final turn in. 
@@ -466,7 +490,7 @@ let arrayQuizzer = new ArrayQuizBank();
 // These are basically placeholders until I figure out how to implement the stated specs. 
 
 /**
- * QuizBank-like object that stores questions related to comparison operators. #refactor: add methods to add additional questions / answers. 
+ * QuizBank-like object that stores questions and related answers related to comparison operators.
  */
 
 class ComparisonsQuizBank extends QuizBank {
@@ -491,14 +515,18 @@ let comparisonsQuizzer = new ComparisonsQuizBank();
 
 
 
+
+
 // =============================onclick Assignments=================================
-// onclick assignment, was having a hard time with eventListener, fell back on alternative
+// onclick assignments. Was having a hard time with eventListener, fell back on alternative
 
 document.getElementById("userAgreeToStart").onclick = dealer.loadGameBoard;
 document.getElementById("askQuestion").onclick = dealer.askQuestion;
 document.getElementById('userQuizAnswer').onclick = dealer.gradeAnswer;
 document.getElementById('endGame').onclick = dealer.determineWin;
 document.getElementById("tryAgain").onclick = dealer.loadGameBoard;
+
+
 
 
 
