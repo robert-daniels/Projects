@@ -4,14 +4,17 @@
 
 
 /**
- * The logic for this script: 
+ * The logic for this code: 
  * 
- * Game Rules (--very-- loosely based on blackjack logic): Player randomly gathers points 1-11 by correctly answering questions from Dealer. Game is decided when Player decides to stop, or Player hand value > 21.
+ * Game Rules (--very-- loosely based on blackjack logic): 
+ * Player randomly gathers points 1-11 by correctly answering questions from Dealer. 
+ * Game is decided when Player decides to stop, or Player hand value > 21.
  * The winner (Dealer or Player) is whichever has a point value closest to 21 without going over 21. 
  * 
  * A Dealer object manages the game by interacting with QuizBank and Player objects. 
- * The Dealer sets the webpage and interacts with QuizBank objects to quiz a Player. The Player provides feedback which is
- * captured by the Dealer. The Dealer then progresses the game forward based on that input. 
+ * The Dealer sets the webpage and interacts with QuizBank objects to quiz a Player. 
+ * The Player provides feedback which is captured by the Dealer. 
+ * The Dealer then progresses the game forward based on that input. 
  * 
  * 
  * User Defined Classes:
@@ -47,6 +50,7 @@ if (name){
 const winThreshold = 21; // const
 
 let instructions = "The rules of this game are simple. Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?";
+
 
 
 
@@ -91,7 +95,7 @@ class Player {
 
     addPoints() {
         var userPointsToAdd  = Math.floor((Math.random() * 11) + 1);
-        this.userPoints = this.userPoints + userPointsToAdd;
+        this.userPoints += userPointsToAdd; // +=
 
         // alert user the points added
         answerResult.insertAdjacentText("beforeend", ` You received a card worth ${userPointsToAdd} points.`);
@@ -128,7 +132,7 @@ class Dealer {
     }
 
     /**
-     * Randomly draws cards and adds to a Dealer's dealerHand until the next card may push over 21. Handicapped
+     * Randomly draws cards and adds to a Dealer's dealerHand until the next card may push over 21.
      */
     
     setDealerHand() {
@@ -137,7 +141,7 @@ class Dealer {
 
         
         while (this.dealerHand < 11) {   // while
-            this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1); // implement handicap
+            this.dealerHand = this.dealerHand + Math.floor((Math.random() * 11) + 1);
             console.log(this.dealerHand); 
         }
     }
@@ -150,9 +154,18 @@ class Dealer {
         return this.dealerHand;
     }
 
+    /**
+     * Allows direct set of topicChoice field of a Dealer object
+     * @param {String} topicChoice as passed up from a QuizBank-like object
+     */
+
     setCurrentTopicChoice(topicChoice) {
         this.currentTopicChoice = topicChoice;
     }
+
+    /**
+     * @returns {String} currentTopicChoice stored in a Dealer object
+     */
 
     getCurrentTopicChoice() {
         return this.currentTopicChoice;
@@ -166,8 +179,7 @@ class Dealer {
         user.setPoints(0);
         dealer.setDealerHand();
 
-        
-
+        // "turn on" appropriate div's
         var activatedDivArray = ["categorySelector", "quizzer", "pointCounter", "gameBoardDiv"];
 
         // document.getElementById("something4").className
@@ -175,11 +187,14 @@ class Dealer {
             document.getElementById(activatedDivArray[i]).className = "activatedDiv";
         };
 
+        // "turn off" appropriate divs
+
         var deactivatedDivArray = ["answerResult", "questionSocket", "comparisonsDiv"];
         
         for (let i = 0; i < deactivatedDivArray.length; ++i) {
             document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
         }
+
 
         // document.getElementById("something5").classList
         document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
@@ -232,10 +247,10 @@ class Dealer {
         var userPoints = user.getPoints();
         var dealerHand = dealer.getDealerHand();
 
-        dealer.clearTheBoard();  // remove input divs
+        dealer.clearTheBoard(); 
 
         // if...else
-        if (userPoints >= dealerHand && userPoints < 22) {   //dealerHand throttled to below 21 in dealer.setDealerHand();
+        if ((userPoints > dealerHand || userPoints == dealerHand) && userPoints < 22) {   //dealerHand throttled to below 21 in dealer.setDealerHand(); && ||
             document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` ;
         }
         else if (userPoints > 21) {
@@ -263,8 +278,6 @@ class Dealer {
     askQuestion() {
         console.log("askQuestion() ran");
 
-        document.getElementById("comparisonsDiv").className = "deactivatedDiv";
-
         var topicChoice = document.getElementById("categorySelector").value;
         dealer.setCurrentTopicChoice(topicChoice);
         var question = "NoName"; 
@@ -272,8 +285,9 @@ class Dealer {
         // clear the old responses
         document.getElementById("answerResult").textContent = "";
         document.getElementById("userAnswer").value = "";
+        document.getElementById("comparisonsDiv").className = "deactivatedDiv";
 
-        // activate the answer html template and append to the socket
+        // activate the answer html templates and append to the socket
 
         var activatedDivArray = ["answerTemplate", "userAnswer", "userQuizAnswer"];
 
@@ -281,10 +295,14 @@ class Dealer {
             document.getElementById(activatedDivArray[i]).className = "activatedDiv";
         }
         
-        
+        // append appropriate type of answer module
+
         if (topicChoice === "comparisons") {
             document.getElementById("comparisonsDiv").className = "activatedDiv";
             answerSocket.append(document.getElementById('comparisonsDiv'));
+
+            document.getElementById("userAnswer").className = "deactivatedDiv";
+            document.getElementById("userQuizAnswer").className = "deactivatedDiv";
         } 
         else {
             answerSocket.append(document.getElementById('answerTemplate'));
@@ -307,14 +325,12 @@ class Dealer {
             case "comparisons":
                 question = comparisonsQuizzer.getQuestion();
                 dealer.setCurrentAnswer(comparisonsQuizzer.getAnswer());
-                document.getElementById("userAnswer").className = "deactivatedDiv";
-                document.getElementById("userQuizAnswer").className = "deactivatedDiv";
                 break;
             default:
-                console.log("Something went wrong in final.js/askQuestion()");
+                console.log("Something went wrong in dealer.askQuestion()");
         }
 
-        document.getElementById("questionSocket").className = ("activatedDiv");
+        document.getElementById("questionSocket").className = "activatedDiv";
         document.getElementById("questionSocket").textContent = question;
         document.getElementById("answerSocket").className = "activatedDiv";
     }
@@ -323,7 +339,7 @@ class Dealer {
      * Decision-gating based on if the user is determined to have answered the question correctly.
      * Short-circuit to determine winner if userPoints exceeds max of 21
      * 
-     * @param {Boolean} validated: userAnswer provided is correct (true) or incorrect (false) as determined by Dealer.gradeAnswer(). 
+     * @param {Boolean} validated userAnswer provided is correct (true) or incorrect (false) as determined by Dealer.gradeAnswer(). 
      */
 
     respondToAnswer(validated) {
@@ -350,18 +366,18 @@ class Dealer {
 
     gradeAnswer() {
         console.log("gradeAnswer ran");
+        var userQuizAnswer = "NoName";
 
         var validated = false;
         
         if (dealer.getCurrentTopicChoice() == "comparisons"){
-            var userQuizAnswer = comparisonsQuizzer.doMath().toString();
+            userQuizAnswer = comparisonsQuizzer.doMath().toString();
         }
         else {
-        var userQuizAnswer = document.getElementById("userAnswer").value;
+            userQuizAnswer = document.getElementById("userAnswer").value;
         }
         
         var correctAnswer = dealer.getCurrentAnswer();
-        console.log(dealer.getCurrentAnswer);
 
         document.getElementById("answerResult").className = "activatedDiv";
 
@@ -527,12 +543,11 @@ let arrayQuizzer = new ArrayQuizBank();
 
 // =============================ComparisonsQuizBank Class=============================
 
-// NOTE FOR INSTRUCTOR: Noted that values should not be hard-coded for the final turn in. 
-// Created to get the class set. #TODO: Add user interface to enter in values for grading. 
-// These are basically placeholders until I figure out how to implement the stated specs. 
+
 
 /**
  * QuizBank-like object that stores questions and related answers related to comparison operators.
+ * Allows user to enter variable data.
  */
 
 class ComparisonsQuizBank extends QuizBank {
@@ -541,6 +556,11 @@ class ComparisonsQuizBank extends QuizBank {
         super();
         this.questionIndex = 0;
         this.numberToCompare = 0;
+        this.num1 = 0;
+        this.num2 = 0;
+        this.mathOperator = "";
+        this.comparisonOperator = "";
+
         this.numberToCompareArray = [
             42,
             83,
@@ -554,17 +574,18 @@ class ComparisonsQuizBank extends QuizBank {
             "true",
             "false",    
         ];
-        this.numberToCompareArray = [
-            42,
-            83,
-        ]
-        this.num1 = 0;
-        this.num2 = 0;
-        this.mathOperator = "";
-        this.comparisonOperator = "";
+
+        
     }
 
-    //@Override
+    
+
+    /**
+     * @override Takes into account the additional comparison step not present in other QuizBanks
+     * @returns {String} Boolean.toString() current correct end result of comparison in user input
+     * @example "Tell me something that evaluates to 'true' when evaluated against 42" returns 'true'  
+     */
+
     getAnswer() {
         var answer = this.answerArray[this.questionIndex];
         answer = answer.toString();
@@ -573,6 +594,13 @@ class ComparisonsQuizBank extends QuizBank {
 
         return answer;
     }
+
+    /**
+     * Compares current numberToCompare vs. the result of the math expression calculated in doMath()
+     * 
+     * @param {number} doMathResult result of doMath() running the expression given by user input 
+     * @returns Boolean result of the user requested comparison operator to doMathResult
+     */
 
     gradeComparison(doMathResult) {
         this.comparisonOperator = document.getElementById("comparisonOperator").value;
@@ -598,10 +626,16 @@ class ComparisonsQuizBank extends QuizBank {
         }
     }
 
+    /**
+     * Evaluates the expression as pulled from user input
+     * 
+     * @returns {Boolean} Result as passed back from comparisonsQuizzer.gradeComparison();
+     */
+
     doMath() {
         console.log("doMath() ran");
-        var result = '';
-        var processedUserAnswer = '';
+        var result = 0;
+        var processedUserAnswer = 'NoName';
         var operator = "NoName";
         var isDivideByZero = false;
 
@@ -610,9 +644,7 @@ class ComparisonsQuizBank extends QuizBank {
         this.num2 = +document.getElementById('num2').value;
         this.mathOperator = document.getElementById("mathOperator").value;
 
-        operator = this.mathOperator;
-
-        switch (operator) {
+        switch (this.mathOperator) {
 
             case "add":
                 result = this.num1 + this.num2;
@@ -625,11 +657,10 @@ class ComparisonsQuizBank extends QuizBank {
                 break;
             case "divide":
                 console.log(this.num2);
-                if (this.num2 != 0) {
+                if (this.num2 != 0) {  // Do not allow user to divide by zero
                     result = this.Num1 / this.Num2;
                 }
                 else {
-                    
                     isDivideByZero = true;
                 };
                 break;
@@ -654,9 +685,6 @@ class ComparisonsQuizBank extends QuizBank {
 
 
     }
-
-   
-
 
 }
 
@@ -683,11 +711,8 @@ document.getElementById("gradeComparison").addEventListener("click", dealer.grad
 
 // document.getElementsByTagName("something3")
 // document.querySelectorAll(".something6")
-// for
 // use JavaScript to modify images
 // include ALL of the following operations, conditional operators, and logical operators
-// +=
-// ===   !=   !==
-// ++    --   
-// ||
-// Do not allow the user to divide by 0.
+// !==
+//    --   
+
