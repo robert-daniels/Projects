@@ -37,7 +37,12 @@
 // =============================Establish Starting Variables===================
 
 let name = prompt("Hello! What is your name?", "John Smith");  // window.prompt(), let
-alert(`${name}, let's play!`); // window.alert()
+
+if (name){
+    alert(`${name}, let's play!`); // window.alert()
+} else {
+    name = "Challenger";
+}
 
 const winThreshold = 21; // const
 
@@ -436,7 +441,7 @@ class DataTypesBank extends QuizBank {
         super();
         this.questionIndex = 0;
         this.questionArray = [
-            "Which of the following are NOT a pimitive data type in JavaScript: string, number, bigint, smallint, boolean, symbol, null, undefined",
+            "Which of the following are NOT a pimitive data type in JavaScript: string, number, bigint, smallint, Boolean, symbol, null, undefined",
             "What will Math.floor((4.0 + 6 - (9 / 3)) ** (10 % 3)) evaluate to?",
             "Assuming that you have num1 = 2 and num2 = 3, cast as strings, what will the result of num3 = num1 + num2 be?", // Differentiate the use of + to add versus concatenate.
         ];
@@ -517,14 +522,13 @@ let comparisonsQuizzer = new ComparisonsQuizBank();
 
 
 
-// =============================onclick Assignments=================================
-// onclick assignments. Was having a hard time with eventListener, fell back on alternative
+// =============================eventListeners=================================
 
-document.getElementById("userAgreeToStart").onclick = dealer.loadGameBoard;
-document.getElementById("askQuestion").onclick = dealer.askQuestion;
-document.getElementById('userQuizAnswer').onclick = dealer.gradeAnswer;
-document.getElementById('endGame').onclick = dealer.determineWin;
-document.getElementById("tryAgain").onclick = dealer.loadGameBoard;
+document.getElementById("userAgreeToStart").addEventListener("click", dealer.loadGameBoard);
+document.getElementById("askQuestion").addEventListener("click", dealer.askQuestion);
+document.getElementById('userQuizAnswer').addEventListener("click", dealer.gradeAnswer);
+document.getElementById('endGame').addEventListener("click", dealer.determineWin);
+document.getElementById("tryAgain").addEventListener("click", dealer.loadGameBoard);
 
 
 
