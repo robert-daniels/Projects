@@ -353,11 +353,8 @@ class Dealer {
 
         var validated = false;
         
-        // TODO: add comparison check
-        console.log(dealer.getCurrentTopicChoice());
         if (dealer.getCurrentTopicChoice() == "comparisons"){
             var userQuizAnswer = comparisonsQuizzer.doMath().toString();
-            console.log(userQuizAnswer);
         }
         else {
         var userQuizAnswer = document.getElementById("userAnswer").value;
@@ -605,38 +602,55 @@ class ComparisonsQuizBank extends QuizBank {
         console.log("doMath() ran");
         var result = '';
         var processedUserAnswer = '';
-
-        
+        var operator = "NoName";
+        var isDivideByZero = false;
 
 
         this.num1 = +document.getElementById('num1').value;
         this.num2 = +document.getElementById('num2').value;
         this.mathOperator = document.getElementById("mathOperator").value;
 
-        if (this.mathOperator === "add"){
-            result = this.num1 + this.num2;
+        operator = this.mathOperator;
+
+        switch (operator) {
+
+            case "add":
+                result = this.num1 + this.num2;
+                break;
+            case "subtract":
+                result = this.Num1 - this.Num2;
+                break;
+            case "multiply":
+                result = this.Num1 * this.Num2;
+                break;
+            case "divide":
+                console.log(this.num2);
+                if (this.num2 != 0) {
+                    result = this.Num1 / this.Num2;
+                }
+                else {
+                    
+                    isDivideByZero = true;
+                };
+                break;
+            case "exponent":
+                result = this.Num1 ** this.Num2;
+                break;
         }
-        else if (this.mathOperator === "subtract"){
-            result = this.Num1 - this.Num2;
-        }
-        else if (this.mathOperator === "multiply"){
-            result = this.Num1 * this.Num2;
-        }
-        else if (this.mathOperator === "divide"){
-            if (num2 != 0) {
-                result = this.Num1 / this.Num2;
-            }
-            else {
-                console.log("divide by zero");  //TODO:
-            }
-        }
-        else if (this.mathOperator === "exponent"){
-            result = this.Num1 ** this.Num2;
-        }
+
 
         console.log("the result is" + result);
         processedUserAnswer = comparisonsQuizzer.gradeComparison(result);
-        return processedUserAnswer;
+
+        console.log("isDivide by zero is " + isDivideByZero);
+        
+        if (isDivideByZero){
+            dealer.setCurrentAnswer("Actually, you divided by zero and blew up the known and unknown universe. Congratulations. No points for you.")
+            return "_Divide By Zero";
+        }
+        else {
+            return processedUserAnswer;
+        }    
 
 
     }
