@@ -124,6 +124,7 @@ class Dealer {
     constructor() {
         this.dealerHand = 0;
         this.currentAnswer = "NoName";
+        this.currentTopicChoice = "NoName";
     }
 
     /**
@@ -149,6 +150,14 @@ class Dealer {
         return this.dealerHand;
     }
 
+    setCurrentTopicChoice(topicChoice) {
+        this.currentTopicChoice = topicChoice;
+    }
+
+    getCurrentTopicChoice() {
+        return this.currentTopicChoice;
+    }
+
     /**
      * Sets the game board for play. Clears old progress and clears introduction modules (if any.)
      */
@@ -162,13 +171,15 @@ class Dealer {
         var activatedDivArray = ["categorySelector", "quizzer", "pointCounter", "gameBoardDiv"];
 
         // document.getElementById("something4").className
-        for (let i = 0; i < activatedDivArray.length; ++i){   // for
+        for (let i = 0; i < activatedDivArray.length; ++i) {   // for
             document.getElementById(activatedDivArray[i]).className = "activatedDiv";
         };
 
-
-        document.getElementById("answerResult").className = "deactivatedDiv";
-        document.getElementById("questionSocket").className = "deactivatedDiv";
+        var deactivatedDivArray = ["answerResult", "questionSocket", "comparisonsDiv"];
+        
+        for (let i = 0; i < deactivatedDivArray.length; ++i) {
+            document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
+        }
 
         // document.getElementById("something5").classList
         document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
@@ -201,7 +212,7 @@ class Dealer {
      */
 
     clearTheBoard() {
-        var deactivatedDivArray = ["questionSocket", "answerSocket", "quizzer", "pointCounter", "answerResult"];
+        var deactivatedDivArray = ["questionSocket", "answerSocket", "quizzer", "pointCounter", "answerResult", "comparisonsDiv"];
 
         for (let i = 0; i < deactivatedDivArray.length; ++i){
             document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
@@ -252,7 +263,10 @@ class Dealer {
     askQuestion() {
         console.log("askQuestion() ran");
 
+        document.getElementById("comparisonsDiv").className = "deactivatedDiv";
+
         var topicChoice = document.getElementById("categorySelector").value;
+        dealer.setCurrentTopicChoice(topicChoice);
         var question = "NoName"; 
 
         // clear the old responses
@@ -260,8 +274,21 @@ class Dealer {
         document.getElementById("userAnswer").value = "";
 
         // activate the answer html template and append to the socket
-        document.getElementById("answerTemplate").className = "activatedDiv";
-        answerSocket.append(document.getElementById('answerTemplate'));
+
+        var activatedDivArray = ["answerTemplate", "userAnswer", "userQuizAnswer"];
+
+        for (let i = 0; i < activatedDivArray.length; ++i) {
+            document.getElementById(activatedDivArray[i]).className = "activatedDiv";
+        }
+        
+        
+        if (topicChoice === "comparisons") {
+            document.getElementById("comparisonsDiv").className = "activatedDiv";
+            answerSocket.append(document.getElementById('comparisonsDiv'));
+        } 
+        else {
+            answerSocket.append(document.getElementById('answerTemplate'));
+        }
 
         // switch
         switch (topicChoice){ 
@@ -280,6 +307,8 @@ class Dealer {
             case "comparisons":
                 question = comparisonsQuizzer.getQuestion();
                 dealer.setCurrentAnswer(comparisonsQuizzer.getAnswer());
+                document.getElementById("userAnswer").className = "deactivatedDiv";
+                document.getElementById("userQuizAnswer").className = "deactivatedDiv";
                 break;
             default:
                 console.log("Something went wrong in final.js/askQuestion()");
@@ -323,8 +352,19 @@ class Dealer {
         console.log("gradeAnswer ran");
 
         var validated = false;
+        
+        // TODO: add comparison check
+        console.log(dealer.getCurrentTopicChoice());
+        if (dealer.getCurrentTopicChoice() == "comparisons"){
+            var userQuizAnswer = comparisonsQuizzer.doMath().toString();
+            console.log(userQuizAnswer);
+        }
+        else {
         var userQuizAnswer = document.getElementById("userAnswer").value;
+        }
+        
         var correctAnswer = dealer.getCurrentAnswer();
+        console.log(dealer.getCurrentAnswer);
 
         document.getElementById("answerResult").className = "activatedDiv";
 
@@ -503,17 +543,107 @@ class ComparisonsQuizBank extends QuizBank {
     constructor() {
         super();
         this.questionIndex = 0;
+        this.numberToCompare = 0;
+        this.numberToCompareArray = [
+            42,
+            83,
+        ]
         this.questionArray = [
-            "What will [(6 < 7) && (10 > 5) || (2 == '2')] return?",
-            "What will [(6 != '6') && ('a' === 'A') && ('a' !== 'A') || (7 >= 2) || (6 <= 8)] return?",
-            "Assume you are running a script, and the following expressions have successfully evaluated. x = 1, y = 2, y++, x--, x += y. What is the final value of x, assuming any increment / decrement operations have ran?"
+            `Tell me something that will evaluate to 'true' when evaluated against 42`,
+            `Tell me something that will evaluate to 'false' when evaluated against 83`,
+            
         ];
         this.answerArray = [
             "true",
-            "true",
-            "3",
+            "false",    
         ];
+        this.numberToCompareArray = [
+            42,
+            83,
+        ]
+        this.num1 = 0;
+        this.num2 = 0;
+        this.mathOperator = "";
+        this.comparisonOperator = "";
     }
+
+    //@Override
+    getAnswer() {
+        var answer = this.answerArray[this.questionIndex];
+        answer = answer.toString();
+        this.numberToCompare = this.numberToCompareArray[this.questionIndex];
+        this.progressQuestion();
+
+        return answer;
+    }
+
+    gradeComparison(doMathResult) {
+        this.comparisonOperator = document.getElementById("comparisonOperator").value;
+
+        switch (this.comparisonOperator) {
+            case "greaterThan":
+                return doMathResult > this.numberToCompare;
+                break;
+            case "lessThan":
+                return doMathResult < this.numberToCompare;
+                break;
+            case "greaterEqual":
+                return doMathResult >= this.numberToCompare;
+                break;
+            case "lessEqual":
+                return doMathResult <= this.numberToCompare;
+                break;
+            case "equalTo":
+                return doMathResult == this.numberToCompare;
+                break;
+            default:
+                console.log("something went wrong in comparisonsQuizzer.gradeComparison()");
+        }
+    }
+
+    doMath() {
+        console.log("doMath() ran");
+        var result = '';
+        var processedUserAnswer = '';
+
+        
+
+
+        this.num1 = +document.getElementById('num1').value;
+        this.num2 = +document.getElementById('num2').value;
+        this.mathOperator = document.getElementById("mathOperator").value;
+
+        if (this.mathOperator === "add"){
+            result = this.num1 + this.num2;
+        }
+        else if (this.mathOperator === "subtract"){
+            result = this.Num1 - this.Num2;
+        }
+        else if (this.mathOperator === "multiply"){
+            result = this.Num1 * this.Num2;
+        }
+        else if (this.mathOperator === "divide"){
+            if (num2 != 0) {
+                result = this.Num1 / this.Num2;
+            }
+            else {
+                console.log("divide by zero");  //TODO:
+            }
+        }
+        else if (this.mathOperator === "exponent"){
+            result = this.Num1 ** this.Num2;
+        }
+
+        console.log("the result is" + result);
+        processedUserAnswer = comparisonsQuizzer.gradeComparison(result);
+        return processedUserAnswer;
+
+
+    }
+
+   
+
+
 }
 
 let comparisonsQuizzer = new ComparisonsQuizBank();
@@ -529,6 +659,7 @@ document.getElementById("askQuestion").addEventListener("click", dealer.askQuest
 document.getElementById('userQuizAnswer').addEventListener("click", dealer.gradeAnswer);
 document.getElementById('endGame').addEventListener("click", dealer.determineWin);
 document.getElementById("tryAgain").addEventListener("click", dealer.loadGameBoard);
+document.getElementById("gradeComparison").addEventListener("click", dealer.gradeAnswer);
 
 
 
@@ -541,10 +672,8 @@ document.getElementById("tryAgain").addEventListener("click", dealer.loadGameBoa
 // for
 // use JavaScript to modify images
 // include ALL of the following operations, conditional operators, and logical operators
-// +   -   *   /   %   **
-// ==   +=
+// +=
 // ===   !=   !==
 // ++    --   
-// >   <   >=   <=
-// &&   ||
+// ||
 // Do not allow the user to divide by 0.
