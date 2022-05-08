@@ -54,6 +54,7 @@
             <div id="questionSocket">&nbsp;</div>
             <br>
             <div id="answerSocket" class="deactivatedDiv">
+                <br>
                 <label for="userAnswer">Your Answer: </label>
                 <input type="text" id="userAnswer">
                 
@@ -73,6 +74,37 @@
             <div id="tryAgainDiv">
                 <button id="tryAgain">Click Here To Reset Your Points and Try Again!</button>
             </div>
+
+<!-- Comparisons Module -->
+
+            <div id="comparisonsDiv" class="deactivatedDiv">
+                <p id="comparisonQuestonSocket"></p>
+                
+                <label for="num1">Enter first number   </label><input type="number" id="num1"><br>
+                <label for="num2">Enter second number  </label><input type="number" id="num2">
+                <p>What would you like to do with these two numbers?</p>
+                    <select id="mathOperator">
+                        <option value="add">+ add</option>
+                        <option value="subtract">- subtract</option>
+                        <option value="multiply">* multiply</option>
+                        <option value="divide">/ divide</option>
+                        <option value="exponent">** exponent</option>
+                        <option value="modulo">% modulo</option>
+                    </select>
+                <p>Enter the correct comparison that will answer the prompt: </p>
+                    <select id="comparisonOperator">    
+                        <option value="greaterThan">></option>
+                        <option value="lessThan"><</option>
+                        <option value="greaterEqual">>=</option>
+                        <option value="lessEqual"><=</option>
+                        <option value="equalTo">==</option>
+                    </select>
+                
+                    <button id="gradeComparison">Check</button>
+                
+        
+            </div>
+
 
         </div>
 
