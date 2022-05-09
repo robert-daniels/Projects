@@ -55,11 +55,6 @@ let correctImageElement = document.getElementById("correctImage")
 let incorrectImageElement = document.getElementById("incorrectImage")
 
 
-
-
-
-
-
 // =============================Introduce the Game=============================
 
 // document.getElementById("something1").textContent
@@ -259,10 +254,10 @@ class Dealer {
         dealer.clearTheBoard(); 
 
         // if...else
-        if ((userPoints > dealerHand || userPoints == dealerHand) && userPoints < 22) {   //dealerHand throttled to below 21 in dealer.setDealerHand(); && ||
+        if ((userPoints > dealerHand || userPoints == dealerHand) && userPoints <= winThreshold) {   //dealerHand throttled to below 21 in dealer.setDealerHand(); && ||
             document.getElementById("title").textContent = `Your points: ${userPoints}. Dealer: ${dealerHand}...You win!` ;
         }
-        else if (userPoints > 21) {
+        else if (userPoints > winThreshold) {
             document.getElementById("title").textContent = `Your points: ${userPoints}. You've gone over 21. You lose...`;
         }
         else if (userPoints < dealerHand) {
@@ -277,8 +272,6 @@ class Dealer {
         }
 
     }
-
-    
 
     /**
      * Based on user selection, asks relevant QuizBank-like object for the next question / answer couple in their data set.  
@@ -404,10 +397,6 @@ class Dealer {
         else {
             dealer.respondToAnswer(validated);
         }
-    }
-
-    changeColor() {
-        buttonElements.style.backgroundColor = 'Green';    
     }
 }
 
@@ -583,13 +572,22 @@ class ComparisonsQuizBank extends QuizBank {
         this.numberToCompareArray = [
             42,
             83,
+            25,
+            -9,
+            12,
         ]
         this.questionArray = [
             `Tell me something that will evaluate to 'true' when evaluated against 42`,
             `Tell me something that will evaluate to 'false' when evaluated against 83`,
+            `Tell me something that will evaluate to 'false' when evaluated against 25`,
+            `Tell me something that will evaluate to 'true' when evaluated against -9`,
+            `Tell me something that will evaluate to 'false' when evaluated against 12`,
             
         ];
         this.answerArray = [
+            "true",
+            "false",
+            "false",
             "true",
             "false",    
         ];
@@ -665,7 +663,6 @@ class ComparisonsQuizBank extends QuizBank {
         console.log("doMath() ran");
         var result = 0;
         var processedUserAnswer = 'NoName';
-        var operator = "NoName";
         var isDivideByZero = false;
 
 
