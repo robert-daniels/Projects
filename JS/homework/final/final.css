@@ -2,11 +2,11 @@
 
 
 header{
-    display: -ms-inline-flexbox;
+    grid-area: sidebar;
     
 }
 body {
-
+    grid-area: content;
     background-color: bisque;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -59,6 +59,49 @@ ul {
     padding-top: 1em;
 }
 
+#answerResult {
+    text-align: justify;
+}
+
 #questionSocket {
     padding-top: 1em;
 }
+
+
+/* Images */
+
+ #correctImage {
+    display:flex;
+    width: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin: auto;
+}
+
+#incorrectImage {
+    display: flex;
+    width: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin: auto;
+} 
+
+/* Media Queries */
+
+@media screen and (max-width: 900px) {
+    
+    #container {
+        width: 100%;
+    }
+
+    header {
+        display: inline;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        display: none;
+    }
+}
+

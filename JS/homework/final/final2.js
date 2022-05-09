@@ -51,6 +51,11 @@ const winThreshold = 21; // const
 
 let instructions = "The rules of this game are simple. Answer questions about JavaScript to push your point value as close to 21 as possible. You win if you get closer to 21 than the dealer without going over. If you go over, you lose. Think you can do it?";
 
+let correctImageElement = document.getElementById("correctImage")
+let incorrectImageElement = document.getElementById("incorrectImage")
+
+
+
 
 
 
@@ -191,13 +196,16 @@ class Dealer {
 
         var deactivatedDivArray = ["answerResult", "questionSocket", "comparisonsDiv"];
         
+        // document.querySelectorAll(".something6")
+        document.querySelectorAll(".introductionDivs").className = "deactivatedDiv";
+        
         for (let i = 0; i < deactivatedDivArray.length; ++i) {
             document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
         }
 
 
         // document.getElementById("something5").classList
-        document.getElementById("onboardingDiv").classList.add("deactivatedDiv");
+        document.getElementById("onboardingDiv").classList.add("deactivatedDiv"); // split out onboarding from intro
 
         document.getElementById("title").textContent = "Let's Play!";
 
@@ -227,7 +235,7 @@ class Dealer {
      */
 
     clearTheBoard() {
-        var deactivatedDivArray = ["questionSocket", "answerSocket", "quizzer", "pointCounter", "answerResult", "comparisonsDiv"];
+        var deactivatedDivArray = ["questionSocket", "answerSocket", "quizzer", "pointCounter", "answerResult", "comparisonsDiv", "defaultUserAnswerLabel"];
 
         for (let i = 0; i < deactivatedDivArray.length; ++i){
             document.getElementById(deactivatedDivArray[i]).className = "deactivatedDiv";
@@ -242,6 +250,7 @@ class Dealer {
     determineWin() {
         console.log("determineWin ran");
         
+
         // document.getElementById("something2").value
         var titleElement = document.getElementById("tryAgainDiv").value;
         var userPoints = user.getPoints();
@@ -287,6 +296,8 @@ class Dealer {
         document.getElementById("userAnswer").value = "";
         document.getElementById("comparisonsDiv").className = "deactivatedDiv";
 
+        
+
         // activate the answer html templates and append to the socket
 
         var activatedDivArray = ["answerTemplate", "userAnswer", "userQuizAnswer"];
@@ -297,7 +308,7 @@ class Dealer {
         
         // append appropriate type of answer module
 
-        if (topicChoice === "comparisons") {
+        if (topicChoice === "comparisons") { // ===
             document.getElementById("comparisonsDiv").className = "activatedDiv";
             answerSocket.append(document.getElementById('comparisonsDiv'));
 
@@ -348,11 +359,16 @@ class Dealer {
         document.getElementById("answerSocket").className = "deactivatedDiv";
 
         if (validated) {
-            answerResult.textContent = "Correct!"
+            //answerResult.textContent = "Correct!"
             user.addPoints();
+            answerResult.appendChild(correctImageElement);
+            correctImageElement.className = "activatedDiv";
+            
         }
         else {
             answerResult.textContent = `Sorry, incorrect. We were looking for: ${this.currentAnswer}`;
+            answerResult.append(incorrectImageElement);
+            incorrectImageElement.className = "activatedDiv"; 
         }
 
         if (user.getPoints() > 21){
@@ -389,9 +405,14 @@ class Dealer {
             dealer.respondToAnswer(validated);
         }
     }
+
+    changeColor() {
+        buttonElements.style.backgroundColor = 'Green';    
+    }
 }
 
 let dealer = new Dealer();
+
 
 
 
@@ -495,12 +516,10 @@ class DataTypesBank extends QuizBank {
         this.questionIndex = 0;
         this.questionArray = [
             "Which of the following are NOT a pimitive data type in JavaScript: string, number, bigint, smallint, Boolean, symbol, null, undefined",
-            "What will Math.floor((4.0 + 6 - (9 / 3)) ** (10 % 3)) evaluate to?",
             "Assuming that you have num1 = 2 and num2 = 3, cast as strings, what will the result of num3 = num1 + num2 be?", // Differentiate the use of + to add versus concatenate.
         ];
         this.answerArray = [
             "smallint",
-            "7",
             "23",
         ];
     }
@@ -578,6 +597,15 @@ class ComparisonsQuizBank extends QuizBank {
         
     }
 
+    /**
+     * Removes previous user input from comparisons entry 
+     */
+
+    clearOldResponses() {
+        document.getElementById("num1").value = 0;
+        document.getElementById("num2").value = 0;
+    }
+
     
 
     /**
@@ -591,6 +619,7 @@ class ComparisonsQuizBank extends QuizBank {
         answer = answer.toString();
         this.numberToCompare = this.numberToCompareArray[this.questionIndex];
         this.progressQuestion();
+        this.clearOldResponses();
 
         return answer;
     }
@@ -707,12 +736,5 @@ document.getElementById("gradeComparison").addEventListener("click", dealer.grad
 
 
 
-// =============================Remaining Items to code=================================
 
-// document.getElementsByTagName("something3")
-// document.querySelectorAll(".something6")
-// use JavaScript to modify images
-// include ALL of the following operations, conditional operators, and logical operators
-// !==
-//    --   
 
