@@ -24,7 +24,8 @@ Your game should demonstrate and use this list of JavaScript knowledge learned i
 DONE:As you are coding your game, include a JavaScript comment to identify *each* of these requirements in your external .js file. (NOTE that "something" below should be replaced by something meaningful to your code.)
 DONE:"use strict";
 DONE: document.getElementById("something1").textContent
-DONE: document.getElementById("something2").value document.getElementsByTagName("something3")
+DONE: document.getElementById("something2").value 
+            document.getElementsByTagName("something3")
 DONE: document.getElementById("something4").className
 DONE: document.getElementById("something5").classList
 DONE: document.querySelectorAll(".something6")
