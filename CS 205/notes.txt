@@ -1,0 +1,365 @@
+do not use equality == != when working with wrapper classes. 
+
+used num1.equals(num2)
+or num1.compareTo(num2)
+
+to get the value from a wrapper, 
+
+.intValue()
+.doubleValue()
+.longValue()....
+
+recall
+
+Integer.toString();
+Integer.parseInt(string); returns int, ...
+Integer.valueOf(string) (returns int), Double.valueOf(string), (returns double)
+
+ArrayList in java.util.ArrayList;
+
+ArrayList<Integer> sameName = new ArrayList<Integer>
+
+sameName.add(element) adds an element at the END of the ArrayList OR sameName.add(index, element), element at that index and above are shifted up by 1
+sameName.get(index) returns element at that index, starting at 0
+sameName.set(index, element) REPLACES element at the specified index with the new value
+sameName.size() returns number of list elements
+sameName.isEmpty() returns boolean if no elementssameName.clear() removes all elements
+
+  // Determine average value
+      sumVal = 0.0;
+      for (i = 0; i < userNums.size(); ++i) {
+         sumVal = sumVal + userNums.get(i); // Calculate sum of all numbers
+      }
+      averageVal = sumVal / userNums.size(); // Calculate average 
+      
+      System.out.println("Average: " + averageVal);
+   }
+
+
+ArrayList<Integer> frameScores = new ArrayList<Integer>();
+
+For the commonly-used public member methods below, assume an ArrayList declared as:
+
+ArrayList<T> arrayList = new ArrayList<T>();
+where T represents the ArrayList's type, such as:
+
+ArrayList<Integer> teamNums = new ArrayList<Integer>();
+
+
+remove()	boolean remove(T existingElement)
+
+Removes the first occurrence of an element which refers to the same object as existingElement. Elements from higher positions are shifted back to fill gap. ArrayList size is decreased by one. Return true if specified element was found and removed. 
+
+T remove(int index), pulls all later elements down into the index, effectively removing the value at the index
+
+Removes element at specified index. Elements from higher positions are shifted back to fill gap. ArrayList size is decreased by one. Returns reference to element removed from ArrayList.	
+// Assume ArrayList is: 23, 77, 34, 88
+teamNums.remove(1);                  // ArrayList is: 23, 34, 88 
+System.out.println(teamNums.size()); // Prints 3
+
+No specifier on a field means it's accessible by default by its own class, and classes in same package (not necessarily derived classes)
+No specifier on a class means it can only be used by classes within the same package, known as package-private
+
+an overriding method can call the overriden method by using super
+
+so super.getDescription()
+
+
+13.5 Polymorphism
+Polymorphism refers to determining which program behavior to execute depending on data types. Method overloading is a form of compile-time polymorphism wherein the compiler determines which of several identically-named methods to call based on the method's arguments. Another form is runtime polymorphism wherein the compiler cannot make the determination but instead the determination is made while the program is running.
+
+One scenario requiring runtime polymorphism involves derived classes. Programmers commonly create a collection of objects of both base and derived class types. Ex: the statement ArrayList<GenericItem> inventoryList = new ArrayList<GenericItem>(); declares an ArrayList that can contain references to objects of type GenericItem or ProduceItem. ProduceItem derives from GenericItem.
+
+Figure 13.5.1: Runtime polymorphism.
+The JVM can dynamically determine the correct method to call based on the object's type.
+
+GenericItem.java:
+public class GenericItem {
+   public void setName(String newName) {
+      itemName = newName;
+   }
+
+   public void setQuantity(int newQty) {
+      itemQuantity = newQty;
+   }
+
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity);
+   }
+
+   protected String itemName;
+   protected int itemQuantity;
+}
+
+ProduceItem.java:
+public class ProduceItem extends GenericItem { // ProduceItem derived from GenericItem
+   public void setExpiration(String newDate) {
+      expirationDate = newDate;
+   }
+
+   public String getExpiration() {
+      return expirationDate;
+   }
+
+   @Override
+   public void printItem() {
+      System.out.println(itemName + " " + itemQuantity
+                                    + " (Expires: " + expirationDate + ")");
+   }
+
+   private String expirationDate;
+}
+
+ItemInventory.java:
+import java.util.ArrayList;
+
+public class ItemInventory {
+   public static void main(String[] args) {
+      GenericItem genericItem1;
+      ProduceItem produceItem1;
+      ArrayList<GenericItem> inventoryList = new ArrayList<GenericItem>(); // Collection of "Items"
+      int i;                                                               // Loop index
+
+      genericItem1 = new GenericItem();
+      genericItem1.setName("Smith Cereal");
+      genericItem1.setQuantity(9);
+
+      produceItem1 = new ProduceItem();
+      produceItem1.setName("Apple");
+      produceItem1.setQuantity(40);
+      produceItem1.setExpiration("May 5, 2012");
+
+      genericItem1.printItem();
+      produceItem1.printItem();
+
+      // More common: Collection (e.g., ArrayList) of objs
+      // Polymorphism -- Correct  printItem()  called
+      inventoryList.add(genericItem1);
+      inventoryList.add(produceItem1);
+      System.out.println("\nInventory: ");
+      for (i = 0; i < inventoryList.size(); ++i) {
+         inventoryList.get(i).printItem(); // Calls correct printItem()
+      }
+   }
+}
+
+13.6 ArrayLists of Objects
+Because all classes are derived from the Object class, programmers can take advantage of runtime polymorphism in order to create a collection (e.g., ArrayList) of objects of various class types and perform operations on the elements. The program below uses the Business class and other built-in classes to create and output a single ArrayList of differing types.
+
+Figure 13.6.1: Business.java.
+public class Business {
+   protected String name;
+   protected String address;
+   
+   public Business() {}
+   
+   public Business(String busName, String busAddress) {
+      name = busName;
+      address = busAddress;
+   }
+   
+   @Override
+   public String toString() {
+      return name + " -- " + address;
+   }
+}
+
+Feedback?
+PARTICIPATION ACTIVITY
+13.6.1: ArrayList of Objects.
+
+Start
+import java.util.ArrayList;
+
+public class ArrayListPrinter {
+   
+   // Method prints an ArrayList of Objects
+   public static void printArrayList(ArrayList<Object> objList) {
+      int i;
+
+      for (i = 0; i < objList.size(); ++i) {
+         System.out.println(objList.get(i));
+      }
+   }
+   
+   public static void main(String[] args) {       
+      ArrayList<Object> objList = new ArrayList<Object>();
+      
+      // Add new instances of various classes to objList
+      objList.add(new Object());
+      objList.add(12);
+      objList.add(3.14);
+      objList.add(new String("Hello!"));
+      objList.add(new Business("ACME", "5 Main St"));     
+      
+      // Print list of Objects
+      printArrayList(objList);   
+   }
+
+java.lang.Object@4517d9a3
+12
+3.14
+Hello!
+ACME -- 5 Main St
+
+Captions
+objList is an ArrayList of Object elements. All objects derive from Object, so objList can store any type of object.
+Five new objects of various class types are added to the ArrayList. Each derived class reference is automatically converted to a base class (Object) reference.
+printArrayList() takes an ArrayList of Objects as an argument and outputs every element of the ArrayList.
+get(i) returns each Object element. Runtime polymorphism allows the correct version of toString() to be called based on the actual class type of each element.
+
+Feedback?
+Note that a method operating on a collection of Object elements may only invoke the methods defined by the base class (e.g., the Object class). Thus, a statement that calls the toString() method on an element of an ArrayList of Objects called objList, such as objList.get(i).toString(), is valid because the Object class defines the toString() method. However, a statement that calls, for example, the Integer class's intValue() method on the same element (i.e., objList.get(i).intValue()) results in a compiler error even if that particular element is an Integer object.
+
+Chapt 13 lab 1
+
+public class Dog extends Pet {
+   private String breed;
+
+   public void setBreed(String userBreed) {
+      breed = userBreed;
+   }
+
+   public String getBreed() {
+      return breed;
+   }
+}
+
+public class Pet {
+
+   protected String name;
+   protected int age;
+
+   public void setName(String userName) {
+      name = userName;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setAge(int userAge) {
+      age = userAge;
+   }
+
+   public int getAge() {
+      return age;
+   }
+
+   public void printInfo() {
+      System.out.println("Pet Information: ");
+      System.out.println("   Name: " + name);
+      System.out.println("   Age: " + age);
+   }
+
+}
+
+Abstract and concrete classes
+An abstract method is a method that is not implemented in the base class, thus all derived classes must override the function. An abstract method is denoted by the keyword abstract in front of the method signature. A method signature defines the method's name and parameters. Ex: abstract double computeArea(); declares an abstract method named computeArea().
+
+An abstract class is a class that cannot be instantiated as an object, but is the superclass for a subclass and specifies how the subclass must be implemented. An abstract class is denoted by the keyword abstract in front of the class definition. Any class with one or more abstract methods must be abstract.
+
+A concrete class is a class that is not abstract, and hence can be instantiated.
+
+PARTICIPATION ACTIVITY
+14.2.1: A Shape class with an abstract method is an abstract class.
+
+Start
+public abstract class Shape {
+
+  protected Point position;
+
+  abstract double computeArea();
+
+  public Point getPosition() {
+     return this.position;
+  }
+
+  public void setPosition(Point position) {
+     this.position = position;
+  }
+
+  public void movePositionRelative(Point position) {
+     double x = this.position.getX() + position.getX();
+     double y = this.position.getY() + position.getY();
+
+     this.position.setX(x);
+     this.position.setY(y);
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+     Shape shape = new Shape();
+     ...
+  }
+}
+
+Error
+
+
+14.5 Interfaces
+Java provides interfaces as another mechanism for programmers to state that a class adheres to rules defined by the interface. An interface can specify a set of abstract methods that an implementing class must override and define. In an interface, an abstract method does not need the abstract keyword in front of the method signature.
+
+To create an interface, a programmer uses the keyword interface. The following code illustrates two interfaces named Drawable and DrawableASCII.
+
+Figure 14.5.1: Creating an interface.
+import java.awt.Graphics2D;
+
+public interface Drawable {
+   public void draw(Graphics2D graphicsObject);
+}
+public interface DrawableASCII {
+   public void drawASCII(char drawChar);
+}
+
+Feedback?
+Drawable declares a draw() method for drawing using Java Swing components, which are discussed elsewhere. DrawableASCII declares a drawASCII() method for drawing using ASCII characters.
+
+Any class that implements an interface must:
+
+List the interface name after the keyword implements
+Override and implement the interface's abstract methods
+Although inheritance and polymorphism allow a class to override methods defined in the superclass, a class can only inherit from a single superclass. A class can implement multiple interfaces using a comma separated list. Each Interface a class implements means the class will adhere to the rules defined by the interface. Ex: Square can implement both the Drawable and DrawableASCII interfaces.
+
+Figure 14.5.2: Implementing an interface.
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
+public class Square implements Drawable, DrawableASCII {
+   private int sideLength;
+
+   public Square(int sideLength) {
+      this.sideLength = sideLength;
+   }
+
+   @Override
+   public void draw(Graphics2D graphicsObject) {
+      Rectangle shapeObject = new Rectangle(0, 0, this.sideLength, this.sideLength);
+      Color colorObject = new Color(255, 0, 0);
+      graphicsObject.setColor(colorObject);
+      graphicsObject.fill(shapeObject);
+   }
+
+   @Override
+   public void drawASCII(char drawChar) {
+      int rowIndex;
+      int columnIndex;
+
+      for (rowIndex = 0; rowIndex < this.sideLength; ++rowIndex) {
+         for (columnIndex = 0; columnIndex < this.sideLength; ++columnIndex) {
+            System.out.print(drawChar);
+         }
+         System.out.println();
+      }
+   }
+}
+
+Drawable declares a draw() method for drawing using Java Swing components, which are discussed elsewhere. DrawableASCII declares a drawASCII() method for drawing using ASCII characters.
+
+Any class that implements an interface must:
+
+List the interface name after the keyword implements
+Override and implement the interface's abstract methods
+Although inheritance and polymorphism allow a class to override methods defined in the superclass, a class can only inherit from a single superclass. A class can implement multiple interfaces using a comma separated list. Each Interface a class implements means the class will adhere to the rules defined by the interface. Ex: Square can implement both the Drawable and DrawableASCII interfaces.

@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch ArrayListPhoneContactsApp",
+            "request": "launch",
+            "mainClass": "Project2.ArrayListPhoneContactsApp",
+            "projectName": "Projects-1_2a7ce0fb"
+        },
+        {
+            "type": "java",
+            "name": "Launch PhoneContactsApp",
+            "request": "launch",
+            "mainClass": "Project2.PhoneContactsApp",
+            "projectName": "Projects-1_2a7ce0fb"
+        },
+        {
+            "type": "java",
+            "name": "Launch testWrapper",
+            "request": "launch",
+            "mainClass": "UnmanagedWork.testWrapper",
+            "projectName": "Projects-1_2a7ce0fb"
+        },
+        {
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
