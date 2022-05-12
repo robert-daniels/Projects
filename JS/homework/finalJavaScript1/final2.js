@@ -576,7 +576,7 @@ class ComparisonsQuizBank extends QuizBank {
             -9,
             12,
         ]
-        this.questionArray = [
+        this.questionArray = [ // yes, should almost certainly just be a formatter string
             `Tell me something that will evaluate to 'true' when evaluated against 42`,
             `Tell me something that will evaluate to 'false' when evaluated against 83`,
             `Tell me something that will evaluate to 'false' when evaluated against 25`,
