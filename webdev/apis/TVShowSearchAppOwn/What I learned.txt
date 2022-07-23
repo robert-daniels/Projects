@@ -1,0 +1,20 @@
+Used the axios library to make an API call, which is one step easier than the fetch mechanism. 
+
+On the HTML
+
+did not use npm for axios, used the cdn 
+
+form review: form is used to not overload the api with calls every character typed. the form id is 'searchForm'. 
+it has one text value wiht a placeholder, and the value name is 'userSearch'
+
+On the app.js
+
+DOM review to assign various elements to a variable 
+
+added an eventListener to the form to prevent the default behavior (reloading the page on submit, in this case)
+the eventListener function is an async, pulls the value from the form. 
+defines the apiConfig items per api documentation. (passing params as key value pairs)
+
+used axios.get(url, config)
+
+looped through the response (returned as an array) and for each array element that had an image, appended that image to the results div. 

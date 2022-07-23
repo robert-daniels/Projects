@@ -1,13 +1,21 @@
+// trying fetch without looking
 
-
-const loadStarWarsPeople = async() =>{
-    try{
-   const res = await fetch("https://swapi.dev/api/people/1/");
-   const data = await res.json();
-   console.log(data);
-    } catch (e) {
-        console.log("Error!!!", e);
-    }
+const pullPerson = async (personID) => {
+    fetch(`https://swapi.dev/api/people/${personID}/`)
+    .then((res) => {
+        console.log("Successful fetch: ", res);
+        return res.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+    .catch ((e) => {
+        console.log("Error occurred: ", e);
+    })
 }
 
-loadStarWarsPeople();
+const pullStarWarsPeople = async (id) => {
+    await pullPerson(id);
+};
+
+pullStarWarsPeople(1);
